@@ -142,7 +142,7 @@ jobs:
       - name: Prepare www directory
         run: |
           mkdir -p www
-          cp index.html manifest.json service-worker.js www/
+          cp index.html manifest.json service-worker.js avatar.jpg www/
           cp -r fonts www/
           cp -r icons www/
 
