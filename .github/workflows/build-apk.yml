@@ -12,6 +12,9 @@ on:
       - 'package.json'
       - '.github/workflows/build-apk.yml'
 
+permissions:
+  contents: write
+
 jobs:
   build-apk:
     name: Build Android APK
