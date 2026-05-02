@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <!-- Background -->
+  <rect width="512" height="512" rx="80" fill="#111318"/>
+  <!-- Gold circle accent -->
+  <circle cx="256" cy="256" r="190" fill="none" stroke="#c9a84c" stroke-width="12" opacity="0.3"/>
+  <!-- Letter "L" stylized as book/vocab icon -->
+  <text x="256" y="320" font-family="Georgia, serif" font-size="240" font-weight="700"
+        text-anchor="middle" fill="#c9a84c" opacity="0.95">L</text>
+  <!-- Small star accent -->
+  <text x="360" y="160" font-family="sans-serif" font-size="60" text-anchor="middle" fill="#f0c86a">★</text>
+</svg>

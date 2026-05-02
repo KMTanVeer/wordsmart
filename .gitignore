@@ -1,0 +1,12 @@
+# Capacitor Android platform (generated during CI build)
+android/
+
+# Node modules (installed during CI build)
+node_modules/
+
+# Font files downloaded during CI build
+fonts/
+
+# OS files
+.DS_Store
+Thumbs.db
