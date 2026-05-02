@@ -1,6 +1,6 @@
 {
-  "name": "LexIBA — Word Smart",
-  "short_name": "LexIBA",
+  "name": "VocabsArt — Word Smart",
+  "short_name": "VocabsArt",
   "description": "Word Smart Vocabulary Platform — learn, quiz, and master vocabulary offline",
   "start_url": "/",
   "display": "standalone",
