@@ -136,11 +136,19 @@ jobs:
           done
           echo "Icons generated:" && ls -la icons/*.png
 
-      # ── 8. Install Capacitor dependencies ────────────────────────────────
+      # ── 8. Assemble web assets into www/ (Capacitor webDir) ──────────────
+      - name: Prepare www directory
+        run: |
+          mkdir -p www
+          cp index.html manifest.json service-worker.js www/
+          cp -r fonts www/
+          cp -r icons www/
+
+      # ── 9. Install Capacitor dependencies ────────────────────────────────
       - name: Install npm dependencies
         run: npm install
 
-      # ── 9. Add Android platform & sync web assets ─────────────────────────
+      # ── 10. Add Android platform & sync web assets ────────────────────────
       - name: Add Capacitor Android platform
         run: npx cap add android
 

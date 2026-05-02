@@ -1,7 +1,7 @@
 {
   "appId": "com.lexiba.wordsmart",
   "appName": "LexIBA",
-  "webDir": ".",
+  "webDir": "www",
   "server": {
     "androidScheme": "https"
   },
