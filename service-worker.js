@@ -1,4 +1,4 @@
-const CACHE_NAME = 'lexiba-v1';
+const CACHE_NAME = 'vocabsart-v1';
 
 // Core files to pre-cache on install
 const PRECACHE_URLS = [

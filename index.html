@@ -3,12 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>LexIBA — Word Smart Vocabulary Platform</title>
+<title>VocabsArt — Word Smart Vocabulary Platform</title>
 <meta name="theme-color" content="#c9a84c">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="LexIBA">
+<meta name="apple-mobile-web-app-title" content="VocabsArt">
 <link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" href="icons/icon-192.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -703,7 +703,51 @@ input:checked + .toggle-slider::before { transform: translateX(20px); background
 }
 .alpha-line { flex: 1; height: 1px; background: var(--border); }
 
-/* ADMIN */
+/* ADMIN / ABOUT */
+.about-avatar-wrap {
+  display: flex; justify-content: center; margin-bottom: 20px;
+}
+.about-avatar {
+  width: 110px; height: 110px;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center top;
+  border: 3px solid var(--gold);
+  box-shadow: 0 0 0 6px var(--gold-dim);
+}
+.about-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.25rem; font-weight: 700;
+  color: var(--text); text-align: center; margin-bottom: 4px;
+}
+.about-role {
+  font-size: 0.82rem; color: var(--text3);
+  text-align: center; margin-bottom: 18px;
+  line-height: 1.6;
+}
+.about-links {
+  display: flex; flex-direction: column; gap: 10px;
+}
+.about-link {
+  display: flex; align-items: center; gap: 12px;
+  padding: 11px 16px;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  color: var(--text2);
+  text-decoration: none;
+  font-size: 0.88rem; font-weight: 500;
+  transition: all var(--transition);
+}
+.about-link:hover { border-color: var(--gold); color: var(--gold); background: var(--gold-dim); }
+.about-link svg { width: 18px; height: 18px; flex-shrink: 0; }
+.about-link-fb:hover { border-color: #5b8ff9; color: #5b8ff9; background: var(--blue-dim); }
+.about-link-li:hover { border-color: #5b8ff9; color: #5b8ff9; background: var(--blue-dim); }
+.about-link-mail:hover { border-color: var(--green); color: var(--green); background: var(--green-dim); }
+.about-divider {
+  height: 1px; background: var(--border); margin: 20px 0;
+}
+
 .admin-form input, .admin-form textarea, .admin-form select {
   width: 100%; background: var(--surface2);
   border: 1.5px solid var(--border);
@@ -774,8 +818,8 @@ input:checked + .toggle-slider::before { transform: translateX(20px); background
   <!-- TOP BAR -->
   <header class="topbar">
     <div class="topbar-brand" onclick="navigate('home')">
-      LexIBA
-      <span>IBA MBA Prep</span>
+      VocabsArt
+      <span>Learn Words</span>
     </div>
     <div class="topbar-right">
       <div class="streak-badge" id="streakBadge">
@@ -1071,12 +1115,12 @@ input:checked + .toggle-slider::before { transform: translateX(20px); background
       <div class="container">
         <div style="padding-top:14px;margin-bottom:14px;">
           <div class="section-title">Mock Verbal Exam</div>
-          <div class="section-subtitle">IBA MBA preparation – timed test</div>
+          <div class="section-subtitle">Vocabulary practice – timed test</div>
         </div>
 
         <div id="examSetup">
           <div class="card" style="margin-bottom:16px;">
-            <div style="font-size:0.88rem;font-weight:600;color:var(--text);margin-bottom:6px;">IBA MBA Verbal Practice</div>
+            <div style="font-size:0.88rem;font-weight:600;color:var(--text);margin-bottom:6px;">Verbal Vocabulary Practice</div>
             <div style="font-size:0.82rem;color:var(--text3);line-height:1.6;">
               30 questions • 15 minutes<br>
               Synonyms, Antonyms, Sentence completion
@@ -1159,6 +1203,33 @@ input:checked + .toggle-slider::before { transform: translateX(20px); background
 
         <!-- Admin Tab -->
         <div id="moreTab-admin" style="display:none;">
+          <!-- Developer Profile -->
+          <div class="card" style="margin-bottom:14px;">
+            <div class="about-avatar-wrap">
+              <img src="avatar.jpg" alt="Profile photo of Kawsar Mahmud Tanveer Khan" class="about-avatar">
+            </div>
+            <div class="about-name">Kawsar Mahmud Tanveer Khan</div>
+            <div class="about-role">
+              BSc in EEE &nbsp;·&nbsp; Daffodil International University<br>
+              Creator &amp; Developer of VocabsArt
+            </div>
+            <div class="about-links">
+              <a class="about-link about-link-fb" href="https://facebook.com/itzzVeer" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
+                facebook.com/itzzVeer
+              </a>
+              <a class="about-link about-link-li" href="https://linkedin.com/in/KawsarTanveer" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+                linkedin.com/in/KawsarTanveer
+              </a>
+              <a class="about-link about-link-mail" href="mailto:tanveerk.eee@gmail.com">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                tanveerk.eee@gmail.com
+              </a>
+            </div>
+          </div>
+
+          <!-- Add Word Tool -->
           <div class="card">
             <div style="font-size:0.88rem;font-weight:600;color:var(--text);margin-bottom:14px;">Add New Word</div>
             <div class="admin-form">
@@ -1236,9 +1307,9 @@ input:checked + .toggle-slider::before { transform: translateX(20px); background
 
           <div class="card" style="margin-top:12px;">
             <div style="font-size:0.8rem;color:var(--text3);line-height:1.7;">
-              <strong style="color:var(--text);">LexIBA</strong><br>
+              <strong style="color:var(--text);">VocabsArt</strong><br>
               Word Smart Vocabulary Platform<br>
-              IBA MBA Verbal Preparation<br>
+              Build Your Vocabulary<br>
               <span style="color:var(--gold);">832 words</span> from Word Smart 1
             </div>
           </div>
@@ -1950,7 +2021,7 @@ function endQuiz() {
   if (pct < 40) { emoji='📚'; msg='Keep practicing!'; }
   else if (pct < 60) { emoji='💪'; msg='Good effort, keep going!'; }
   else if (pct < 80) { emoji='⭐'; msg='Great progress!'; }
-  else { emoji='🏆'; msg='Outstanding! IBA-ready!'; }
+  else { emoji='🏆'; msg='Outstanding! Vocabulary master!'; }
   document.getElementById('quizEmoji').textContent = emoji;
   document.getElementById('quizFinalMsg').textContent = msg;
   updateHomeStats();
@@ -2060,8 +2131,8 @@ function endExam() {
   document.getElementById('examFinalScore').textContent = `${state.examCorrect}/30`;
   document.getElementById('examCorrect').textContent = state.examCorrect;
   document.getElementById('examWrong').textContent = state.examWrong;
-  let emoji='📝', msg='Keep practicing for IBA!';
-  if (pct>=80) { emoji='🏆'; msg='Excellent! IBA-ready performance!'; }
+  let emoji='📝', msg='Keep practicing!';
+  if (pct>=80) { emoji='🏆'; msg='Excellent! Outstanding performance!'; }
   else if (pct>=60) { emoji='⭐'; msg='Good performance! Keep it up!'; }
   else if (pct>=40) { emoji='💪'; msg='Decent attempt. More practice needed.'; }
   document.getElementById('examEmoji').textContent = emoji;

@@ -1,6 +1,6 @@
 {
   "appId": "com.lexiba.wordsmart",
-  "appName": "LexIBA",
+  "appName": "VocabsArt",
   "webDir": "www",
   "server": {
     "androidScheme": "https"
