@@ -1,10 +1,11 @@
-const CACHE_NAME = 'vocabsart-v1';
+const CACHE_NAME = 'vocabsart-v2';
 
 // Core files to pre-cache on install
 const PRECACHE_URLS = [
   '/',
   '/index.html',
   '/manifest.json',
+  '/avatar.jpg',
 ];
 
 // Google Fonts CDN origins we want to cache at runtime
