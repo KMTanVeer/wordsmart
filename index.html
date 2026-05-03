@@ -10,7 +10,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="VocabsArt">
 <link rel="manifest" href="manifest.json">
-<link rel="icon" type="image/svg+xml" href="vocabsart-icon.svg">
+<link rel="icon" type="image/svg+xml" href="vocabsart-icon-light.svg">
 <link rel="apple-touch-icon" href="icons/icon-192.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -866,8 +866,8 @@ input:checked + .toggle-slider::before { transform: translateX(20px); background
         </div>
 
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px;">
-          <div class="stat-card" style="text-align:left;padding:14px;">
-            <div style="font-size:0.68rem;text-transform:uppercase;letter-spacing:0.06em;color:var(--text3);margin-bottom:6px;">Weak Words</div>
+          <div class="stat-card" style="text-align:left;padding:14px;cursor:pointer;" onclick="navigateToWeak()">
+            <div style="font-size:0.68rem;text-transform:uppercase;letter-spacing:0.06em;color:var(--text3);margin-bottom:6px;">Revise</div>
             <div class="stat-val red" id="statWeak">0</div>
             <div style="font-size:0.72rem;color:var(--text3);margin-top:4px;">Need Revision</div>
           </div>
@@ -922,7 +922,7 @@ input:checked + .toggle-slider::before { transform: translateX(20px); background
             <div class="chip" data-val="Easy" onclick="filterLearn('Easy',this)">🟢 Easy</div>
             <div class="chip" data-val="Medium" onclick="filterLearn('Medium',this)">🟡 Medium</div>
             <div class="chip" data-val="Hard" onclick="filterLearn('Hard',this)">🔴 Hard</div>
-            <div class="chip" data-val="weak" onclick="filterLearn('weak',this)">⚡ Weak</div>
+            <div class="chip" data-val="weak" onclick="filterLearn('weak',this)">⚡ Revise</div>
             <div class="chip" data-val="saved" onclick="filterLearn('saved',this)">🔖 Saved</div>
           </div>
 
@@ -962,7 +962,7 @@ input:checked + .toggle-slider::before { transform: translateX(20px); background
 
         <div class="tabs">
           <button class="tab-btn active" onclick="setFCMode('all',this)">All Words</button>
-          <button class="tab-btn" onclick="setFCMode('weak',this)">Weak</button>
+          <button class="tab-btn" onclick="setFCMode('weak',this)">Revise</button>
           <button class="tab-btn" onclick="setFCMode('saved',this)">Saved</button>
           <button class="tab-btn" onclick="setFCMode('hard',this)">Hard</button>
         </div>
@@ -1049,7 +1049,7 @@ input:checked + .toggle-slider::before { transform: translateX(20px); background
             <div style="font-size:0.88rem;font-weight:500;color:var(--text2);margin-bottom:12px;">Quiz from</div>
             <div class="tabs" style="margin-bottom:0;">
               <button class="tab-btn active" onclick="setQuizPool('all',this)">All</button>
-              <button class="tab-btn" onclick="setQuizPool('weak',this)">Weak</button>
+              <button class="tab-btn" onclick="setQuizPool('weak',this)">Revise</button>
               <button class="tab-btn" onclick="setQuizPool('hard',this)">Hard</button>
               <button class="tab-btn" onclick="setQuizPool('saved',this)">Saved</button>
             </div>
@@ -1176,8 +1176,7 @@ input:checked + .toggle-slider::before { transform: translateX(20px); background
 
         <div class="tabs">
           <button class="tab-btn active" onclick="showMoreTab('stats',this)">Stats</button>
-          <button class="tab-btn" onclick="showMoreTab('admin',this)">Admin</button>
-          <button class="tab-btn" onclick="showMoreTab('addword',this)">Add Word</button>
+          <button class="tab-btn" onclick="showMoreTab('about',this)">About</button>
           <button class="tab-btn" onclick="showMoreTab('settings',this)">Settings</button>
         </div>
 
@@ -1189,7 +1188,7 @@ input:checked + .toggle-slider::before { transform: translateX(20px); background
               <div class="stat-card"><div class="stat-val gold" id="st2Learned">0</div><div class="stat-label">Words Learned</div></div>
               <div class="stat-card"><div class="stat-val" id="st2Streak">0</div><div class="stat-label">Day Streak</div></div>
               <div class="stat-card"><div class="stat-val green" id="st2Acc">—</div><div class="stat-label">Quiz Accuracy</div></div>
-              <div class="stat-card"><div class="stat-val red" id="st2Weak">0</div><div class="stat-label">Weak Words</div></div>
+              <div class="stat-card"><div class="stat-val red" id="st2Weak">0</div><div class="stat-label">Revise</div></div>
             </div>
           </div>
 
@@ -1203,16 +1202,15 @@ input:checked + .toggle-slider::before { transform: translateX(20px); background
           </button>
         </div>
 
-        <!-- Admin Tab (Developer Profile only) -->
-        <div id="moreTab-admin" style="display:none;">
+        <!-- About Tab (Developer Profile) -->
+        <div id="moreTab-about" style="display:none;">
           <div class="card" style="margin-bottom:14px;">
             <div class="about-avatar-wrap">
               <img src="avatar.jpg" alt="Profile photo of Kawsar Mahmud Tanveer Khan" class="about-avatar">
             </div>
             <div class="about-name">Kawsar Mahmud Tanveer Khan</div>
             <div class="about-role">
-              BSc in EEE &nbsp;·&nbsp; Daffodil International University<br>
-              Creator &amp; Developer of VocabsArt
+              BSc in EEE &nbsp;·&nbsp; Daffodil International University
             </div>
             <div class="about-links">
               <a class="about-link about-link-fb" href="https://facebook.com/itzzVeer" target="_blank" rel="noopener">
@@ -1227,38 +1225,6 @@ input:checked + .toggle-slider::before { transform: translateX(20px); background
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
                 tanveerk.eee@gmail.com
               </a>
-            </div>
-          </div>
-        </div>
-
-        <!-- Add Word Tab (separate from Admin) -->
-        <div id="moreTab-addword" style="display:none;">
-          <div class="card">
-            <div style="font-size:0.88rem;font-weight:600;color:var(--text);margin-bottom:14px;">Add New Word</div>
-            <div class="admin-form">
-              <label>Word *</label>
-              <input id="adminWord" type="text" placeholder="e.g. Ephemeral">
-              <label>Pronunciation</label>
-              <input id="adminPron" type="text" placeholder="e.g. i FEM ur al">
-              <label>Part of Speech</label>
-              <select id="adminPos">
-                <option>noun</option><option>verb</option><option>adjective</option><option>adverb</option>
-              </select>
-              <label>Definition *</label>
-              <textarea id="adminDef" placeholder="English meaning..."></textarea>
-              <label>Bengali Meaning</label>
-              <input id="adminBengali" type="text" placeholder="বাংলা অর্থ">
-              <label>Synonyms (comma separated)</label>
-              <input id="adminSyns" type="text" placeholder="fleeting, transient, temporary">
-              <label>Antonyms (comma separated)</label>
-              <input id="adminAnts" type="text" placeholder="permanent, lasting">
-              <label>Example Sentence</label>
-              <textarea id="adminEx" placeholder="Example sentence..."></textarea>
-              <label>Difficulty</label>
-              <select id="adminDiff"><option>Easy</option><option>Medium</option><option>Hard</option></select>
-              <label>Category</label>
-              <input id="adminCat" type="text" placeholder="e.g. Time, Personality">
-              <button class="btn btn-gold btn-full" onclick="addAdminWord()" style="margin-top:6px;">Add Word</button>
             </div>
           </div>
         </div>
@@ -1676,6 +1642,19 @@ function renderWordCard(w) {
   </div>`;
 }
 
+function toggleRevise(e, id) {
+  e.stopPropagation();
+  const isWeak = (state.progress.weak[id]||0) > 0;
+  state.progress.weak[id] = isWeak ? 0 : 2;
+  saveProgress();
+  const btn = document.getElementById('modalReviseBtn');
+  if (btn) {
+    btn.style.opacity = isWeak ? '0.7' : '1';
+    btn.innerHTML = `<svg width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" d="M6 18L18 6M6 6l12 12"/></svg> ${isWeak?'Revise':'Marked Revise'}`;
+  }
+  updateHomeStats();
+}
+
 function toggleSave(e, id) {
   e.stopPropagation();
   state.progress.saved[id] = !state.progress.saved[id];
@@ -1741,7 +1720,11 @@ function openModal(id) {
       <div class="word-synonyms" style="margin:0;">${w.antonyms.map(s=>`<span class="syn-tag" style="border-color:rgba(224,84,84,0.2);color:var(--red);">${s}</span>`).join('')}</div>
     </div>` : ''}
     <div class="modal-divider"></div>
-    <div style="padding-bottom:10px;">
+    <div style="padding-bottom:10px;display:flex;gap:10px;">
+      <button class="btn btn-red btn-full" onclick="toggleRevise(event,${id})" id="modalReviseBtn" style="${(state.progress.weak[id]||0)>0?'opacity:1':'opacity:0.7'}">
+        <svg width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" d="M6 18L18 6M6 6l12 12"/></svg>
+        ${(state.progress.weak[id]||0)>0?'Marked Revise':'Revise'}
+      </button>
       <button class="btn btn-gold btn-full" onclick="closeModal2()">Got it!</button>
     </div>
   `;
@@ -1758,6 +1741,14 @@ function closeModal2() {
     renderLearnList();
     if (savedLetter) selectLetter(savedLetter);
   }
+}
+
+function navigateToWeak() {
+  state.learnFilter = 'weak';
+  document.querySelectorAll('#diffFilter .chip').forEach(c => c.classList.remove('active'));
+  const weakChip = document.querySelector('#diffFilter .chip[data-val="weak"]');
+  if (weakChip) weakChip.classList.add('active');
+  navigate('learn');
 }
 
 function navigateToSaved() {
@@ -2172,8 +2163,7 @@ function showMoreTab(tab, el) {
   document.querySelectorAll('#page-more .tabs .tab-btn').forEach(b=>b.classList.remove('active'));
   el.classList.add('active');
   document.getElementById('moreTab-stats').style.display = tab==='stats'?'block':'none';
-  document.getElementById('moreTab-admin').style.display = tab==='admin'?'block':'none';
-  document.getElementById('moreTab-addword').style.display = tab==='addword'?'block':'none';
+  document.getElementById('moreTab-about').style.display = tab==='about'?'block':'none';
   document.getElementById('moreTab-settings').style.display = tab==='settings'?'block':'none';
 }
 
