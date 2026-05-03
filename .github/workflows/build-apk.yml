@@ -184,7 +184,7 @@ jobs:
             else
               python3 -c "
           import struct, zlib
-          def create_png(size, color=(13,27,62)):
+          def create_png(size, color=(13,27,62)):  # matches icon background #0D1B3E
               w = h = size
               raw = b''.join(b'\x00' + bytes(color) * w for _ in range(h))
               def chunk(t,d): c=zlib.crc32(t+d)&0xffffffff; return struct.pack('>I',len(d))+t+d+struct.pack('>I',c)
@@ -207,7 +207,7 @@ jobs:
               convert "$src" /tmp/circle_mask_${size}.png \
                 -alpha Off -compose CopyOpacity -composite "$out"
             else
-              # Python fallback: copy the source as-is (Android itself clips to circle)
+              # Python fallback: copy as-is; best-effort since Android may clip to circle on newer launchers
               cp "$src" "$out"
             fi
           }
