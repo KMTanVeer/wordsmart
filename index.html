@@ -1761,9 +1761,11 @@ function closeModal2() {
 }
 
 function navigateToSaved() {
-  navigate('learn');
+  state.learnFilter = 'saved';
+  document.querySelectorAll('#diffFilter .chip').forEach(c => c.classList.remove('active'));
   const savedChip = document.querySelector('#diffFilter .chip[data-val="saved"]');
-  if (savedChip) filterLearn('saved', savedChip);
+  if (savedChip) savedChip.classList.add('active');
+  navigate('learn');
 }
 
 // ============================================================
