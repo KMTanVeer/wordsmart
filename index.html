@@ -871,7 +871,7 @@ input:checked + .toggle-slider::before { transform: translateX(20px); background
             <div class="stat-val red" id="statWeak">0</div>
             <div style="font-size:0.72rem;color:var(--text3);margin-top:4px;">Need Revision</div>
           </div>
-          <div class="stat-card" style="text-align:left;padding:14px;">
+          <div class="stat-card" style="text-align:left;padding:14px;cursor:pointer;" onclick="navigateToSaved()">
             <div style="font-size:0.68rem;text-transform:uppercase;letter-spacing:0.06em;color:var(--text3);margin-bottom:6px;">Bookmarked</div>
             <div class="stat-val" style="color:var(--blue);" id="statBookmarks">0</div>
             <div style="font-size:0.72rem;color:var(--text3);margin-top:4px;">Saved Words</div>
@@ -1750,7 +1750,23 @@ function openModal(id) {
 }
 
 function closeModal(e) { if (e.target === document.getElementById('wordModal')) closeModal2(); }
-function closeModal2() { document.getElementById('wordModal').classList.remove('open'); updateHomeStats(); renderLearnList(); }
+function closeModal2() {
+  document.getElementById('wordModal').classList.remove('open');
+  updateHomeStats();
+  if (state.currentPage === 'learn') {
+    const savedLetter = state.selectedLetter;
+    renderLearnList();
+    if (savedLetter) selectLetter(savedLetter);
+  }
+}
+
+function navigateToSaved() {
+  state.learnFilter = 'saved';
+  document.querySelectorAll('#diffFilter .chip').forEach(c => c.classList.remove('active'));
+  const savedChip = document.querySelector('#diffFilter .chip[data-val="saved"]');
+  if (savedChip) savedChip.classList.add('active');
+  navigate('learn');
+}
 
 // ============================================================
 // FLASHCARDS
