@@ -154,6 +154,36 @@ jobs:
       - name: Add Capacitor Android platform
         run: npx cap add android
 
+      # ── 10b. Replace default Capacitor icons with custom app icon ──────────
+      - name: Set custom Android launcher icons
+        run: |
+          declare -A sizes=(
+            ["mipmap-mdpi"]=48
+            ["mipmap-hdpi"]=72
+            ["mipmap-xhdpi"]=96
+            ["mipmap-xxhdpi"]=144
+            ["mipmap-xxxhdpi"]=192
+          )
+          # Foreground canvas is 2.25× the standard size (108dp base at mdpi)
+          declare -A fg_sizes=(
+            ["mipmap-mdpi"]=108
+            ["mipmap-hdpi"]=162
+            ["mipmap-xhdpi"]=216
+            ["mipmap-xxhdpi"]=324
+            ["mipmap-xxxhdpi"]=432
+          )
+
+          for dir in "${!sizes[@]}"; do
+            size=${sizes[$dir]}
+            fg_size=${fg_sizes[$dir]}
+            res_dir="android/app/src/main/res/$dir"
+            mkdir -p "$res_dir"
+            rsvg-convert -w $size -h $size icons/icon.svg -o "$res_dir/ic_launcher.png"
+            cp "$res_dir/ic_launcher.png" "$res_dir/ic_launcher_round.png"
+            rsvg-convert -w $fg_size -h $fg_size icons/icon.svg -o "$res_dir/ic_launcher_foreground.png"
+          done
+          echo "Android launcher icons set:" && ls android/app/src/main/res/mipmap-mdpi/
+
       - name: Sync web assets to Android project
         run: npx cap sync android
 
