@@ -1,7 +1,7 @@
 {
-  "name": "lexiba-wordsmart",
+  "name": "vocabsart-wordsmart",
   "version": "1.0.0",
-  "description": "LexIBA Word Smart Vocabulary Platform — Android App",
+  "description": "VocabsArt Word Smart Vocabulary Platform — Android App",
   "private": true,
   "scripts": {
     "cap:add-android": "npx cap add android",
