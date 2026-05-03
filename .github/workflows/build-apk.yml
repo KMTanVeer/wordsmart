@@ -12,6 +12,7 @@ on:
       - 'package.json'
       - 'icons/**'
       - 'vocabsart-icon.svg'
+      - 'vocabsart-icon-light.svg'
       - '.github/workflows/build-apk.yml'
 
 jobs:
@@ -127,7 +128,7 @@ jobs:
               # Last fallback: create a minimal solid PNG with Python
               python3 -c "
           import struct, zlib, base64
-          def create_png(size, color=(17,19,24)):
+          def create_png(size, color=(255,248,240)):
               w = h = size
               raw = b''.join(b'\x00' + bytes(color) * w for _ in range(h))
               def chunk(t,d): c=zlib.crc32(t+d)&0xffffffff; return struct.pack('>I',len(d))+t+d+struct.pack('>I',c)
@@ -184,7 +185,7 @@ jobs:
             else
               python3 -c "
           import struct, zlib
-          def create_png(size, color=(13,27,62)):  # matches icon background #0D1B3E
+          def create_png(size, color=(255,248,240)):  # matches light icon background #FFF8F0
               w = h = size
               raw = b''.join(b'\x00' + bytes(color) * w for _ in range(h))
               def chunk(t,d): c=zlib.crc32(t+d)&0xffffffff; return struct.pack('>I',len(d))+t+d+struct.pack('>I',c)

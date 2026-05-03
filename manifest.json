@@ -11,7 +11,7 @@
   "categories": ["education"],
   "icons": [
     {
-      "src": "vocabsart-icon.svg",
+      "src": "vocabsart-icon-light.svg",
       "sizes": "any",
       "type": "image/svg+xml",
       "purpose": "any maskable"
