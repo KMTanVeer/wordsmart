@@ -244,7 +244,7 @@ jobs:
       - name: Upload APK artifact
         uses: actions/upload-artifact@v4
         with:
-          name: LexIBA-WordSmart-debug-apk
+          name: VocabsArt-WordSmart-debug-apk
           path: android/app/build/outputs/apk/debug/app-debug.apk
           retention-days: 30
 
@@ -254,15 +254,15 @@ jobs:
         uses: softprops/action-gh-release@v2
         with:
           tag_name: apk-${{ github.run_number }}
-          name: "LexIBA APK — Build ${{ github.run_number }}"
+          name: "VocabsArt APK — Build ${{ github.run_number }}"
           body: |
-            ## LexIBA WordSmart Android APK
+            ## VocabsArt Android APK
 
             ### Install instructions
             1. Download `app-debug.apk` from the **Assets** section below
             2. On your Android phone, go to **Settings → Security** and enable **Install from unknown sources**
             3. Open the downloaded APK file and tap **Install**
-            4. Open **LexIBA** from your app drawer
+            4. Open **VocabsArt** from your app drawer
 
             ### Features
             - ✅ Full offline support — no internet required
