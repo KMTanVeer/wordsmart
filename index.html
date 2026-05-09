@@ -616,6 +616,11 @@ body {
 
 .exam-wrong-list {
   text-align: left;
+  display: none;
+  margin-bottom: 16px;
+}
+
+.exam-wrong-list.visible {
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -656,6 +661,11 @@ body {
 
 .exam-wrong-value:last-child {
   margin-bottom: 0;
+}
+
+.exam-wrong-toggle {
+  display: none;
+  margin-bottom: 12px;
 }
 
 /* TABS */
@@ -1277,8 +1287,8 @@ input:checked + .toggle-slider::before { transform: translateX(20px); background
               <div class="stat-card"><div class="stat-val green" id="examCorrect">0</div><div class="stat-label">Correct</div></div>
               <div class="stat-card"><div class="stat-val red" id="examWrong">0</div><div class="stat-label">Wrong</div></div>
             </div>
-            <button class="btn btn-outline btn-full" id="examWrongAnswersBtn" onclick="toggleExamWrongAnswers()" style="display:none;margin-bottom:12px;">See Wrong Answers</button>
-            <div class="exam-wrong-list" id="examWrongAnswersList" style="display:none;margin-bottom:16px;"></div>
+            <button class="btn btn-outline btn-full exam-wrong-toggle" id="examWrongAnswersBtn" onclick="toggleExamWrongAnswers()" aria-expanded="false" aria-controls="examWrongAnswersList">See Wrong Answers</button>
+            <div class="exam-wrong-list" id="examWrongAnswersList"></div>
             <button class="btn btn-gold btn-full btn-lg" onclick="restartExam()">Try Again</button>
           </div>
         </div>
@@ -1457,6 +1467,8 @@ let idiomSearchTerm = '';
 // ============================================================
 // STATE
 // ============================================================
+const NO_ANSWER_TEXT = 'No answer';
+
 let state = {
   words: [],
   learnFilter: 'all',
@@ -2380,11 +2392,11 @@ function answerExam(selected) {
   else {
     state.examWrong++;
     state.examWrongAnswers.push({
-      questionNo: state.examIndex + 1,
+      questionIndex: state.examIndex,
       type: q.type,
       question: q.question,
       word: q.word,
-      selected: q.options[selected] ?? 'No answer',
+      selected: q.options[selected] ?? NO_ANSWER_TEXT,
       correct: q.options[q.answer] ?? ''
     });
     if (q.wordId !== undefined) state.progress.weak[q.wordId] = (state.progress.weak[q.wordId]||0)+1;
@@ -2411,16 +2423,12 @@ function endExam() {
   document.getElementById('examCorrect').textContent = state.examCorrect;
   document.getElementById('examWrong').textContent = state.examWrong;
   const wrongBtn = document.getElementById('examWrongAnswersBtn');
-  const wrongList = document.getElementById('examWrongAnswersList');
   if (state.examWrongAnswers.length) {
     renderExamWrongAnswers();
-    wrongList.style.display = 'none';
     wrongBtn.style.display = 'block';
-    wrongBtn.textContent = `See Wrong Answers (${state.examWrongAnswers.length})`;
+    setExamWrongAnswersVisible(false);
   } else {
-    wrongBtn.style.display = 'none';
-    wrongList.style.display = 'none';
-    wrongList.textContent = '';
+    resetExamWrongAnswersView();
   }
   let emoji='📝', msg='Keep practicing!';
   if (pct>=80) { emoji='🏆'; msg='Excellent! Outstanding performance!'; }
@@ -2434,23 +2442,21 @@ function endExam() {
 function restartExam() {
   clearInterval(state.examTimer);
   state.examWrongAnswers = [];
-  document.getElementById('examWrongAnswersBtn').style.display = 'none';
-  document.getElementById('examWrongAnswersList').style.display = 'none';
-  document.getElementById('examWrongAnswersList').textContent = '';
+  resetExamWrongAnswersView();
   document.getElementById('examResult').style.display = 'none';
   document.getElementById('examSetup').style.display = 'block';
 }
 
 function renderExamWrongAnswers() {
   const list = document.getElementById('examWrongAnswersList');
-  list.textContent = '';
+  list.innerHTML = '';
   state.examWrongAnswers.forEach(item => {
     const card = document.createElement('div');
     card.className = 'exam-wrong-item';
 
     const head = document.createElement('div');
     head.className = 'exam-wrong-head';
-    head.textContent = `Question ${item.questionNo} • ${item.type}`;
+    head.textContent = `Question ${item.questionIndex + 1} • ${item.type}`;
     card.appendChild(head);
 
     const word = document.createElement('div');
@@ -2494,15 +2500,27 @@ function renderExamWrongAnswers() {
 
 function toggleExamWrongAnswers() {
   const list = document.getElementById('examWrongAnswersList');
+  const visible = list.classList.contains('visible');
+  setExamWrongAnswersVisible(!visible);
+}
+
+function setExamWrongAnswersVisible(visible) {
+  const list = document.getElementById('examWrongAnswersList');
   const btn = document.getElementById('examWrongAnswersBtn');
-  const visible = list.style.display === 'block';
-  if (visible) {
-    list.style.display = 'none';
-    btn.textContent = `See Wrong Answers (${state.examWrongAnswers.length})`;
-  } else {
-    list.style.display = 'block';
-    btn.textContent = 'Hide Wrong Answers';
-  }
+  const collapsedText = `See Wrong Answers (${state.examWrongAnswers.length})`;
+  list.classList.toggle('visible', visible);
+  btn.setAttribute('aria-expanded', visible ? 'true' : 'false');
+  btn.textContent = visible ? 'Hide Wrong Answers' : collapsedText;
+}
+
+function resetExamWrongAnswersView() {
+  const list = document.getElementById('examWrongAnswersList');
+  const btn = document.getElementById('examWrongAnswersBtn');
+  list.classList.remove('visible');
+  list.innerHTML = '';
+  btn.style.display = 'none';
+  btn.setAttribute('aria-expanded', 'false');
+  btn.textContent = 'See Wrong Answers';
 }
 
 // ============================================================
