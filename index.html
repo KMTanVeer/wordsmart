@@ -614,6 +614,60 @@ body {
 
 .exam-timer.warning { color: var(--red); }
 
+.exam-wrong-list {
+  text-align: left;
+  display: none;
+  margin-bottom: 16px;
+}
+
+.exam-wrong-list.visible {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.exam-wrong-item {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 12px;
+}
+
+.exam-wrong-head {
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text3);
+  margin-bottom: 6px;
+}
+
+.exam-wrong-word {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 8px;
+}
+
+.exam-wrong-label {
+  font-size: 0.76rem;
+  color: var(--text3);
+}
+
+.exam-wrong-value {
+  font-size: 0.84rem;
+  color: var(--text2);
+  margin-bottom: 8px;
+}
+
+.exam-wrong-value:last-child {
+  margin-bottom: 0;
+}
+
+.exam-wrong-toggle {
+  display: none;
+  margin-bottom: 12px;
+}
+
 /* TABS */
 .tabs {
   display: flex; gap: 4px;
@@ -1233,6 +1287,8 @@ input:checked + .toggle-slider::before { transform: translateX(20px); background
               <div class="stat-card"><div class="stat-val green" id="examCorrect">0</div><div class="stat-label">Correct</div></div>
               <div class="stat-card"><div class="stat-val red" id="examWrong">0</div><div class="stat-label">Wrong</div></div>
             </div>
+            <button class="btn btn-outline btn-full exam-wrong-toggle" id="examWrongAnswersBtn" onclick="toggleExamWrongAnswers()" aria-expanded="false" aria-controls="examWrongAnswersList">See Wrong Answers</button>
+            <div class="exam-wrong-list" id="examWrongAnswersList"></div>
             <button class="btn btn-gold btn-full btn-lg" onclick="restartExam()">Try Again</button>
           </div>
         </div>
@@ -1411,6 +1467,8 @@ let idiomSearchTerm = '';
 // ============================================================
 // STATE
 // ============================================================
+const NO_ANSWER_TEXT = 'No answer';
+
 let state = {
   words: [],
   learnFilter: 'all',
@@ -1433,6 +1491,7 @@ let state = {
   examIndex: 0,
   examCorrect: 0,
   examWrong: 0,
+  examWrongAnswers: [],
   examTimer: null,
   examSeconds: 900,
   currentPage: 'home',
@@ -2284,6 +2343,7 @@ function startExam() {
   const examWords = shuffle(pool).slice(0, 60);
   const totalQ = Math.min(30, pool.length);
   state.examQuestions = [];
+  state.examWrongAnswers = [];
   const types = ['meaning','synonym','antonym','meaning','synonym','meaning'];
   for (let i=0;i<totalQ;i++) {
     state.examQuestions.push(generateQuestion(types[i%types.length], examWords));
@@ -2329,7 +2389,18 @@ function answerExam(selected) {
   const correct = q.answer === selected;
   document.querySelectorAll('.quiz-opt').forEach(btn => { btn.disabled = true; });
   if (correct) state.examCorrect++;
-  else { state.examWrong++; if (q.wordId !== undefined) state.progress.weak[q.wordId] = (state.progress.weak[q.wordId]||0)+1; }
+  else {
+    state.examWrong++;
+    state.examWrongAnswers.push({
+      questionIndex: state.examIndex,
+      type: q.type,
+      question: q.question,
+      word: q.word,
+      selected: q.options[selected] ?? NO_ANSWER_TEXT,
+      correct: q.options[q.answer] ?? ''
+    });
+    if (q.wordId !== undefined) state.progress.weak[q.wordId] = (state.progress.weak[q.wordId]||0)+1;
+  }
   saveProgress();
   document.getElementById('examNextBtn').style.display = 'block';
 }
@@ -2351,6 +2422,14 @@ function endExam() {
   document.getElementById('examFinalPct').textContent = `${pct}%`;
   document.getElementById('examCorrect').textContent = state.examCorrect;
   document.getElementById('examWrong').textContent = state.examWrong;
+  const wrongBtn = document.getElementById('examWrongAnswersBtn');
+  if (state.examWrongAnswers.length) {
+    renderExamWrongAnswers();
+    wrongBtn.style.display = 'block';
+    setExamWrongAnswersVisible(false);
+  } else {
+    resetExamWrongAnswersView();
+  }
   let emoji='📝', msg='Keep practicing!';
   if (pct>=80) { emoji='🏆'; msg='Excellent! Outstanding performance!'; }
   else if (pct>=60) { emoji='⭐'; msg='Good performance! Keep it up!'; }
@@ -2362,8 +2441,86 @@ function endExam() {
 
 function restartExam() {
   clearInterval(state.examTimer);
+  state.examWrongAnswers = [];
+  resetExamWrongAnswersView();
   document.getElementById('examResult').style.display = 'none';
   document.getElementById('examSetup').style.display = 'block';
+}
+
+function renderExamWrongAnswers() {
+  const list = document.getElementById('examWrongAnswersList');
+  list.innerHTML = '';
+  state.examWrongAnswers.forEach(item => {
+    const card = document.createElement('div');
+    card.className = 'exam-wrong-item';
+
+    const head = document.createElement('div');
+    head.className = 'exam-wrong-head';
+    head.textContent = `Question ${item.questionIndex + 1} • ${item.type}`;
+    card.appendChild(head);
+
+    const word = document.createElement('div');
+    word.className = 'exam-wrong-word';
+    word.textContent = item.word;
+    card.appendChild(word);
+
+    const promptLabel = document.createElement('div');
+    promptLabel.className = 'exam-wrong-label';
+    promptLabel.textContent = 'Prompt';
+    card.appendChild(promptLabel);
+
+    const prompt = document.createElement('div');
+    prompt.className = 'exam-wrong-value';
+    prompt.textContent = item.question;
+    card.appendChild(prompt);
+
+    const selectedLabel = document.createElement('div');
+    selectedLabel.className = 'exam-wrong-label';
+    selectedLabel.textContent = 'Your Answer';
+    card.appendChild(selectedLabel);
+
+    const selected = document.createElement('div');
+    selected.className = 'exam-wrong-value';
+    selected.textContent = item.selected;
+    card.appendChild(selected);
+
+    const correctLabel = document.createElement('div');
+    correctLabel.className = 'exam-wrong-label';
+    correctLabel.textContent = 'Correct Answer';
+    card.appendChild(correctLabel);
+
+    const correct = document.createElement('div');
+    correct.className = 'exam-wrong-value';
+    correct.textContent = item.correct;
+    card.appendChild(correct);
+
+    list.appendChild(card);
+  });
+}
+
+function toggleExamWrongAnswers() {
+  const list = document.getElementById('examWrongAnswersList');
+  const visible = list.classList.contains('visible');
+  setExamWrongAnswersVisible(!visible);
+}
+
+function setExamWrongAnswersVisible(visible) {
+  const list = document.getElementById('examWrongAnswersList');
+  const btn = document.getElementById('examWrongAnswersBtn');
+  const collapsedText = `See Wrong Answers (${state.examWrongAnswers.length})`;
+  list.classList.toggle('visible', visible);
+  btn.setAttribute('aria-expanded', visible ? 'true' : 'false');
+  btn.textContent = visible ? 'Hide Wrong Answers' : collapsedText;
+}
+
+function resetExamWrongAnswersView() {
+  const list = document.getElementById('examWrongAnswersList');
+  const btn = document.getElementById('examWrongAnswersBtn');
+  list.classList.remove('visible');
+  list.innerHTML = '';
+  btn.style.display = 'none';
+  btn.setAttribute('aria-expanded', 'false');
+  btn.textContent = 'See Wrong Answers';
 }
 
 // ============================================================
