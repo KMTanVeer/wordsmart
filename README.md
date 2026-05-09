@@ -14,6 +14,7 @@
 ## Features
 
 - 📚 **832 vocabulary words** from the Word Smart series with definitions, pronunciations, Bengali meanings, synonyms, antonyms, and example sentences
+- 🗂️ **Idiom Library** — organized idiom sections sourced from the included idiom PDF
 - 🃏 **Flashcards** — flip through cards with difficulty ratings (Know / Hard / Save)
 - 🧠 **Quiz mode** — multiple choice questions: word meaning, synonym, antonym, and sentence completion
 - 📝 **Exam mode** — timed 30-question exam to test your knowledge
@@ -31,6 +32,7 @@
 |------|-------------|
 | **Home** | Overview with streak, progress, and quick stats |
 | **Learn** | Browse all 832 words by letter or filter (Easy/Medium/Hard/Weak/Saved) |
+| **Idioms** | Explore organized idiom sections with search support |
 | **Cards** | Flashcard deck with flip animation and difficulty rating |
 | **Quiz** | 20-question quiz with instant feedback |
 | **Exam** | 30-question timed exam (15 minutes) |
