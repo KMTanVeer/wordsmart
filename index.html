@@ -171,25 +171,13 @@ body {
 }
 .card:hover { border-color: var(--border2); }
 
-.card,
-.stat-card,
-.word-card,
-.quiz-question,
-.exam-header,
-.tabs,
-.idiom-card {
+:is(.card, .stat-card, .word-card, .quiz-question, .exam-header, .tabs, .idiom-card) {
   position: relative;
   overflow: hidden;
   transition: transform var(--transition), border-color var(--transition), box-shadow var(--transition);
 }
 
-.card::after,
-.stat-card::after,
-.word-card::after,
-.quiz-question::after,
-.exam-header::after,
-.tabs::after,
-.idiom-card::after {
+:is(.card, .stat-card, .word-card, .quiz-question, .exam-header, .tabs, .idiom-card)::after {
   content: '';
   position: absolute;
   left: 8%;
@@ -201,13 +189,7 @@ body {
   pointer-events: none;
 }
 
-.card:hover,
-.stat-card:hover,
-.word-card:hover,
-.quiz-question:hover,
-.exam-header:hover,
-.tabs:hover,
-.idiom-card:hover {
+:is(.card, .stat-card, .word-card, .quiz-question, .exam-header, .tabs, .idiom-card):hover {
   transform: translateY(-3px);
   box-shadow:
     0 24px 42px rgba(0, 0, 0, 0.5),
@@ -947,25 +929,27 @@ input:checked + .toggle-slider::before { transform: translateX(20px); background
 }
 
 /* GLASS OVERRIDES */
-.card,
-.stat-card,
-.word-card,
-.flashcard-face,
-.quiz-question,
-.quiz-opt,
-.quiz-timer,
-.search-input,
-.modal,
-.exam-header,
-.exam-wrong-item,
-.tabs,
-.chip,
-.about-link,
-.admin-form input,
-.admin-form textarea,
-.admin-form select,
-.alpha-btn,
-.idiom-card {
+:is(
+  .card,
+  .stat-card,
+  .word-card,
+  .flashcard-face,
+  .quiz-question,
+  .quiz-opt,
+  .quiz-timer,
+  .search-input,
+  .modal,
+  .exam-header,
+  .exam-wrong-item,
+  .tabs,
+  .chip,
+  .about-link,
+  .admin-form input,
+  .admin-form textarea,
+  .admin-form select,
+  .alpha-btn,
+  .idiom-card
+) {
   background: linear-gradient(145deg, rgba(129, 171, 255, 0.18), rgba(9, 18, 36, 0.62));
   backdrop-filter: blur(16px) saturate(145%);
   -webkit-backdrop-filter: blur(16px) saturate(145%);
