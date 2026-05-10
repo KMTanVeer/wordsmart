@@ -1427,7 +1427,7 @@ input:checked + .toggle-slider::before { transform: translateX(20px); background
               </label>
               <label class="setup-option" id="qt4">
                 <input type="radio" name="qtype" value="mixed" style="margin-top:2px;">
-                <span class="setup-option-main"><span class="setup-option-title">Mixed</span><span class="setup-option-desc">Practice with meaning and synonym questions.</span></span>
+                <span class="setup-option-main"><span class="setup-option-title">Mixed</span><span class="setup-option-desc">Practice with multiple question types.</span></span>
               </label>
             </div>
           </div>
@@ -2755,7 +2755,7 @@ function startExam() {
   const totalQ = Math.min(30, pool.length);
   state.examQuestions = [];
   state.examWrongAnswers = [];
-  const types = ['meaning','synonym'];
+  const types = ['meaning','synonym','meaning'];
   for (let i=0;i<totalQ;i++) {
     state.examQuestions.push(generateQuestion(types[i%types.length], examWords));
   }
