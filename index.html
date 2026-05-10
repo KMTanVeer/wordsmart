@@ -2300,12 +2300,18 @@ function setIdiomLetter(letter) {
   renderIdioms();
 }
 
+function getIdiomLetter(item) {
+  if (item && /^[A-Z]$/.test(item.letter)) return item.letter;
+  const first = (item?.idiom || '')[0] || '#';
+  return /^[A-Z]$/.test(first.toUpperCase()) ? first.toUpperCase() : '#';
+}
+
 function renderIdiomAlphabet(sourceItems) {
   const picker = document.getElementById('idiomAlphaPicker');
   const allBtn = document.getElementById('idiomAlphaAll');
   if (!picker || !allBtn) return;
 
-  const letters = [...new Set(sourceItems.map(item => /^[A-Z]$/.test(item.letter) ? item.letter : '#'))].sort((a, b) => a.localeCompare(b));
+  const letters = [...new Set(sourceItems.map(item => getIdiomLetter(item)))].sort((a, b) => a.localeCompare(b));
   if (idiomSelectedLetter !== 'all' && !letters.includes(idiomSelectedLetter)) {
     idiomSelectedLetter = 'all';
   }
@@ -2336,7 +2342,7 @@ function renderIdioms() {
 
   const filtered = searchFiltered.filter(item => {
     if (idiomSelectedLetter === 'all') return true;
-    return item.letter === idiomSelectedLetter;
+    return getIdiomLetter(item) === idiomSelectedLetter;
   });
 
   countEl.textContent = `${filtered.length} of ${IDIOMS.length} idioms`;
@@ -2357,7 +2363,7 @@ function renderIdioms() {
 
   const grouped = {};
   filtered.forEach(item => {
-    const letter = /^[A-Z]$/.test(item.letter) ? item.letter : '#';
+    const letter = getIdiomLetter(item);
     if (!grouped[letter]) grouped[letter] = [];
     grouped[letter].push(item);
   });
