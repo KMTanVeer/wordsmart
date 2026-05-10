@@ -2401,10 +2401,14 @@ function renderExamQuestion() {
     </div>`;
 }
 
-function answerExam(selected) {
+function answerExam(selectedIndex) {
   const q = state.examQuestions[state.examIndex];
-  const correct = q.answer === selected;
-  document.querySelectorAll('.quiz-opt').forEach(btn => { btn.disabled = true; });
+  const correct = q.answer === selectedIndex;
+  document.querySelectorAll('.quiz-opt').forEach((btn, i) => {
+    btn.disabled = true;
+    if (i === q.answer) btn.classList.add('correct');
+    else if (i === selectedIndex) btn.classList.add('wrong');
+  });
   if (correct) state.examCorrect++;
   else {
     state.examWrong++;
@@ -2413,7 +2417,7 @@ function answerExam(selected) {
       type: q.type,
       question: q.question,
       word: q.word,
-      selected: q.options[selected] ?? NO_ANSWER_TEXT,
+      selected: q.options[selectedIndex] ?? NO_ANSWER_TEXT,
       correct: q.options[q.answer] ?? ''
     });
     if (q.wordId !== undefined) state.progress.weak[q.wordId] = (state.progress.weak[q.wordId]||0)+1;
