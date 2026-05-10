@@ -1749,7 +1749,7 @@ input:checked + .toggle-slider::before { transform: translateX(20px); background
 <div class="name-prompt-overlay" id="namePromptOverlay" style="display:none;">
   <div class="name-prompt-card">
     <div class="name-prompt-logo">VocabsArt</div>
-    <div class="name-prompt-sub">VocabsArt Vocabulary Platform</div>
+    <div class="name-prompt-sub">VocabsArt Platform</div>
     <div class="name-prompt-title">Welcome! What's your name?</div>
     <div class="name-prompt-desc">We'll use it to greet you personally.</div>
     <input class="name-prompt-input" id="namePromptInput" type="text" placeholder="Enter your name…" maxlength="40" autocomplete="given-name">
@@ -2446,7 +2446,7 @@ function generateQuiz(count=20) {
   const words = getQuizWords();
   const type = document.querySelector('input[name="qtype"]:checked').value;
   const questions = [];
-  const types = type==='mixed' ? ['meaning','synonym','meaning','synonym'] : [type];
+  const types = type==='mixed' ? ['meaning','synonym'] : [type];
   for (let i=0;i<count;i++) {
     const t = types[i%types.length];
     questions.push(generateQuestion(t, words));
@@ -2755,7 +2755,7 @@ function startExam() {
   const totalQ = Math.min(30, pool.length);
   state.examQuestions = [];
   state.examWrongAnswers = [];
-  const types = ['meaning','synonym','meaning','synonym','meaning'];
+  const types = ['meaning','synonym'];
   for (let i=0;i<totalQ;i++) {
     state.examQuestions.push(generateQuestion(types[i%types.length], examWords));
   }
