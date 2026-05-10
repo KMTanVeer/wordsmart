@@ -187,6 +187,59 @@ body {
   margin-bottom: 20px;
 }
 
+
+.home-section-title {
+  font-size: 0.78rem;
+  color: var(--text3);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 10px;
+}
+
+.quick-actions-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.quick-actions-grid .btn {
+  min-height: 44px;
+}
+
+.motivation-banner {
+  border: 1px solid rgba(var(--gold-rgb),0.28);
+  background: linear-gradient(135deg, rgba(var(--gold-rgb),0.14), rgba(var(--gold-rgb),0.06));
+  color: var(--gold2);
+  font-size: 0.86rem;
+  font-weight: 600;
+  border-radius: var(--radius);
+  padding: 10px 12px;
+  margin-bottom: 14px;
+}
+
+.recent-scroll {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  padding-bottom: 4px;
+}
+
+.recent-item {
+  min-width: 148px;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 10px 12px;
+  cursor: pointer;
+}
+
+.recent-item-word {
+  font-family: 'Playfair Display', serif;
+  font-size: 1rem;
+  margin-bottom: 4px;
+}
+
 .stat-card {
   background: var(--surface);
   border: 1px solid var(--border);
@@ -864,13 +917,13 @@ input:checked + .toggle-slider::before { transform: translateX(20px); background
 }
 .alpha-btn:hover { border-color: var(--gold); color: var(--gold); background: var(--gold-dim); }
 .alpha-btn.active { background: var(--gold); color: var(--accent-contrast); border-color: var(--gold); }
-.alpha-btn.has-words::after {
+.alpha-btn.has-revise::after {
   content: '';
   position: absolute; bottom: 3px; right: 3px;
-  width: 5px; height: 5px; border-radius: 50%;
-  background: var(--gold);
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--red);
 }
-.alpha-btn.active::after { background: var(--accent-contrast); }
+.alpha-btn.has-revise.active::after { box-shadow: 0 0 0 1px var(--surface); }
 .alpha-btn.no-words { opacity: 0.3; cursor: default; }
 .alpha-btn.no-words:hover { border-color: var(--border); color: var(--text2); background: var(--surface); }
 
@@ -1066,6 +1119,44 @@ input:checked + .toggle-slider::before { transform: translateX(20px); background
 }
 .admin-icon-btn:hover { border-color: var(--gold); color: var(--gold); background: var(--gold-dim); }
 .admin-icon-btn svg { width: 22px; height: 22px; }
+
+.setup-option {
+  display:flex;
+  align-items:flex-start;
+  gap:10px;
+  cursor:pointer;
+  padding:10px;
+  border-radius:8px;
+  border:1.5px solid var(--border);
+}
+
+.setup-option-main {
+  display:flex;
+  flex-direction:column;
+  gap:2px;
+}
+
+.setup-option-title {
+  font-size:0.9rem;
+  color:var(--text);
+  font-weight:500;
+}
+
+.setup-option-desc {
+  font-size:0.76rem;
+  color:var(--text3);
+  line-height:1.5;
+}
+
+.exam-progress-wrap {
+  margin: 10px 0 12px;
+}
+
+.setting-actions {
+  display:grid;
+  gap:10px;
+  margin-top:12px;
+}
 </style>
 </head>
 <body>
@@ -1120,43 +1211,37 @@ input:checked + .toggle-slider::before { transform: translateX(20px); background
           <div style="font-size:0.75rem;color:var(--text3);margin-top:6px;" id="progressDetail">0 of 832 words learned</div>
         </div>
 
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px;">
-          <div class="stat-card" role="button" tabindex="0" style="text-align:left;padding:14px;cursor:pointer;" onclick="navigateToWeak()" onkeydown="if(event.key==='Enter'||event.key===' ')navigateToWeak()">
-            <div style="font-size:0.68rem;text-transform:uppercase;letter-spacing:0.06em;color:var(--text3);margin-bottom:6px;">Revise</div>
-            <div class="stat-val red" id="statWeak">0</div>
-            <div style="font-size:0.72rem;color:var(--text3);margin-top:4px;">Need Revision</div>
-          </div>
-          <div class="stat-card" style="text-align:left;padding:14px;cursor:pointer;" onclick="navigateToSaved()">
-            <div style="font-size:0.68rem;text-transform:uppercase;letter-spacing:0.06em;color:var(--text3);margin-bottom:6px;">Bookmarked</div>
-            <div class="stat-val" style="color:var(--blue);" id="statBookmarks">0</div>
-            <div style="font-size:0.72rem;color:var(--text3);margin-top:4px;">Saved Words</div>
+        <div style="margin-bottom:14px;">
+          <div class="home-section-title">Quick Actions</div>
+          <div class="quick-actions-grid">
+            <button class="btn btn-gold btn-full" onclick="navigate('learn')">Continue Learning</button>
+            <button class="btn btn-surface btn-full" onclick="navigate('flashcards')">Flashcards</button>
+            <button class="btn btn-surface btn-full" onclick="navigate('quiz')">Quick Quiz</button>
+            <button class="btn btn-surface btn-full" onclick="navigate('idioms')">Browse Idioms</button>
+            <button class="btn btn-outline btn-full" onclick="navigate('exam')" style="grid-column:1/-1;">Mock Exam</button>
           </div>
         </div>
 
-        <button class="btn btn-gold btn-full btn-lg" onclick="navigate('learn')" style="margin-bottom:10px;">
-          <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
-          Continue Learning
-        </button>
-
-
-        <button class="btn btn-outline btn-full" onclick="navigate('idioms')" style="margin-bottom:12px;">
-          <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M7 8h10M7 12h10M7 16h6"/><rect x="4" y="4" width="16" height="16" rx="2"/></svg>
-          Browse Idioms
-        </button>
-
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:20px;">
-          <button class="btn btn-surface btn-full" onclick="navigate('flashcards')">
-            <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8m-4-4v4"/></svg>
-            Flashcards
-          </button>
-          <button class="btn btn-surface btn-full" onclick="navigate('quiz')">
-            <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3m.08 4h.01"/></svg>
-            Quick Quiz
-          </button>
+        <div style="margin-bottom:14px;">
+          <div class="home-section-title">Review</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+            <div class="stat-card" role="button" tabindex="0" style="text-align:left;padding:14px;cursor:pointer;" onclick="navigateToWeak()" onkeydown="if(event.key==='Enter'||event.key===' ')navigateToWeak()">
+              <div style="font-size:0.68rem;text-transform:uppercase;letter-spacing:0.06em;color:var(--text3);margin-bottom:6px;">Revise</div>
+              <div class="stat-val red" id="statWeak">0</div>
+              <div style="font-size:0.72rem;color:var(--text3);margin-top:4px;">Need Revision</div>
+            </div>
+            <div class="stat-card" style="text-align:left;padding:14px;cursor:pointer;" onclick="navigateToSaved()">
+              <div style="font-size:0.68rem;text-transform:uppercase;letter-spacing:0.06em;color:var(--text3);margin-bottom:6px;">Bookmarked</div>
+              <div class="stat-val" style="color:var(--blue);" id="statBookmarks">0</div>
+              <div style="font-size:0.72rem;color:var(--text3);margin-top:4px;">Saved Words</div>
+            </div>
+          </div>
         </div>
+
+        <div class="motivation-banner" id="homeMotivation">Keep it up! You're building momentum.</div>
 
         <div style="margin-bottom:16px;">
-          <div style="font-size:0.8rem;font-weight:500;color:var(--text2);margin-bottom:10px;">Recent Words</div>
+          <div class="home-section-title" style="margin-bottom:8px;">Recent Words</div>
           <div id="recentWords"><div class="empty" style="padding:24px 0;"><p>Start learning to track progress</p></div></div>
         </div>
       </div>
@@ -1182,17 +1267,33 @@ input:checked + .toggle-slider::before { transform: translateX(20px); background
 
         <!-- A-Z Letter Picker -->
         <div id="alphaPickerSection">
-          <div class="filter-row" id="diffFilter" style="margin-bottom:10px;">
+          <div class="filter-row" id="diffFilter" style="margin-bottom:10px;gap:8px;">
             <div class="chip active" data-val="all" onclick="filterLearn('all',this)">All</div>
-            <div class="chip" data-val="Easy" onclick="filterLearn('Easy',this)">🟢 Easy</div>
-            <div class="chip" data-val="Medium" onclick="filterLearn('Medium',this)">🟡 Medium</div>
-            <div class="chip" data-val="Hard" onclick="filterLearn('Hard',this)">🔴 Hard</div>
-            <div class="chip" data-val="weak" onclick="filterLearn('weak',this)">⚡ Revise</div>
-            <div class="chip" data-val="saved" onclick="filterLearn('saved',this)">🔖 Saved</div>
+            <div class="chip" data-val="Easy" onclick="filterLearn('Easy',this)">Easy</div>
+            <div class="chip" data-val="Medium" onclick="filterLearn('Medium',this)">Medium</div>
+            <div class="chip" data-val="Hard" onclick="filterLearn('Hard',this)">Hard</div>
+            <div class="chip" data-val="weak" onclick="filterLearn('weak',this)">Revise</div>
+            <div class="chip" data-val="saved" onclick="filterLearn('saved',this)">Saved</div>
+          </div>
+
+          <div class="filter-row" id="catFilter" style="margin-bottom:10px;gap:8px;">
+            <div class="chip active" data-cat="all" onclick="setLearnCategory('all',this)">All Categories</div>
+            <div class="chip" data-cat="General" onclick="setLearnCategory('General',this)">General</div>
+            <div class="chip" data-cat="Personality" onclick="setLearnCategory('Personality',this)">Personality</div>
+            <div class="chip" data-cat="Emotion" onclick="setLearnCategory('Emotion',this)">Emotion</div>
+            <div class="chip" data-cat="Behavior" onclick="setLearnCategory('Behavior',this)">Behavior</div>
+            <div class="chip" data-cat="Language" onclick="setLearnCategory('Language',this)">Language</div>
+            <div class="chip" data-cat="Intelligence" onclick="setLearnCategory('Intelligence',this)">Intelligence</div>
+            <div class="chip" data-cat="Moral/Ethical" onclick="setLearnCategory('Moral/Ethical',this)">Moral/Ethical</div>
+            <div class="chip" data-cat="Change" onclick="setLearnCategory('Change',this)">Change</div>
+          </div>
+
+          <div class="filter-row" style="margin-bottom:10px;">
+            <button class="btn btn-surface btn-sm" id="learnIdiomsToggle" onclick="toggleLearnIdioms(this)">Idioms Toggle: Off</button>
           </div>
 
           <div style="font-size:0.72rem;color:var(--text3);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:8px;">Browse by Letter</div>
-          <div id="alphaPicker" style="display:grid;grid-template-columns:repeat(9,1fr);gap:5px;margin-bottom:16px;"></div>
+          <div id="alphaPicker" style="display:grid;grid-template-columns:repeat(9,1fr);gap:8px;margin-bottom:16px;"></div>
         </div>
 
         <!-- Letter Word List View -->
@@ -1260,6 +1361,11 @@ input:checked + .toggle-slider::before { transform: translateX(20px); background
           <button class="tab-btn" onclick="setFCMode('hard',this)">Hard</button>
         </div>
 
+        <div class="filter-row" style="margin-bottom:10px;">
+          <button class="chip active" id="fcToggleBengali" onclick="toggleFlashcardSetting('showBengali', this)">Bengali Meaning</button>
+          <button class="chip active" id="fcToggleExample" onclick="toggleFlashcardSetting('showEx', this)">Example Sentence</button>
+        </div>
+
         <div class="fc-progress" id="fcProgress">Card 1 of 0</div>
 
         <div class="flashcard-wrapper">
@@ -1320,20 +1426,25 @@ input:checked + .toggle-slider::before { transform: translateX(20px); background
           <div class="card" style="margin-bottom:12px;">
             <div style="font-size:0.88rem;font-weight:500;color:var(--text2);margin-bottom:12px;">Quiz Type</div>
             <div style="display:flex;flex-direction:column;gap:8px;" id="quizTypeList">
-              <label style="display:flex;align-items:center;gap:10px;cursor:pointer;padding:10px;border-radius:8px;border:1.5px solid var(--border);transition:border-color 0.2s;" id="qt0">
-                <input type="radio" name="qtype" value="meaning" checked style="accent-color:var(--gold);"> Word Meaning (MCQ)
+              <label class="setup-option" id="qt0">
+                <input type="radio" name="qtype" value="meaning" checked style="accent-color:var(--gold);margin-top:2px;">
+                <span class="setup-option-main"><span class="setup-option-title">Word Meaning (MCQ)</span><span class="setup-option-desc">Choose the correct meaning for each word.</span></span>
               </label>
-              <label style="display:flex;align-items:center;gap:10px;cursor:pointer;padding:10px;border-radius:8px;border:1.5px solid var(--border);" id="qt1">
-                <input type="radio" name="qtype" value="synonym"> Synonym Match
+              <label class="setup-option" id="qt1">
+                <input type="radio" name="qtype" value="synonym" style="margin-top:2px;">
+                <span class="setup-option-main"><span class="setup-option-title">Synonym Match</span><span class="setup-option-desc">Pick the closest similar meaning.</span></span>
               </label>
-              <label style="display:flex;align-items:center;gap:10px;cursor:pointer;padding:10px;border-radius:8px;border:1.5px solid var(--border);" id="qt2">
-                <input type="radio" name="qtype" value="antonym"> Antonym Match
+              <label class="setup-option" id="qt2">
+                <input type="radio" name="qtype" value="antonym" style="margin-top:2px;">
+                <span class="setup-option-main"><span class="setup-option-title">Antonym Match</span><span class="setup-option-desc">Identify the opposite meaning.</span></span>
               </label>
-              <label style="display:flex;align-items:center;gap:10px;cursor:pointer;padding:10px;border-radius:8px;border:1.5px solid var(--border);" id="qt3">
-                <input type="radio" name="qtype" value="sentence"> Sentence Completion
+              <label class="setup-option" id="qt3">
+                <input type="radio" name="qtype" value="sentence" style="margin-top:2px;">
+                <span class="setup-option-main"><span class="setup-option-title">Sentence Completion</span><span class="setup-option-desc">Fill in the blank with the right word.</span></span>
               </label>
-              <label style="display:flex;align-items:center;gap:10px;cursor:pointer;padding:10px;border-radius:8px;border:1.5px solid var(--border);" id="qt4">
-                <input type="radio" name="qtype" value="mixed"> Mixed (All Types)
+              <label class="setup-option" id="qt4">
+                <input type="radio" name="qtype" value="mixed" style="margin-top:2px;">
+                <span class="setup-option-main"><span class="setup-option-title">Mixed (All Types)</span><span class="setup-option-desc">Practice with all quiz formats together.</span></span>
               </label>
             </div>
           </div>
@@ -1456,6 +1567,10 @@ input:checked + .toggle-slider::before { transform: translateX(20px); background
               <div style="font-size:1.2rem;font-weight:600;" id="examQNum">1/30</div>
             </div>
           </div>
+          <div class="exam-progress-wrap">
+            <div class="progress-bar"><div class="progress-fill" id="examProgressFill" style="width:0%"></div></div>
+            <div style="font-size:0.75rem;color:var(--text3);margin-top:6px;" id="examProgressText">Question 1 of 30</div>
+          </div>
           <div id="examQuestionBox"></div>
           <div id="examNextBtn" style="display:none;">
             <button class="btn btn-gold btn-full" style="margin-top:14px;" onclick="nextExamQ()">Next →</button>
@@ -1484,7 +1599,7 @@ input:checked + .toggle-slider::before { transform: translateX(20px); background
     <div id="page-more" class="page">
       <div class="container">
         <div style="padding-top:14px;margin-bottom:18px;">
-          <div class="section-title">More</div>
+          <div class="section-title">Profile</div>
         </div>
 
         <div class="tabs">
@@ -1509,9 +1624,6 @@ input:checked + .toggle-slider::before { transform: translateX(20px); background
             <div id="categoryBreakdown" style="font-size:0.82rem;color:var(--text3);">Loading...</div>
           </div>
 
-          <button class="btn btn-outline btn-full" onclick="resetProgress()" style="color:var(--red);border-color:rgba(var(--red-rgb),0.3);">
-            Reset All Progress
-          </button>
         </div>
 
         <!-- About Tab (Developer Profile) -->
@@ -1561,6 +1673,11 @@ input:checked + .toggle-slider::before { transform: translateX(20px); background
             </div>
           </div>
 
+          <div class="setting-actions">
+            <button class="btn btn-surface btn-full" onclick="backupAndSync()">Backup &amp; Sync</button>
+            <button class="btn btn-outline btn-full" onclick="resetProgress()" style="color:var(--red);border-color:rgba(var(--red-rgb),0.3);">Reset All Progress</button>
+          </div>
+
           <div class="card" style="margin-top:12px;">
             <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;">
               <div style="font-size:0.8rem;color:var(--text3);line-height:1.7;">
@@ -1604,7 +1721,7 @@ input:checked + .toggle-slider::before { transform: translateX(20px); background
     </button>
     <button class="nav-btn" id="nav-more" onclick="navigate('more')">
       <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><circle cx="12" cy="5" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="12" cy="19" r="1"/></svg>
-      More
+      Profile
     </button>
   </nav>
 </div>
@@ -1684,6 +1801,8 @@ const NO_ANSWER_TEXT = 'No answer';
 let state = {
   words: [],
   learnFilter: 'all',
+  learnCategory: 'all',
+  learnIdiomsOnly: false,
   selectedLetter: null,
   fcMode: 'all',
   fcDeck: [],
@@ -1773,6 +1892,12 @@ function saveProgress() {
 function saveSetting(key, val) {
   state.settings[key] = val;
   localStorage.setItem('lexiba_settings', JSON.stringify(state.settings));
+  if (key === 'showBengali' || key === 'showEx') {
+    const fcToggleId = key === 'showBengali' ? 'fcToggleBengali' : 'fcToggleExample';
+    const fcToggle = document.getElementById(fcToggleId);
+    if (fcToggle) fcToggle.classList.toggle('active', !!val);
+    if (state.fcDeck.length) loadCard();
+  }
 }
 
 function loadSettings() {
@@ -1780,6 +1905,10 @@ function loadSettings() {
   document.getElementById('settSyns').checked = state.settings.showSyns;
   document.getElementById('settEx').checked = state.settings.showEx;
   document.getElementById('settWeak').checked = state.settings.weakFocus;
+  const fcBengali = document.getElementById('fcToggleBengali');
+  const fcExample = document.getElementById('fcToggleExample');
+  if (fcBengali) fcBengali.classList.toggle('active', !!state.settings.showBengali);
+  if (fcExample) fcExample.classList.toggle('active', !!state.settings.showEx);
 }
 
 function setGreeting() {
@@ -1823,28 +1952,30 @@ function updateHomeStats() {
   document.getElementById('st2Acc').textContent = acc;
   document.getElementById('st2Weak').textContent = weak;
 
+  const motivation = document.getElementById('homeMotivation');
+  if (motivation) {
+    if (pct >= 80) motivation.textContent = 'Amazing consistency! You are exam-ready.';
+    else if (pct >= 50) motivation.textContent = 'Great momentum! Keep it up!';
+    else if (learned > 0) motivation.textContent = 'Nice start! One more session today will help a lot.';
+    else motivation.textContent = 'Keep it up! Start with a quick learning round.';
+  }
+
   renderRecentWords();
   renderCategoryBreakdown();
 }
 
 function renderRecentWords() {
   const el = document.getElementById('recentWords');
-  const recent = (state.progress.recent || []).slice(0,5);
+  const recent = (state.progress.recent || []).slice(0,8);
   if (!recent.length) { el.innerHTML = '<div class="empty" style="padding:16px 0;"><p>Start learning to track progress</p></div>'; return; }
-  el.innerHTML = recent.map(id => {
+  el.innerHTML = `<div class="recent-scroll">${recent.map(id => {
     const w = state.words[id];
     if (!w) return '';
-    return `<div class="word-card" style="padding:12px 14px;margin-bottom:6px;" onclick="openModal(${id})">
-      <div style="display:flex;align-items:center;justify-content:space-between;">
-        <div>
-          <span class="word-name" style="font-size:1rem;">${w.word}</span>
-          <span class="word-pos" style="margin-left:8px;">${w.pos}</span>
-        </div>
-        <span class="badge badge-${w.difficulty.toLowerCase()}">${w.difficulty}</span>
-      </div>
-      <div class="word-def" style="margin-top:4px;">${w.definition.slice(0,80)}${w.definition.length>80?'…':''}</div>
+    return `<div class="recent-item" onclick="openModal(${id})">
+      <div class="recent-item-word">${w.word}</div>
+      <span class="badge badge-${w.difficulty.toLowerCase()}">${w.difficulty}</span>
     </div>`;
-  }).join('');
+  }).join('')}</div>`;
 }
 
 function renderCategoryBreakdown() {
@@ -1889,12 +2020,35 @@ function filterLearn(val, el) {
   renderLearnList();
 }
 
+function setLearnCategory(cat, el) {
+  document.querySelectorAll('#catFilter .chip').forEach(c => c.classList.remove('active'));
+  el.classList.add('active');
+  state.learnCategory = cat;
+  renderLearnList();
+}
+
+function toggleLearnIdioms(el) {
+  state.learnIdiomsOnly = !state.learnIdiomsOnly;
+  if (el) {
+    el.classList.toggle('btn-gold', state.learnIdiomsOnly);
+    el.classList.toggle('btn-surface', !state.learnIdiomsOnly);
+    el.textContent = `Idioms Toggle: ${state.learnIdiomsOnly ? 'On' : 'Off'}`;
+  }
+  renderLearnList();
+}
+
 function getFilteredWords() {
   let words = [...state.words];
   const f = state.learnFilter;
   if (f === 'Easy' || f === 'Medium' || f === 'Hard') words = words.filter(w => w.difficulty === f);
   else if (f === 'weak') words = words.filter(w => (state.progress.weak[w.id]||0) > 1);
   else if (f === 'saved') words = words.filter(w => state.progress.saved[w.id]);
+
+  if (state.learnIdiomsOnly) {
+    words = words.filter(w => w.category === 'Language');
+  } else if (state.learnCategory !== 'all') {
+    words = words.filter(w => w.category === state.learnCategory);
+  }
   return words;
 }
 
@@ -1902,11 +2056,13 @@ function buildAlphaPicker() {
   const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
   const words = getFilteredWords();
   const available = new Set(words.map(w => w.word[0].toUpperCase()));
+  const weakLetters = new Set(words.filter(w => (state.progress.weak[w.id]||0) > 1).map(w => w.word[0].toUpperCase()));
   const el = document.getElementById('alphaPicker');
   if (!el) return;
   el.innerHTML = letters.map(l => {
     const has = available.has(l);
-    return `<button class="alpha-btn ${has?'has-words':'no-words'} ${state.selectedLetter===l?'active':''}" 
+    const hasRevise = weakLetters.has(l);
+    return `<button class="alpha-btn ${has?'':'no-words'} ${hasRevise?'has-revise':''} ${state.selectedLetter===l?'active':''}" 
       onclick="${has?`selectLetter('${l}')`:''}">${l}</button>`;
   }).join('');
 }
@@ -1947,6 +2103,12 @@ function backToAlpha() {
 function renderLearnList() {
   const words = getFilteredWords();
   document.getElementById('learnCount').textContent = `${words.length} of ${state.words.length} words`;
+  const idiomToggleBtn = document.getElementById('learnIdiomsToggle');
+  if (idiomToggleBtn) {
+    idiomToggleBtn.classList.toggle('btn-gold', state.learnIdiomsOnly);
+    idiomToggleBtn.classList.toggle('btn-surface', !state.learnIdiomsOnly);
+    idiomToggleBtn.textContent = `Idioms Toggle: ${state.learnIdiomsOnly ? 'On' : 'Off'}`;
+  }
 
   // Reset letter view
   state.selectedLetter = null;
@@ -2147,10 +2309,17 @@ function getFCDeck() {
 }
 
 function setFCMode(mode, el) {
-  document.querySelectorAll('.tabs .tab-btn').forEach(b=>b.classList.remove('active'));
+  document.querySelectorAll('#page-flashcards .tabs .tab-btn').forEach(b=>b.classList.remove('active'));
   el.classList.add('active');
   state.fcMode = mode;
   initFlashcards();
+}
+
+function toggleFlashcardSetting(key, el) {
+  state.settings[key] = !state.settings[key];
+  localStorage.setItem('lexiba_settings', JSON.stringify(state.settings));
+  el.classList.toggle('active', state.settings[key]);
+  if (state.fcDeck.length) loadCard();
 }
 
 function initFlashcards() {
@@ -2184,9 +2353,9 @@ function loadCard() {
   // Back
   document.getElementById('fcBackWord').textContent = w.word;
   document.getElementById('fcDef').textContent = w.definition;
-  document.getElementById('fcBengali').textContent = w.bengali || '';
+  document.getElementById('fcBengali').textContent = state.settings.showBengali ? (w.bengali || '') : '';
   document.getElementById('fcSyns').innerHTML = w.synonyms.slice(0,5).map(s=>`<span class="syn-tag">${s}</span>`).join('');
-  document.getElementById('fcExample').textContent = w.example || '—';
+  document.getElementById('fcExample').textContent = state.settings.showEx ? (w.example || '—') : '';
 }
 
 function flipCard() {
@@ -2642,6 +2811,9 @@ function renderExamQuestion() {
   if (!q) { endExam(); return; }
   document.getElementById('examQNum').textContent = `${state.examIndex+1}/${total}`;
   document.getElementById('examNextBtn').style.display = 'none';
+  const examProgress = Math.round((state.examIndex / total) * 100);
+  document.getElementById('examProgressFill').style.width = `${examProgress}%`;
+  document.getElementById('examProgressText').textContent = `Question ${state.examIndex + 1} of ${total}`;
   const box = document.getElementById('examQuestionBox');
   box.innerHTML = `
     <div class="quiz-question">
@@ -2836,12 +3008,42 @@ function showMoreTab(tab, el) {
 }
 
 // ============================================================
+// BACKUP
+// ============================================================
+function backupAndSync() {
+  const payload = JSON.stringify({
+    progress: state.progress,
+    stats: { correct: state.totalCorrect, answered: state.totalAnswered, streak: state.streak },
+    settings: state.settings
+  });
+
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(payload)
+      .then(() => alert('Backup copied to clipboard. Paste it somewhere safe for sync/restore.'))
+      .catch(() => alert('Backup created, but clipboard permission was denied.'));
+    return;
+  }
+
+  const blob = new Blob([payload], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'vocabsart-backup.json';
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
+// ============================================================
 // RESET
 // ============================================================
 function resetProgress() {
   if (!confirm('Reset all your progress? This cannot be undone.')) return;
   state.progress = {learned:{}, weak:{}, saved:{}, recent:[]};
   state.totalCorrect = 0; state.totalAnswered = 0; state.streak = 0;
+  const examProgressFill = document.getElementById('examProgressFill');
+  const examProgressText = document.getElementById('examProgressText');
+  if (examProgressFill) examProgressFill.style.width = '0%';
+  if (examProgressText) examProgressText.textContent = 'Question 1 of 30';
   saveProgress();
   updateHomeStats();
   renderLearnList();
