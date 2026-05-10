@@ -88,16 +88,43 @@ body {
 }
 
 .topbar-brand {
-  font-family: 'Playfair Display', serif;
-  font-size: 1.35rem;
-  font-weight: 700;
-  color: var(--gold);
-  letter-spacing: 0.01em;
+  display: flex;
+  align-items: center;
+  gap: 10px;
   cursor: pointer;
   user-select: none;
 }
 
-.topbar-brand span { color: var(--text2); font-size: 0.65rem; font-family: 'DM Sans', sans-serif; font-weight: 400; letter-spacing: 0.15em; text-transform: uppercase; display: block; margin-top: -3px; }
+.topbar-logo {
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+}
+
+.topbar-brand-main {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: 0.01em;
+  line-height: 1.1;
+}
+
+.topbar-brand-main strong {
+  color: var(--gold);
+  font-weight: 700;
+}
+
+.topbar-brand span {
+  color: var(--text3);
+  font-size: 0.58rem;
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 500;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  display: block;
+  margin-top: 2px;
+}
 
 .topbar-right { display: flex; align-items: center; gap: 12px; }
 
@@ -109,6 +136,20 @@ body {
   padding: 5px 12px;
   font-size: 0.78rem; font-weight: 500; color: var(--gold2);
 }
+
+.notification-btn {
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text2);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.notification-btn svg { width: 17px; height: 17px; }
 
 /* NAV */
 .nav {
@@ -187,7 +228,6 @@ body {
   margin-bottom: 20px;
 }
 
-
 .home-section-title {
   font-size: 0.78rem;
   color: var(--text3);
@@ -238,6 +278,320 @@ body {
   font-family: 'Playfair Display', serif;
   font-size: 1rem;
   margin-bottom: 4px;
+}
+
+#page-home .home-shell {
+  padding-top: 14px;
+  display: grid;
+  gap: 12px;
+}
+
+#page-home .home-hero {
+  background: linear-gradient(145deg, #0f1326 0%, #090d1a 55%, #070a14 100%);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 18px;
+  padding: 18px 16px;
+}
+
+#page-home .home-hero-greeting {
+  font-size: 0.8rem;
+  color: #b6c2db;
+  margin-bottom: 6px;
+}
+
+#page-home .home-hero-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.85rem;
+  font-weight: 700;
+  line-height: 1.12;
+  color: var(--text);
+}
+
+#page-home .home-hero-sub {
+  font-size: 0.8rem;
+  color: var(--text3);
+  margin-top: 7px;
+}
+
+#page-home .stats-grid {
+  gap: 10px;
+  margin-bottom: 0;
+}
+
+#page-home .stat-card {
+  text-align: left;
+  background: linear-gradient(150deg, #101733 0%, #0d1326 100%);
+  border: 1px solid rgba(130, 163, 255, 0.18);
+  border-radius: 15px;
+  padding: 12px;
+}
+
+#page-home .stat-icon {
+  width: 28px;
+  height: 28px;
+  border-radius: 10px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
+#page-home .stat-icon svg { width: 15px; height: 15px; }
+#page-home .stat-icon.purple { background: rgba(183,156,255,0.2); color: #ccb8ff; }
+#page-home .stat-icon.blue { background: rgba(var(--blue-rgb),0.2); color: #96c8ff; }
+#page-home .stat-icon.green { background: rgba(var(--green-rgb),0.18); color: #7ff0ca; }
+
+#page-home .stat-val {
+  font-size: 2rem;
+  line-height: 1;
+  margin-bottom: 6px;
+}
+
+#page-home .stat-label {
+  font-size: 0.78rem;
+  text-transform: none;
+  letter-spacing: 0;
+  margin-top: 0;
+  color: #cad4ea;
+}
+
+#page-home .stat-note {
+  font-size: 0.72rem;
+  color: var(--text3);
+  margin-top: 4px;
+}
+
+#page-home .stat-note.good { color: var(--green); font-weight: 600; }
+
+#page-home .home-progress {
+  background: linear-gradient(145deg, #111a35 0%, #0c1224 100%);
+  border: 1px solid rgba(130, 163, 255, 0.18);
+  border-radius: 16px;
+  padding: 14px;
+}
+
+#page-home .home-progress-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+#page-home .home-progress-title {
+  font-size: 0.95rem;
+  font-weight: 700;
+}
+
+#page-home .home-progress-pct {
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+#page-home .progress-bar {
+  height: 8px;
+  background: rgba(255,255,255,0.08);
+  margin: 0;
+}
+
+#page-home .progress-fill {
+  background: linear-gradient(90deg, var(--gold) 0%, #ffcf66 100%);
+}
+
+#page-home .home-progress-foot {
+  margin-top: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  font-size: 0.76rem;
+  color: #c3d0e8;
+}
+
+#page-home .review-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+#page-home .review-card {
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,0.1);
+  padding: 13px 12px;
+  cursor: pointer;
+}
+
+#page-home .review-card.revise {
+  background: linear-gradient(145deg, rgba(var(--red-rgb),0.16), rgba(var(--purple-dim),0.12));
+}
+
+#page-home .review-card.saved {
+  background: linear-gradient(145deg, rgba(var(--blue-rgb),0.14), rgba(54,83,160,0.15));
+}
+
+#page-home .review-label {
+  font-size: 0.82rem;
+  color: var(--text2);
+  margin-bottom: 3px;
+}
+
+#page-home .review-value {
+  font-family: 'Playfair Display', serif;
+  font-size: 2rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+#page-home .review-value.red { color: var(--red); }
+#page-home .review-value.blue { color: #6fb2ff; }
+
+#page-home .review-sub {
+  font-size: 0.77rem;
+  color: var(--text3);
+  margin-top: 6px;
+}
+
+#page-home .home-primary-btn {
+  width: 100%;
+  min-height: 58px;
+  border-radius: 14px;
+  border: none;
+  background: linear-gradient(135deg, #ffbc39 0%, #ffcc53 100%);
+  color: #352100;
+  font-size: 1.1rem;
+  font-weight: 700;
+  padding: 12px 16px;
+  text-align: left;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+#page-home .home-primary-sub {
+  display: block;
+  font-size: 0.82rem;
+  font-weight: 500;
+  opacity: 0.8;
+  margin-top: 2px;
+}
+
+#page-home .shortcut-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0,1fr));
+  gap: 8px;
+}
+
+#page-home .shortcut-btn {
+  min-height: 78px;
+  background: linear-gradient(145deg, #10172f 0%, #0a1020 100%);
+  border: 1px solid rgba(130, 163, 255, 0.17);
+  border-radius: 12px;
+  color: var(--text);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  font-size: 0.77rem;
+  font-weight: 500;
+}
+
+#page-home .shortcut-btn svg {
+  width: 18px;
+  height: 18px;
+}
+
+#page-home .shortcut-btn.purple svg { color: #c49fff; }
+#page-home .shortcut-btn.green svg { color: #7cf4c7; }
+#page-home .shortcut-btn.blue svg { color: #7ab8ff; }
+#page-home .shortcut-btn.gold svg { color: var(--gold); }
+
+#page-home .recent-wrap {
+  background: linear-gradient(145deg, #10172f 0%, #090f1f 100%);
+  border: 1px solid rgba(130, 163, 255, 0.18);
+  border-radius: 16px;
+  padding: 14px;
+}
+
+#page-home .recent-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+#page-home .recent-title {
+  font-size: 1.15rem;
+  font-weight: 700;
+}
+
+#page-home .recent-view-all {
+  border: none;
+  background: none;
+  color: var(--gold);
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+
+#page-home .recent-preview {
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 14px;
+  background: rgba(255,255,255,0.02);
+  padding: 12px;
+  cursor: pointer;
+}
+
+#page-home .recent-word-line {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+#page-home .recent-word {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.9rem;
+  font-weight: 700;
+  color: var(--text);
+}
+
+#page-home .recent-pos {
+  display: inline-block;
+  font-size: 0.72rem;
+  color: #9bb6ff;
+  background: rgba(116,173,243,0.18);
+  border-radius: 999px;
+  padding: 3px 9px;
+  margin-left: 10px;
+  vertical-align: middle;
+}
+
+#page-home .recent-def {
+  margin-top: 8px;
+  color: var(--text2);
+  font-size: 0.93rem;
+  line-height: 1.5;
+}
+
+#page-home .recent-meta {
+  margin-top: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: var(--text3);
+  font-size: 0.82rem;
+}
+
+#page-home .recent-empty {
+  border: 1px dashed rgba(255,255,255,0.17);
+  border-radius: 12px;
+  padding: 16px;
+  color: var(--text3);
+  font-size: 0.85rem;
+  text-align: center;
+}
+
+#page-home .motivation-banner {
+  margin-bottom: 0;
 }
 
 .stat-card {
@@ -1165,14 +1519,19 @@ input:checked + .toggle-slider::before { transform: translateX(20px); background
   <!-- TOP BAR -->
   <header class="topbar">
     <div class="topbar-brand" onclick="navigate('home')">
-      VocabsArt
+      <img src="vocabsart-icon-light.svg" alt="VocabsArt logo" class="topbar-logo">
+      <div class="topbar-brand-main">Vocabs<strong>Art</strong>
       <span>Learn Words</span>
+      </div>
     </div>
     <div class="topbar-right">
       <div class="streak-badge" id="streakBadge">
         <svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M17.657 18.657A8 8 0 016.343 7.343S7 9 9 10c0-2 .5-5 2.986-7C14 5 16.09 5.777 17.656 7.343A7.975 7.975 0 0120 13a7.975 7.975 0 01-2.343 5.657z"/><path d="M9.879 16.121A3 3 0 1012.015 11L11 14H9c0 .768.293 1.536.879 2.121z"/></svg>
         <span id="streakCount">0</span> Day Streak
       </div>
+      <button class="notification-btn" aria-label="Notifications">
+        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M15 17h5l-1.4-1.4a2 2 0 0 1-.6-1.4V11a6 6 0 1 0-12 0v3.2a2 2 0 0 1-.6 1.4L4 17h5"/><path d="M9 17a3 3 0 0 0 6 0"/></svg>
+      </button>
     </div>
   </header>
 
@@ -1182,67 +1541,99 @@ input:checked + .toggle-slider::before { transform: translateX(20px); background
     <!-- HOME PAGE -->
     <div id="page-home" class="page active">
       <div class="container">
-        <div style="padding-top:14px; margin-bottom:18px;">
-          <div style="font-size:0.78rem;color:var(--text3);margin-bottom:3px;" id="homeGreeting">Good morning</div>
-          <div class="serif" style="font-size:1.6rem;font-weight:700;color:var(--text);">Today's Progress</div>
-        </div>
+        <div class="home-shell">
+          <div class="home-hero">
+            <div class="home-hero-greeting" id="homeGreeting">Good morning, Learner</div>
+            <div class="home-hero-title">Keep learning, keep growing.</div>
+            <div class="home-hero-sub">Track your daily momentum and stay consistent.</div>
+          </div>
 
-        <div class="stats-grid">
-          <div class="stat-card">
-            <div class="stat-val gold" id="statLearned">0</div>
-            <div class="stat-label">Learned</div>
-          </div>
-          <div class="stat-card">
-            <div class="stat-val" id="statTotal">832</div>
-            <div class="stat-label">Total Words</div>
-          </div>
-          <div class="stat-card">
-            <div class="stat-val green" id="statAccuracy">—</div>
-            <div class="stat-label">Accuracy</div>
-          </div>
-        </div>
-
-        <div class="card" style="margin-bottom:12px;">
-          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;">
-            <div style="font-size:0.82rem;font-weight:500;color:var(--text2);">Overall Progress</div>
-            <div style="font-size:0.78rem;color:var(--text3);" id="progressPercent">0%</div>
-          </div>
-          <div class="progress-bar"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
-          <div style="font-size:0.75rem;color:var(--text3);margin-top:6px;" id="progressDetail">0 of 832 words learned</div>
-        </div>
-
-        <div style="margin-bottom:14px;">
-          <div class="home-section-title">Quick Actions</div>
-          <div class="quick-actions-grid">
-            <button class="btn btn-gold btn-full" onclick="navigate('learn')">Continue Learning</button>
-            <button class="btn btn-surface btn-full" onclick="navigate('flashcards')">Flashcards</button>
-            <button class="btn btn-surface btn-full" onclick="navigate('quiz')">Quick Quiz</button>
-            <button class="btn btn-surface btn-full" onclick="navigate('idioms')">Browse Idioms</button>
-            <button class="btn btn-outline btn-full" onclick="navigate('exam')" style="grid-column:1/-1;">Mock Exam</button>
-          </div>
-        </div>
-
-        <div style="margin-bottom:14px;">
-          <div class="home-section-title">Review</div>
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
-            <div class="stat-card" role="button" tabindex="0" style="text-align:left;padding:14px;cursor:pointer;" onclick="navigateToWeak()" onkeydown="if(event.key==='Enter'||event.key===' ')navigateToWeak()">
-              <div style="font-size:0.68rem;text-transform:uppercase;letter-spacing:0.06em;color:var(--text3);margin-bottom:6px;">Revise</div>
-              <div class="stat-val red" id="statWeak">0</div>
-              <div style="font-size:0.72rem;color:var(--text3);margin-top:4px;">Need Revision</div>
+          <div class="stats-grid">
+            <div class="stat-card">
+              <div class="stat-icon purple">
+                <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M12 3 2 8l10 5 10-5-10-5Z"/><path d="M5 10v5l7 4 7-4v-5"/></svg>
+              </div>
+              <div class="stat-val gold" id="statLearned">0</div>
+              <div class="stat-label">Learned Today</div>
+              <div class="stat-note good">▲ Building habit</div>
             </div>
-            <div class="stat-card" style="text-align:left;padding:14px;cursor:pointer;" onclick="navigateToSaved()">
-              <div style="font-size:0.68rem;text-transform:uppercase;letter-spacing:0.06em;color:var(--text3);margin-bottom:6px;">Bookmarked</div>
-              <div class="stat-val" style="color:var(--blue);" id="statBookmarks">0</div>
-              <div style="font-size:0.72rem;color:var(--text3);margin-top:4px;">Saved Words</div>
+            <div class="stat-card">
+              <div class="stat-icon blue">
+                <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M3 5a2 2 0 0 1 2-2h6v18H5a2 2 0 0 1-2-2V5z"/><path d="M13 3h6a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-6V3z"/></svg>
+              </div>
+              <div class="stat-val" id="statTotal">832</div>
+              <div class="stat-label">Total Words</div>
+              <div class="stat-note">Library size</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon green">
+                <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="8"/><path d="m9 12 2 2 4-4"/></svg>
+              </div>
+              <div class="stat-val green" id="statAccuracy">—</div>
+              <div class="stat-label">Quiz Accuracy</div>
+              <div class="stat-note good">▲ Keep it sharp</div>
             </div>
           </div>
-        </div>
 
-        <div class="motivation-banner" id="homeMotivation">Keep it up! You're building momentum.</div>
+          <div class="home-progress">
+            <div class="home-progress-head">
+              <div class="home-progress-title">Overall Progress</div>
+              <div class="home-progress-pct" id="progressPercent">0%</div>
+            </div>
+            <div class="progress-bar"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
+            <div class="home-progress-foot">
+              <span id="progressDetail">0 of 832 words learned</span>
+              <span id="homeMotivation">Keep it up!</span>
+            </div>
+          </div>
 
-        <div style="margin-bottom:16px;">
-          <div class="home-section-title" style="margin-bottom:8px;">Recent Words</div>
-          <div id="recentWords"><div class="empty" style="padding:24px 0;"><p>Start learning to track progress</p></div></div>
+          <div class="review-grid">
+            <div class="review-card revise" role="button" tabindex="0" onclick="navigateToWeak()" onkeydown="if(event.key==='Enter'||event.key===' ')navigateToWeak()">
+              <div class="review-label">Need Revision</div>
+              <div class="review-value red" id="statWeak">0</div>
+              <div class="review-sub">Words to review</div>
+            </div>
+            <div class="review-card saved" role="button" tabindex="0" onclick="navigateToSaved()" onkeydown="if(event.key==='Enter'||event.key===' ')navigateToSaved()">
+              <div class="review-label">Saved Words</div>
+              <div class="review-value blue" id="statBookmarks">0</div>
+              <div class="review-sub">Your bookmarks</div>
+            </div>
+          </div>
+
+          <button class="home-primary-btn" onclick="navigate('learn')">
+            <span>
+              Continue Learning
+              <span class="home-primary-sub">Pick up where you left off</span>
+            </span>
+            <span style="font-size:1.4rem;">›</span>
+          </button>
+
+          <div class="shortcut-grid">
+            <button class="shortcut-btn purple" onclick="navigate('flashcards')">
+              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8m-4-4v4"/></svg>
+              Flashcards
+            </button>
+            <button class="shortcut-btn green" onclick="navigate('quiz')">
+              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16h.01"/><path d="M9.1 9a3 3 0 1 1 4.8 2.4c-.8.6-1.4 1.1-1.4 2.1"/></svg>
+              Quick Quiz
+            </button>
+            <button class="shortcut-btn blue" onclick="navigate('idioms')">
+              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M4 5a2 2 0 0 1 2-2h12v18H6a2 2 0 0 1-2-2V5z"/><path d="M8 7h6M8 11h8M8 15h5"/></svg>
+              Browse Idioms
+            </button>
+            <button class="shortcut-btn gold" onclick="navigate('exam')">
+              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4"/><path d="M19 7v10a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V7"/><path d="M16 3H8"/></svg>
+              Mock Exam
+            </button>
+          </div>
+
+          <div class="recent-wrap">
+            <div class="recent-head">
+              <div class="recent-title">Recent Words</div>
+              <button class="recent-view-all" onclick="navigate('learn')">View All</button>
+            </div>
+            <div id="recentWords"><div class="recent-empty">Start learning to track your recent activity.</div></div>
+          </div>
         </div>
       </div>
     </div>
@@ -1721,7 +2112,7 @@ input:checked + .toggle-slider::before { transform: translateX(20px); background
     </button>
     <button class="nav-btn" id="nav-more" onclick="navigate('more')">
       <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><circle cx="12" cy="5" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="12" cy="19" r="1"/></svg>
-      Profile
+      More
     </button>
   </nav>
 </div>
@@ -1964,18 +2355,46 @@ function updateHomeStats() {
   renderCategoryBreakdown();
 }
 
+function escapeHTML(value) {
+  return String(value ?? '')
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
 function renderRecentWords() {
   const el = document.getElementById('recentWords');
-  const recent = (state.progress.recent || []).slice(0,8);
-  if (!recent.length) { el.innerHTML = '<div class="empty" style="padding:16px 0;"><p>Start learning to track progress</p></div>'; return; }
-  el.innerHTML = `<div class="recent-scroll">${recent.map(id => {
-    const w = state.words[id];
-    if (!w) return '';
-    return `<div class="recent-item" onclick="openModal(${id})">
-      <div class="recent-item-word">${w.word}</div>
-      <span class="badge badge-${w.difficulty.toLowerCase()}">${w.difficulty}</span>
-    </div>`;
-  }).join('')}</div>`;
+  const recent = state.progress.recent || [];
+  if (!recent.length) {
+    el.innerHTML = '<div class="recent-empty">Start learning to track your recent activity.</div>';
+    return;
+  }
+
+  const latestId = recent[0];
+  const w = state.words[latestId];
+  if (!w) {
+    el.innerHTML = '<div class="recent-empty">No recent word found. Continue learning to populate this section.</div>';
+    return;
+  }
+
+  const pos = w.pos ? `<span class="recent-pos">${escapeHTML(w.pos)}</span>` : '';
+  const difficulty = `<span class="badge badge-${String(w.difficulty || 'medium').toLowerCase()}">${escapeHTML(w.difficulty || 'Medium')}</span>`;
+  const def = escapeHTML(w.definition || 'No definition available yet.');
+  const word = escapeHTML(w.word || 'Word');
+
+  el.innerHTML = `<div class="recent-preview" onclick="openModal(${latestId})" role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' ')openModal(${latestId})">
+    <div class="recent-word-line">
+      <div class="recent-word">${word}${pos}</div>
+      ${difficulty}
+    </div>
+    <div class="recent-def">${def}</div>
+    <div class="recent-meta">
+      <span>Recently practiced</span>
+      <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+    </div>
+  </div>`;
 }
 
 function renderCategoryBreakdown() {
