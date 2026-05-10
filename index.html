@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>VocabsArt — Word Smart Vocabulary Platform</title>
-<meta name="theme-color" content="#010103">
+<meta name="theme-color" content="#000000">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -918,6 +918,11 @@ input:checked + .toggle-slider::before { transform: translateX(20px); background
 
 .idiom-alpha-btn {
   aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  line-height: 1;
   border: 1px solid var(--border);
   border-radius: 8px;
   background: var(--surface2);
@@ -958,8 +963,7 @@ input:checked + .toggle-slider::before { transform: translateX(20px); background
   .admin-form input,
   .admin-form textarea,
   .admin-form select,
-  .alpha-btn,
-  .idiom-card
+  .alpha-btn
 ) {
   background: var(--surface);
   backdrop-filter: none;
