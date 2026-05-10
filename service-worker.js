@@ -1,4 +1,4 @@
-const CACHE_NAME = 'vocabsart-v8';
+const CACHE_NAME = 'vocabsart-v9';
 
 // Core files to pre-cache on install
 const PRECACHE_URLS = [

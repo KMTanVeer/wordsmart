@@ -17,13 +17,13 @@
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 :root {
-  --bg: #07121f;
-  --bg-rgb: 7, 18, 31;
-  --surface: #0f1c2d;
-  --surface2: #15263b;
-  --surface3: #1d3150;
-  --border: rgba(148,181,255,0.12);
-  --border2: rgba(148,181,255,0.24);
+  --bg: #020307;
+  --bg-rgb: 2, 3, 7;
+  --surface: rgba(16, 29, 56, 0.48);
+  --surface2: rgba(20, 38, 72, 0.56);
+  --surface3: rgba(31, 56, 102, 0.62);
+  --border: rgba(153,189,255,0.2);
+  --border2: rgba(163,203,255,0.34);
   --gold: #ffb84d;
   --gold-rgb: 255, 184, 77;
   --gold2: #ffd38a;
@@ -59,8 +59,9 @@ html { font-size: 16px; scroll-behavior: smooth; }
 body {
   font-family: 'DM Sans', sans-serif;
   background:
-    radial-gradient(circle at top, rgba(var(--blue-rgb),0.14), transparent 34%),
-    radial-gradient(circle at bottom right, var(--gold-dim), transparent 30%),
+    radial-gradient(circle at 12% -10%, rgba(var(--blue-rgb),0.2), transparent 34%),
+    radial-gradient(circle at 86% 8%, rgba(129, 171, 255, 0.15), transparent 28%),
+    radial-gradient(circle at 100% 100%, rgba(89, 131, 222, 0.12), transparent 38%),
     var(--bg);
   color: var(--text);
   min-height: 100vh;
@@ -169,6 +170,79 @@ body {
   transition: border-color var(--transition);
 }
 .card:hover { border-color: var(--border2); }
+
+/* GLASS SURFACES */
+.card,
+.stat-card,
+.word-card,
+.flashcard-face,
+.quiz-question,
+.quiz-opt,
+.quiz-timer,
+.search-input,
+.modal,
+.exam-header,
+.exam-wrong-item,
+.tabs,
+.chip,
+.about-link,
+.admin-form input,
+.admin-form textarea,
+.admin-form select,
+.alpha-btn,
+.idiom-card {
+  background-image: linear-gradient(145deg, rgba(129, 171, 255, 0.18), rgba(9, 18, 36, 0.62));
+  backdrop-filter: blur(16px) saturate(145%);
+  -webkit-backdrop-filter: blur(16px) saturate(145%);
+  box-shadow:
+    0 18px 34px rgba(0, 0, 0, 0.4),
+    0 2px 0 rgba(192, 219, 255, 0.15) inset,
+    0 0 0 1px rgba(130, 172, 255, 0.08) inset;
+}
+
+.card,
+.stat-card,
+.word-card,
+.quiz-question,
+.exam-header,
+.tabs,
+.idiom-card {
+  position: relative;
+  overflow: hidden;
+  transition: transform var(--transition), border-color var(--transition), box-shadow var(--transition);
+}
+
+.card::after,
+.stat-card::after,
+.word-card::after,
+.quiz-question::after,
+.exam-header::after,
+.tabs::after,
+.idiom-card::after {
+  content: '';
+  position: absolute;
+  left: 8%;
+  right: 8%;
+  top: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(197, 224, 255, 0.6), transparent);
+  opacity: 0.8;
+  pointer-events: none;
+}
+
+.card:hover,
+.stat-card:hover,
+.word-card:hover,
+.quiz-question:hover,
+.exam-header:hover,
+.tabs:hover,
+.idiom-card:hover {
+  transform: translateY(-3px);
+  box-shadow:
+    0 24px 42px rgba(0, 0, 0, 0.5),
+    0 2px 0 rgba(199, 226, 255, 0.22) inset,
+    0 0 0 1px rgba(130, 172, 255, 0.12) inset;
+}
 
 /* STATS GRID */
 .stats-grid {
@@ -279,7 +353,7 @@ body {
   transition: opacity var(--transition);
 }
 
-.word-card:hover { border-color: var(--border2); transform: translateY(-1px); }
+.word-card:hover { border-color: var(--border2); }
 .word-card:hover::before { opacity: 1; }
 
 .word-name {
@@ -899,6 +973,35 @@ input:checked + .toggle-slider::before { transform: translateX(20px); background
   padding-top: 6px;
   border-top: 1px solid var(--border);
   opacity: 0.85;
+}
+
+/* GLASS OVERRIDES */
+.card,
+.stat-card,
+.word-card,
+.flashcard-face,
+.quiz-question,
+.quiz-opt,
+.quiz-timer,
+.search-input,
+.modal,
+.exam-header,
+.exam-wrong-item,
+.tabs,
+.chip,
+.about-link,
+.admin-form input,
+.admin-form textarea,
+.admin-form select,
+.alpha-btn,
+.idiom-card {
+  background: linear-gradient(145deg, rgba(129, 171, 255, 0.18), rgba(9, 18, 36, 0.62));
+  backdrop-filter: blur(16px) saturate(145%);
+  -webkit-backdrop-filter: blur(16px) saturate(145%);
+  box-shadow:
+    0 18px 34px rgba(0, 0, 0, 0.4),
+    0 2px 0 rgba(192, 219, 255, 0.15) inset,
+    0 0 0 1px rgba(130, 172, 255, 0.08) inset;
 }
 
 /* RESPONSIVE */
