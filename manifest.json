@@ -1,7 +1,7 @@
 {
-  "name": "VocabsArt — Word Smart",
+  "name": "VocabsArt",
   "short_name": "VocabsArt",
-  "description": "Word Smart Vocabulary Platform — learn, quiz, and master vocabulary offline",
+  "description": "VocabsArt Vocabulary Platform — learn, quiz, and master vocabulary offline",
   "start_url": "/",
   "display": "standalone",
   "orientation": "portrait",

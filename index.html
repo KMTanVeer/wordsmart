@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>VocabsArt — Word Smart Vocabulary Platform</title>
+<title>VocabsArt Vocabulary Platform</title>
 <meta name="theme-color" content="#000000">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -1209,10 +1209,7 @@ input:checked + .toggle-slider::before { transform: translateX(20px); background
           <div class="home-section-title">Quick Actions</div>
           <div class="quick-actions-grid">
             <button class="btn btn-gold btn-full" onclick="navigate('learn')">Continue Learning</button>
-            <button class="btn btn-surface btn-full" onclick="navigate('flashcards')">Flashcards</button>
-            <button class="btn btn-surface btn-full" onclick="navigate('quiz')">Quick Quiz</button>
             <button class="btn btn-surface btn-full" onclick="navigate('idioms')">Browse Idioms</button>
-            <button class="btn btn-outline btn-full" onclick="navigate('exam')" style="grid-column:1/-1;">Mock Exam</button>
           </div>
         </div>
 
@@ -1428,17 +1425,9 @@ input:checked + .toggle-slider::before { transform: translateX(20px); background
                 <input type="radio" name="qtype" value="synonym" style="margin-top:2px;">
                 <span class="setup-option-main"><span class="setup-option-title">Synonym Match</span><span class="setup-option-desc">Pick the closest similar meaning.</span></span>
               </label>
-              <label class="setup-option" id="qt2">
-                <input type="radio" name="qtype" value="antonym" style="margin-top:2px;">
-                <span class="setup-option-main"><span class="setup-option-title">Antonym Match</span><span class="setup-option-desc">Identify the opposite meaning.</span></span>
-              </label>
-              <label class="setup-option" id="qt3">
-                <input type="radio" name="qtype" value="sentence" style="margin-top:2px;">
-                <span class="setup-option-main"><span class="setup-option-title">Sentence Completion</span><span class="setup-option-desc">Fill in the blank with the right word.</span></span>
-              </label>
               <label class="setup-option" id="qt4">
                 <input type="radio" name="qtype" value="mixed" style="margin-top:2px;">
-                <span class="setup-option-main"><span class="setup-option-title">Mixed (All Types)</span><span class="setup-option-desc">Practice with all quiz formats together.</span></span>
+                <span class="setup-option-main"><span class="setup-option-title">Mixed</span><span class="setup-option-desc">Practice with meaning and synonym questions.</span></span>
               </label>
             </div>
           </div>
@@ -1760,7 +1749,7 @@ input:checked + .toggle-slider::before { transform: translateX(20px); background
 <div class="name-prompt-overlay" id="namePromptOverlay" style="display:none;">
   <div class="name-prompt-card">
     <div class="name-prompt-logo">VocabsArt</div>
-    <div class="name-prompt-sub">Word Smart Vocabulary Platform</div>
+    <div class="name-prompt-sub">VocabsArt Vocabulary Platform</div>
     <div class="name-prompt-title">Welcome! What's your name?</div>
     <div class="name-prompt-desc">We'll use it to greet you personally.</div>
     <input class="name-prompt-input" id="namePromptInput" type="text" placeholder="Enter your name…" maxlength="40" autocomplete="given-name">
@@ -2457,7 +2446,7 @@ function generateQuiz(count=20) {
   const words = getQuizWords();
   const type = document.querySelector('input[name="qtype"]:checked').value;
   const questions = [];
-  const types = type==='mixed' ? ['meaning','synonym','antonym','sentence'] : [type];
+  const types = type==='mixed' ? ['meaning','synonym','meaning','synonym'] : [type];
   for (let i=0;i<count;i++) {
     const t = types[i%types.length];
     questions.push(generateQuestion(t, words));
@@ -2766,7 +2755,7 @@ function startExam() {
   const totalQ = Math.min(30, pool.length);
   state.examQuestions = [];
   state.examWrongAnswers = [];
-  const types = ['meaning','synonym','antonym','meaning','synonym','meaning'];
+  const types = ['meaning','synonym','meaning','synonym','meaning'];
   for (let i=0;i<totalQ;i++) {
     state.examQuestions.push(generateQuestion(types[i%types.length], examWords));
   }
