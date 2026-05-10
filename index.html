@@ -2407,9 +2407,8 @@ function answerExam(selectedIndex) {
   const correct = q.answer === selectedIndex;
   document.querySelectorAll('.quiz-opt').forEach((btn, i) => {
     btn.disabled = true;
-    if (i === selectedIndex) btn.classList.add('selected');
     if (i === q.answer) btn.classList.add('correct');
-    else if (i === selectedIndex) btn.classList.add('wrong');
+    else if (i === selectedIndex) btn.classList.add('selected', 'wrong');
   });
   if (correct) state.examCorrect++;
   else {
