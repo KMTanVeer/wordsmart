@@ -88,6 +88,9 @@ body {
 }
 
 .topbar-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
   font-family: 'Playfair Display', serif;
   font-size: 1.35rem;
   font-weight: 700;
@@ -97,7 +100,20 @@ body {
   user-select: none;
 }
 
-.topbar-brand span { color: var(--text2); font-size: 0.65rem; font-family: 'DM Sans', sans-serif; font-weight: 400; letter-spacing: 0.15em; text-transform: uppercase; display: block; margin-top: -3px; }
+.topbar-logo {
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  object-fit: cover;
+  border: 1px solid var(--border2);
+  background: var(--surface2);
+}
+
+.topbar-brand-text {
+  line-height: 1;
+}
+
+.topbar-brand-text span { color: var(--text2); font-size: 0.65rem; font-family: 'DM Sans', sans-serif; font-weight: 400; letter-spacing: 0.15em; text-transform: uppercase; display: block; margin-top: 4px; }
 
 .topbar-right { display: flex; align-items: center; gap: 12px; }
 
@@ -1086,40 +1102,6 @@ input:checked + .toggle-slider::before { transform: translateX(20px); background
 .name-prompt-input::placeholder { color: var(--text3); }
 .name-prompt-input:focus { border-color: var(--gold); }
 
-/* ABOUT POPUP (bottom-sheet) */
-.about-popup-overlay {
-  position: fixed; inset: 0; z-index: 200;
-  background: rgba(0,0,0,0.8);
-  backdrop-filter: blur(8px);
-  display: none; align-items: flex-end;
-}
-.about-popup-overlay.open { display: flex; }
-
-.about-popup {
-  width: 100%; max-height: 88vh;
-  background: var(--surface);
-  border-radius: 20px 20px 0 0;
-  border-top: 1px solid var(--border2);
-  overflow-y: auto;
-  animation: slideUp 0.3s ease;
-  padding-bottom: max(24px, env(safe-area-inset-bottom));
-}
-
-/* ADMIN ICON BUTTON */
-.admin-icon-btn {
-  flex-shrink: 0;
-  background: var(--surface2);
-  border: 1px solid var(--border);
-  border-radius: 50%;
-  width: 44px; height: 44px;
-  display: flex; align-items: center; justify-content: center;
-  cursor: pointer;
-  color: var(--text3);
-  transition: all var(--transition);
-}
-.admin-icon-btn:hover { border-color: var(--gold); color: var(--gold); background: var(--gold-dim); }
-.admin-icon-btn svg { width: 22px; height: 22px; }
-
 .setup-option {
   display:flex;
   align-items:flex-start;
@@ -1165,8 +1147,11 @@ input:checked + .toggle-slider::before { transform: translateX(20px); background
   <!-- TOP BAR -->
   <header class="topbar">
     <div class="topbar-brand" onclick="navigate('home')">
-      VocabsArt
-      <span>Learn Words</span>
+      <img src="icons/app-logo.png" alt="WordSmart logo" class="topbar-logo">
+      <div class="topbar-brand-text">
+        WordSmart
+        <span>Learn Words</span>
+      </div>
     </div>
     <div class="topbar-right">
       <div class="streak-badge" id="streakBadge">
@@ -1595,16 +1580,17 @@ input:checked + .toggle-slider::before { transform: translateX(20px); background
       </div>
     </div>
 
-    <!-- MORE PAGE (Admin + Settings) -->
+    <!-- ABOUT PAGE (Stats + Settings + About) -->
     <div id="page-more" class="page">
       <div class="container">
         <div style="padding-top:14px;margin-bottom:18px;">
-          <div class="section-title">Profile</div>
+          <div class="section-title">About</div>
         </div>
 
         <div class="tabs">
           <button class="tab-btn active" onclick="showMoreTab('stats',this)">Stats</button>
           <button class="tab-btn" onclick="showMoreTab('settings',this)">Settings</button>
+          <button class="tab-btn" onclick="showMoreTab('about',this)">About</button>
         </div>
 
         <!-- Stats Tab -->
@@ -1674,32 +1660,45 @@ input:checked + .toggle-slider::before { transform: translateX(20px); background
           </div>
 
           <div class="setting-actions">
-            <button class="btn btn-surface btn-full" onclick="backupAndSync()">Backup &amp; Sync</button>
             <button class="btn btn-outline btn-full" onclick="resetProgress()" style="color:var(--red);border-color:rgba(var(--red-rgb),0.3);">Reset All Progress</button>
           </div>
+        </div>
 
-          <div class="card" style="margin-top:12px;">
+        <div id="moreTab-about" style="display:none;">
+          <div class="card" style="margin-bottom:12px;">
             <div style="display:flex;align-items:center;gap:12px;">
               <img src="icons/app-logo.png" alt="VocabsArt logo" style="width:56px;height:56px;border-radius:14px;object-fit:cover;border:1px solid var(--border);background:var(--surface2);">
               <div style="font-size:0.8rem;color:var(--text3);line-height:1.6;">
-                <strong style="display:block;color:var(--text);font-size:0.92rem;">VocabsArt</strong>
+                <strong style="display:block;color:var(--text);font-size:0.92rem;">WordSmart</strong>
                 <span style="display:block;color:var(--gold);font-size:0.72rem;">Version 1.0.0</span>
                 Your smart vocabulary companion.<br>
                 <span style="color:var(--text2);">832+ curated words</span> from Word Smart 1
               </div>
             </div>
+          </div>
+
+          <div class="card">
+            <div class="about-avatar-wrap">
+              <img src="avatar.jpg" alt="Profile photo of Kawsar Mahmud Tanveer Khan" class="about-avatar">
+            </div>
+            <div class="about-name">Kawsar Mahmud Tanveer Khan</div>
+            <div class="about-role">
+              BSc in EEE &nbsp;·&nbsp; Daffodil International University
+            </div>
             <div style="height:1px;background:var(--border);margin:14px 0 12px;"></div>
-            <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;">
-              <div style="display:flex;align-items:center;gap:10px;">
-                <img src="avatar.jpg" alt="Tanveer" style="width:34px;height:34px;border-radius:50%;object-fit:cover;border:1px solid var(--border2);">
-                <div style="font-size:0.78rem;color:var(--text2);line-height:1.4;">
-                  <strong style="display:block;color:var(--text);font-size:0.82rem;">Admin</strong>
-                  Made with ♥ by Tanveer
-                </div>
-              </div>
-              <button class="admin-icon-btn" onclick="openAbout()" title="About Developer" aria-label="About Developer">
-                <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="4"/><path stroke-linecap="round" d="M4 20c0-4 3.582-7 8-7s8 3 8 7"/></svg>
-              </button>
+            <div class="about-links">
+              <a class="about-link about-link-fb" href="https://facebook.com/itzzVeer" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
+                facebook.com/itzzVeer
+              </a>
+              <a class="about-link about-link-li" href="https://linkedin.com/in/KawsarTanveer" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+                linkedin.com/in/KawsarTanveer
+              </a>
+              <a class="about-link about-link-mail" href="mailto:tanveerk.eee@gmail.com">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                tanveerk.eee@gmail.com
+              </a>
             </div>
           </div>
         </div>
@@ -1732,7 +1731,7 @@ input:checked + .toggle-slider::before { transform: translateX(20px); background
     </button>
     <button class="nav-btn" id="nav-more" onclick="navigate('more')">
       <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><circle cx="12" cy="5" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="12" cy="19" r="1"/></svg>
-      Profile
+      About
     </button>
   </nav>
 </div>
@@ -1745,41 +1744,6 @@ input:checked + .toggle-slider::before { transform: translateX(20px); background
     </button>
     <div class="modal-handle"></div>
     <div class="modal-content" id="modalBody"></div>
-  </div>
-</div>
-
-<!-- ABOUT POPUP (Developer Profile) -->
-<div class="about-popup-overlay" id="aboutPopup" onclick="closeAbout(event)">
-  <div class="about-popup" id="aboutPopupContent">
-    <button class="modal-close" onclick="closeAbout2()">
-      <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path d="M6 18L18 6M6 6l12 12"/></svg>
-    </button>
-    <div class="modal-handle"></div>
-    <div class="modal-content">
-      <div class="card" style="margin-bottom:14px;border:none;padding:0;">
-        <div class="about-avatar-wrap">
-          <img src="avatar.jpg" alt="Profile photo of Kawsar Mahmud Tanveer Khan" class="about-avatar">
-        </div>
-        <div class="about-name">Kawsar Mahmud Tanveer Khan</div>
-        <div class="about-role">
-          BSc in EEE &nbsp;·&nbsp; Daffodil International University
-        </div>
-        <div class="about-links">
-          <a class="about-link about-link-fb" href="https://facebook.com/itzzVeer" target="_blank" rel="noopener">
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
-            facebook.com/itzzVeer
-          </a>
-          <a class="about-link about-link-li" href="https://linkedin.com/in/KawsarTanveer" target="_blank" rel="noopener">
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
-            linkedin.com/in/KawsarTanveer
-          </a>
-          <a class="about-link about-link-mail" href="mailto:tanveerk.eee@gmail.com">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-            tanveerk.eee@gmail.com
-          </a>
-        </div>
-      </div>
-    </div>
   </div>
 </div>
 
@@ -2992,23 +2956,6 @@ function submitName() {
 }
 
 // ============================================================
-// ABOUT POPUP
-// ============================================================
-function openAbout() {
-  document.getElementById('aboutPopup').classList.add('open');
-}
-
-function closeAbout(e) {
-  if (e.target === document.getElementById('aboutPopup')) {
-    document.getElementById('aboutPopup').classList.remove('open');
-  }
-}
-
-function closeAbout2() {
-  document.getElementById('aboutPopup').classList.remove('open');
-}
-
-// ============================================================
 // MORE TABS
 // ============================================================
 function showMoreTab(tab, el) {
@@ -3016,32 +2963,7 @@ function showMoreTab(tab, el) {
   el.classList.add('active');
   document.getElementById('moreTab-stats').style.display = tab==='stats'?'block':'none';
   document.getElementById('moreTab-settings').style.display = tab==='settings'?'block':'none';
-}
-
-// ============================================================
-// BACKUP
-// ============================================================
-function backupAndSync() {
-  const payload = JSON.stringify({
-    progress: state.progress,
-    stats: { correct: state.totalCorrect, answered: state.totalAnswered, streak: state.streak },
-    settings: state.settings
-  });
-
-  if (navigator.clipboard && navigator.clipboard.writeText) {
-    navigator.clipboard.writeText(payload)
-      .then(() => alert('Backup copied to clipboard. Paste it somewhere safe for sync/restore.'))
-      .catch(() => alert('Backup created, but clipboard permission was denied.'));
-    return;
-  }
-
-  const blob = new Blob([payload], { type: 'application/json' });
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  a.href = url;
-  a.download = 'vocabsart-backup.json';
-  a.click();
-  URL.revokeObjectURL(url);
+  document.getElementById('moreTab-about').style.display = tab==='about'?'block':'none';
 }
 
 // ============================================================
