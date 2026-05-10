@@ -10,8 +10,8 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="VocabsArt">
 <link rel="manifest" href="manifest.json">
-<link rel="icon" type="image/svg+xml" href="vocabsart-icon-light.svg">
-<link rel="apple-touch-icon" href="icons/icon-192.png">
+<link rel="icon" type="image/png" href="icons/favicon.png">
+<link rel="apple-touch-icon" href="icons/app-logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -1679,12 +1679,23 @@ input:checked + .toggle-slider::before { transform: translateX(20px); background
           </div>
 
           <div class="card" style="margin-top:12px;">
+            <div style="display:flex;align-items:center;gap:12px;">
+              <img src="icons/app-logo.png" alt="VocabsArt logo" style="width:56px;height:56px;border-radius:14px;object-fit:cover;border:1px solid var(--border);background:var(--surface2);">
+              <div style="font-size:0.8rem;color:var(--text3);line-height:1.6;">
+                <strong style="display:block;color:var(--text);font-size:0.92rem;">VocabsArt</strong>
+                <span style="display:block;color:var(--gold);font-size:0.72rem;">Version 1.0.0</span>
+                Your smart vocabulary companion.<br>
+                <span style="color:var(--text2);">832+ curated words</span> from Word Smart 1
+              </div>
+            </div>
+            <div style="height:1px;background:var(--border);margin:14px 0 12px;"></div>
             <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;">
-              <div style="font-size:0.8rem;color:var(--text3);line-height:1.7;">
-                <strong style="color:var(--text);">VocabsArt</strong><br>
-                Word Smart Vocabulary Platform<br>
-                Build Your Vocabulary<br>
-                <span style="color:var(--gold);">832 words</span> from Word Smart 1
+              <div style="display:flex;align-items:center;gap:10px;">
+                <img src="avatar.jpg" alt="Tanveer" style="width:34px;height:34px;border-radius:50%;object-fit:cover;border:1px solid var(--border2);">
+                <div style="font-size:0.78rem;color:var(--text2);line-height:1.4;">
+                  <strong style="display:block;color:var(--text);font-size:0.82rem;">Admin</strong>
+                  Made with by Tanveer
+                </div>
               </div>
               <button class="admin-icon-btn" onclick="openAbout()" title="About Developer" aria-label="About Developer">
                 <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="4"/><path stroke-linecap="round" d="M4 20c0-4 3.582-7 8-7s8 3 8 7"/></svg>
