@@ -481,7 +481,6 @@ body {
 }
 
 .quiz-opt:hover:not(:disabled) { border-color: var(--gold); color: var(--gold); }
-.quiz-opt.selected { border-color: var(--gold); background: var(--gold-dim); color: var(--gold); }
 .quiz-opt.correct { border-color: var(--green); background: var(--green-dim); color: var(--green); }
 .quiz-opt.wrong { border-color: var(--red); background: var(--red-dim); color: var(--red); }
 .quiz-opt:disabled { cursor: default; }
@@ -2408,7 +2407,7 @@ function answerExam(selectedIndex) {
   document.querySelectorAll('.quiz-opt').forEach((btn, i) => {
     btn.disabled = true;
     if (i === q.answer) btn.classList.add('correct');
-    else if (i === selectedIndex) btn.classList.add('selected', 'wrong');
+    else if (i === selectedIndex) btn.classList.add('wrong');
   });
   if (correct) state.examCorrect++;
   else {
