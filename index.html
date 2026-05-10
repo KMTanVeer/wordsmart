@@ -975,6 +975,97 @@ input:checked + .toggle-slider::before { transform: translateX(20px); background
 @media (min-width: 500px) {
   .stats-grid { grid-template-columns: repeat(3, 1fr); }
 }
+
+/* NAME PROMPT OVERLAY */
+.name-prompt-overlay {
+  position: fixed; inset: 0; z-index: 300;
+  background: rgba(0,0,0,0.92);
+  backdrop-filter: blur(12px);
+  display: flex; align-items: center; justify-content: center;
+  padding: 24px;
+  animation: fadeIn 0.3s ease;
+}
+
+.name-prompt-card {
+  background: var(--surface);
+  border: 1px solid var(--border2);
+  border-radius: var(--radius-lg);
+  padding: 32px 24px;
+  width: 100%; max-width: 380px;
+  text-align: center;
+}
+
+.name-prompt-logo {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.6rem; font-weight: 700; color: var(--gold);
+  margin-bottom: 4px;
+}
+
+.name-prompt-sub {
+  font-size: 0.75rem; color: var(--text3);
+  letter-spacing: 0.12em; text-transform: uppercase;
+  margin-bottom: 24px;
+}
+
+.name-prompt-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.15rem; font-weight: 600; color: var(--text);
+  margin-bottom: 6px;
+}
+
+.name-prompt-desc {
+  font-size: 0.82rem; color: var(--text3); margin-bottom: 20px;
+}
+
+.name-prompt-input {
+  width: 100%;
+  background: var(--surface2);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius);
+  padding: 12px 16px;
+  font-size: 0.95rem;
+  font-family: 'DM Sans', sans-serif;
+  color: var(--text); outline: none;
+  transition: border-color var(--transition);
+  text-align: center;
+  margin-bottom: 14px;
+}
+.name-prompt-input::placeholder { color: var(--text3); }
+.name-prompt-input:focus { border-color: var(--gold); }
+
+/* ABOUT POPUP (bottom-sheet) */
+.about-popup-overlay {
+  position: fixed; inset: 0; z-index: 200;
+  background: rgba(0,0,0,0.8);
+  backdrop-filter: blur(8px);
+  display: none; align-items: flex-end;
+}
+.about-popup-overlay.open { display: flex; }
+
+.about-popup {
+  width: 100%; max-height: 88vh;
+  background: var(--surface);
+  border-radius: 20px 20px 0 0;
+  border-top: 1px solid var(--border2);
+  overflow-y: auto;
+  animation: slideUp 0.3s ease;
+  padding-bottom: max(24px, env(safe-area-inset-bottom));
+}
+
+/* ADMIN ICON BUTTON */
+.admin-icon-btn {
+  flex-shrink: 0;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  width: 44px; height: 44px;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer;
+  color: var(--text3);
+  transition: all var(--transition);
+}
+.admin-icon-btn:hover { border-color: var(--gold); color: var(--gold); background: var(--gold-dim); }
+.admin-icon-btn svg { width: 22px; height: 22px; }
 </style>
 </head>
 <body>
@@ -1398,7 +1489,6 @@ input:checked + .toggle-slider::before { transform: translateX(20px); background
 
         <div class="tabs">
           <button class="tab-btn active" onclick="showMoreTab('stats',this)">Stats</button>
-          <button class="tab-btn" onclick="showMoreTab('about',this)">About</button>
           <button class="tab-btn" onclick="showMoreTab('settings',this)">Settings</button>
         </div>
 
@@ -1425,31 +1515,6 @@ input:checked + .toggle-slider::before { transform: translateX(20px); background
         </div>
 
         <!-- About Tab (Developer Profile) -->
-        <div id="moreTab-about" style="display:none;">
-          <div class="card" style="margin-bottom:14px;">
-            <div class="about-avatar-wrap">
-              <img src="avatar.jpg" alt="Profile photo of Kawsar Mahmud Tanveer Khan" class="about-avatar">
-            </div>
-            <div class="about-name">Kawsar Mahmud Tanveer Khan</div>
-            <div class="about-role">
-              BSc in EEE &nbsp;·&nbsp; Daffodil International University
-            </div>
-            <div class="about-links">
-              <a class="about-link about-link-fb" href="https://facebook.com/itzzVeer" target="_blank" rel="noopener">
-                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
-                facebook.com/itzzVeer
-              </a>
-              <a class="about-link about-link-li" href="https://linkedin.com/in/KawsarTanveer" target="_blank" rel="noopener">
-                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
-                linkedin.com/in/KawsarTanveer
-              </a>
-              <a class="about-link about-link-mail" href="mailto:tanveerk.eee@gmail.com">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-                tanveerk.eee@gmail.com
-              </a>
-            </div>
-          </div>
-        </div>
 
         <!-- Settings Tab -->
         <div id="moreTab-settings" style="display:none;">
@@ -1497,11 +1562,16 @@ input:checked + .toggle-slider::before { transform: translateX(20px); background
           </div>
 
           <div class="card" style="margin-top:12px;">
-            <div style="font-size:0.8rem;color:var(--text3);line-height:1.7;">
-              <strong style="color:var(--text);">VocabsArt</strong><br>
-              Word Smart Vocabulary Platform<br>
-              Build Your Vocabulary<br>
-              <span style="color:var(--gold);">832 words</span> from Word Smart 1
+            <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;">
+              <div style="font-size:0.8rem;color:var(--text3);line-height:1.7;">
+                <strong style="color:var(--text);">VocabsArt</strong><br>
+                Word Smart Vocabulary Platform<br>
+                Build Your Vocabulary<br>
+                <span style="color:var(--gold);">832 words</span> from Word Smart 1
+              </div>
+              <button class="admin-icon-btn" onclick="openAbout()" title="About Developer" aria-label="About Developer">
+                <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="4"/><path stroke-linecap="round" d="M4 20c0-4 3.582-7 8-7s8 3 8 7"/></svg>
+              </button>
             </div>
           </div>
         </div>
@@ -1547,6 +1617,53 @@ input:checked + .toggle-slider::before { transform: translateX(20px); background
     </button>
     <div class="modal-handle"></div>
     <div class="modal-content" id="modalBody"></div>
+  </div>
+</div>
+
+<!-- ABOUT POPUP (Developer Profile) -->
+<div class="about-popup-overlay" id="aboutPopup" onclick="closeAbout(event)">
+  <div class="about-popup" id="aboutPopupContent">
+    <button class="modal-close" onclick="closeAbout2()">
+      <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path d="M6 18L18 6M6 6l12 12"/></svg>
+    </button>
+    <div class="modal-handle"></div>
+    <div class="modal-content">
+      <div class="card" style="margin-bottom:14px;border:none;padding:0;">
+        <div class="about-avatar-wrap">
+          <img src="avatar.jpg" alt="Profile photo of Kawsar Mahmud Tanveer Khan" class="about-avatar">
+        </div>
+        <div class="about-name">Kawsar Mahmud Tanveer Khan</div>
+        <div class="about-role">
+          BSc in EEE &nbsp;·&nbsp; Daffodil International University
+        </div>
+        <div class="about-links">
+          <a class="about-link about-link-fb" href="https://facebook.com/itzzVeer" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
+            facebook.com/itzzVeer
+          </a>
+          <a class="about-link about-link-li" href="https://linkedin.com/in/KawsarTanveer" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+            linkedin.com/in/KawsarTanveer
+          </a>
+          <a class="about-link about-link-mail" href="mailto:tanveerk.eee@gmail.com">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            tanveerk.eee@gmail.com
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- NAME PROMPT MODAL (first-time only) -->
+<div class="name-prompt-overlay" id="namePromptOverlay" style="display:none;">
+  <div class="name-prompt-card">
+    <div class="name-prompt-logo">VocabsArt</div>
+    <div class="name-prompt-sub">Word Smart Vocabulary Platform</div>
+    <div class="name-prompt-title">Welcome! What's your name?</div>
+    <div class="name-prompt-desc">We'll use it to greet you personally.</div>
+    <input class="name-prompt-input" id="namePromptInput" type="text" placeholder="Enter your name…" maxlength="40" autocomplete="given-name">
+    <button class="btn btn-gold btn-full" onclick="submitName()">Let's Go →</button>
   </div>
 </div>
 
@@ -1635,6 +1752,15 @@ function init() {
   renderLearnList();
   initFlashcards();
   setGreeting();
+
+  // First-time name prompt
+  if (!localStorage.getItem('lexiba_user_name')) {
+    document.getElementById('namePromptOverlay').style.display = 'flex';
+    setTimeout(() => document.getElementById('namePromptInput').focus(), 100);
+    document.getElementById('namePromptInput').addEventListener('keydown', function(e) {
+      if (e.key === 'Enter') submitName();
+    });
+  }
 }
 
 function saveProgress() {
@@ -1660,7 +1786,8 @@ function setGreeting() {
   const h = new Date().getHours();
   const greetings = ['Good night','Good morning','Good afternoon','Good evening'];
   const g = h < 5 ? 0 : h < 12 ? 1 : h < 17 ? 2 : h < 21 ? 3 : 0;
-  document.getElementById('homeGreeting').textContent = greetings[g] + ', Sir';
+  const name = localStorage.getItem('lexiba_user_name') || 'Sir';
+  document.getElementById('homeGreeting').textContent = greetings[g] + ', ' + name;
 }
 
 function updateStreak() {
@@ -2670,13 +2797,41 @@ function resetExamWrongAnswersView() {
 }
 
 // ============================================================
+// NAME PROMPT
+// ============================================================
+function submitName() {
+  const input = document.getElementById('namePromptInput');
+  const name = input.value.trim();
+  if (!name) { input.focus(); return; }
+  localStorage.setItem('lexiba_user_name', name);
+  document.getElementById('namePromptOverlay').style.display = 'none';
+  setGreeting();
+}
+
+// ============================================================
+// ABOUT POPUP
+// ============================================================
+function openAbout() {
+  document.getElementById('aboutPopup').classList.add('open');
+}
+
+function closeAbout(e) {
+  if (e.target === document.getElementById('aboutPopup')) {
+    document.getElementById('aboutPopup').classList.remove('open');
+  }
+}
+
+function closeAbout2() {
+  document.getElementById('aboutPopup').classList.remove('open');
+}
+
+// ============================================================
 // MORE TABS
 // ============================================================
 function showMoreTab(tab, el) {
   document.querySelectorAll('#page-more .tabs .tab-btn').forEach(b=>b.classList.remove('active'));
   el.classList.add('active');
   document.getElementById('moreTab-stats').style.display = tab==='stats'?'block':'none';
-  document.getElementById('moreTab-about').style.display = tab==='about'?'block':'none';
   document.getElementById('moreTab-settings').style.display = tab==='settings'?'block':'none';
 }
 
