@@ -481,6 +481,7 @@ body {
 }
 
 .quiz-opt:hover:not(:disabled) { border-color: var(--gold); color: var(--gold); }
+.quiz-opt.selected { border-color: var(--gold); background: var(--gold-dim); color: var(--gold); }
 .quiz-opt.correct { border-color: var(--green); background: var(--green-dim); color: var(--green); }
 .quiz-opt.wrong { border-color: var(--red); background: var(--red-dim); color: var(--red); }
 .quiz-opt:disabled { cursor: default; }
@@ -2404,7 +2405,12 @@ function renderExamQuestion() {
 function answerExam(selected) {
   const q = state.examQuestions[state.examIndex];
   const correct = q.answer === selected;
-  document.querySelectorAll('.quiz-opt').forEach(btn => { btn.disabled = true; });
+  document.querySelectorAll('.quiz-opt').forEach((btn, i) => {
+    btn.disabled = true;
+    if (i === selected) btn.classList.add('selected');
+    if (i === q.answer) btn.classList.add('correct');
+    else if (i === selected && !correct) btn.classList.add('wrong');
+  });
   if (correct) state.examCorrect++;
   else {
     state.examWrong++;
