@@ -1,4 +1,4 @@
-# VocabsArt — Word Smart Vocabulary Platform
+# VocabsArt Vocabulary Platform
 
 <p align="center">
   <img src="vocabsart-icon.svg" alt="VocabsArt Icon" width="120" height="120"/>

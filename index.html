@@ -1156,9 +1156,9 @@ input:checked + .toggle-slider::before { transform: translateX(20px); background
   <!-- TOP BAR -->
   <header class="topbar">
     <div class="topbar-brand" onclick="navigate('home')">
-      <img src="icons/app-logo.png" alt="WordSmart logo" class="topbar-logo">
+      <img src="icons/app-logo.png" alt="VocabsArt logo" class="topbar-logo">
       <div class="topbar-brand-text">
-        WordSmart
+        VocabsArt
         <span>Learn Words</span>
       </div>
     </div>
@@ -1492,7 +1492,7 @@ input:checked + .toggle-slider::before { transform: translateX(20px); background
           <div class="empty" style="padding:40px 0;">
             <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
             <h3>Type to Search</h3>
-            <p>Find any word from Word Smart vocabulary</p>
+            <p>Find any word from the VocabsArt vocabulary</p>
           </div>
         </div>
       </div>
@@ -1665,9 +1665,9 @@ input:checked + .toggle-slider::before { transform: translateX(20px); background
         <div id="moreTab-about" style="display:none;">
           <div class="card" style="margin-bottom:12px;">
             <div style="display:flex;align-items:center;gap:12px;">
-              <img src="icons/app-logo.png" alt="WordSmart logo" style="width:56px;height:56px;border-radius:14px;object-fit:cover;border:1px solid var(--border);background:var(--surface2);">
+              <img src="icons/app-logo.png" alt="VocabsArt logo" style="width:56px;height:56px;border-radius:14px;object-fit:cover;border:1px solid var(--border);background:var(--surface2);">
               <div style="font-size:0.8rem;color:var(--text3);line-height:1.6;">
-                <strong style="display:block;color:var(--text);font-size:0.92rem;">WordSmart</strong>
+                <strong style="display:block;color:var(--text);font-size:0.92rem;">VocabsArt</strong>
                 <span style="display:block;color:var(--gold);font-size:0.72rem;">Version 1.0.0</span>
                 Your smart vocabulary companion.<br>
                 <span style="color:var(--text2);">832+ curated words</span> from Word Smart 1
@@ -2680,7 +2680,7 @@ function doSearch(query) {
   const el = document.getElementById('searchResults');
   const q = query.trim().toLowerCase();
   if (!q) {
-    el.innerHTML = '<div class="empty" style="padding:40px 0;"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg><h3>Type to Search</h3><p>Find any word from Word Smart vocabulary</p></div>';
+    el.innerHTML = '<div class="empty" style="padding:40px 0;"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg><h3>Type to Search</h3><p>Find any word from the VocabsArt vocabulary</p></div>';
     return;
   }
   const results = state.words.filter(w =>

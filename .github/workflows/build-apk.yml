@@ -231,12 +231,12 @@ jobs:
       - name: Accept Android SDK licenses
         run: yes | sdkmanager --licenses 2>/dev/null || true
 
-      # ── 11. Build debug APK ───────────────────────────────────────────────
-      - name: Build debug APK
+      # ── 11. Build final release APK ───────────────────────────────────────
+      - name: Build final release APK
         working-directory: android
         run: |
           chmod +x gradlew
-          ./gradlew assembleDebug --no-daemon
+          ./gradlew assembleRelease --no-daemon
         env:
           ANDROID_HOME: ${{ env.ANDROID_HOME }}
           JAVA_HOME: ${{ env.JAVA_HOME }}
@@ -245,8 +245,8 @@ jobs:
       - name: Upload APK artifact
         uses: actions/upload-artifact@v4
         with:
-          name: VocabsArt-WordSmart-debug-apk
-          path: android/app/build/outputs/apk/debug/app-debug.apk
+          name: VocabsArt-release-apk
+          path: android/app/build/outputs/apk/release/*.apk
           retention-days: 30
 
       # ── 13. Create release (on push to main/master) ───────────────────────
@@ -260,7 +260,7 @@ jobs:
             ## VocabsArt Android APK
 
             ### Install instructions
-            1. Download `app-debug.apk` from the **Assets** section below
+            1. Download the release APK from the **Assets** section below
             2. On your Android phone, go to **Settings → Security** and enable **Install from unknown sources**
             3. Open the downloaded APK file and tap **Install**
             4. Open **VocabsArt** from your app drawer
@@ -269,6 +269,6 @@ jobs:
             - ✅ Full offline support — no internet required
             - ✅ All vocabulary, quizzes, and progress saved locally
             - ✅ Same experience as the website
-          files: android/app/build/outputs/apk/debug/app-debug.apk
+          files: android/app/build/outputs/apk/release/*.apk
           token: ${{ secrets.GITHUB_TOKEN }}
           fail_on_unmatched_files: false
