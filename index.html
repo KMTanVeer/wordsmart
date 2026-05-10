@@ -113,7 +113,16 @@ body {
   line-height: 1;
 }
 
-.topbar-brand-text span { color: var(--text2); font-size: 0.65rem; font-family: 'DM Sans', sans-serif; font-weight: 400; letter-spacing: 0.15em; text-transform: uppercase; display: block; margin-top: 4px; }
+.topbar-brand-text span {
+  color: var(--text2);
+  font-size: 0.65rem;
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 400;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  display: block;
+  margin-top: 4px;
+}
 
 .topbar-right { display: flex; align-items: center; gap: 12px; }
 
@@ -1581,7 +1590,7 @@ input:checked + .toggle-slider::before { transform: translateX(20px); background
     </div>
 
     <!-- ABOUT PAGE (Stats + Settings + About) -->
-    <div id="page-more" class="page">
+    <div id="page-about" class="page">
       <div class="container">
         <div style="padding-top:14px;margin-bottom:18px;">
           <div class="section-title">About</div>
@@ -1729,7 +1738,7 @@ input:checked + .toggle-slider::before { transform: translateX(20px); background
       <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
       Exam
     </button>
-    <button class="nav-btn" id="nav-more" onclick="navigate('more')">
+    <button class="nav-btn" id="nav-about" onclick="navigate('about')">
       <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><circle cx="12" cy="5" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="12" cy="19" r="1"/></svg>
       About
     </button>
@@ -1982,7 +1991,7 @@ function navigate(page) {
   if (page === 'flashcards') initFlashcards();
   if (page === 'quiz') { resetQuizUI(); }
   if (page === 'idioms') { renderIdioms(); }
-  if (page === 'more') { updateHomeStats(); }
+  if (page === 'about') { updateHomeStats(); }
 }
 
 // ============================================================
@@ -2959,7 +2968,7 @@ function submitName() {
 // MORE TABS
 // ============================================================
 function showMoreTab(tab, el) {
-  document.querySelectorAll('#page-more .tabs .tab-btn').forEach(b=>b.classList.remove('active'));
+  document.querySelectorAll('#page-about .tabs .tab-btn').forEach(b=>b.classList.remove('active'));
   el.classList.add('active');
   document.getElementById('moreTab-stats').style.display = tab==='stats'?'block':'none';
   document.getElementById('moreTab-settings').style.display = tab==='settings'?'block':'none';
