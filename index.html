@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>VocabsArt — Word Smart Vocabulary Platform</title>
-<meta name="theme-color" content="#c9a84c">
+<meta name="theme-color" content="#0f1c2d">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -17,30 +17,36 @@
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 :root {
-  --bg: #0a0b0e;
-  --surface: #111318;
-  --surface2: #181c24;
-  --surface3: #1f242f;
-  --border: rgba(255,255,255,0.07);
-  --border2: rgba(255,255,255,0.12);
-  --gold: #c9a84c;
-  --gold2: #f0c86a;
-  --gold-dim: rgba(201,168,76,0.12);
-  --gold-glow: rgba(201,168,76,0.25);
-  --text: #e8e9ec;
-  --text2: #9aa0b0;
-  --text3: #606880;
-  --green: #3dce8a;
-  --green-dim: rgba(61,206,138,0.12);
-  --red: #e05454;
-  --red-dim: rgba(224,84,84,0.12);
-  --blue: #5b8ff9;
-  --blue-dim: rgba(91,143,249,0.12);
-  --purple: #a78bfa;
-  --purple-dim: rgba(167,139,250,0.12);
-  --easy: #3dce8a;
-  --medium: #f0c86a;
-  --hard: #e05454;
+  --bg: #07121f;
+  --bg-rgb: 7, 18, 31;
+  --surface: #0f1c2d;
+  --surface2: #15263b;
+  --surface3: #1d3150;
+  --border: rgba(148,181,255,0.12);
+  --border2: rgba(148,181,255,0.24);
+  --gold: #ffb84d;
+  --gold-rgb: 255, 184, 77;
+  --gold2: #ffd38a;
+  --gold-dim: rgba(255,184,77,0.16);
+  --gold-glow: rgba(255,184,77,0.32);
+  --text: #eff6ff;
+  --text2: #b0bfd7;
+  --text3: #7285a3;
+  --green: #63e6be;
+  --green-rgb: 99, 230, 190;
+  --green-dim: rgba(99,230,190,0.14);
+  --red: #ff7a90;
+  --red-rgb: 255, 122, 144;
+  --red-dim: rgba(255,122,144,0.14);
+  --blue: #7cb8ff;
+  --blue-rgb: 124, 184, 255;
+  --blue-dim: rgba(124,184,255,0.16);
+  --purple: #b79cff;
+  --purple-dim: rgba(183,156,255,0.16);
+  --easy: #63e6be;
+  --medium: #ffd38a;
+  --hard: #ff7a90;
+  --accent-contrast: #07121f;
   --radius: 12px;
   --radius-lg: 18px;
   --transition: 0.2s ease;
@@ -52,7 +58,10 @@ html { font-size: 16px; scroll-behavior: smooth; }
 
 body {
   font-family: 'DM Sans', sans-serif;
-  background: var(--bg);
+  background:
+    radial-gradient(circle at top, rgba(var(--blue-rgb),0.14), transparent 34%),
+    radial-gradient(circle at bottom right, var(--gold-dim), transparent 30%),
+    var(--bg);
   color: var(--text);
   min-height: 100vh;
   overflow-x: hidden;
@@ -76,7 +85,7 @@ body {
   position: fixed; top: 0; left: 0; right: 0; z-index: 100;
   display: flex; align-items: center; justify-content: space-between;
   padding: 0 20px; height: 58px;
-  background: rgba(10,11,14,0.92);
+  background: rgba(var(--bg-rgb),0.9);
   backdrop-filter: blur(20px);
   border-bottom: 1px solid var(--border);
 }
@@ -98,7 +107,7 @@ body {
 .streak-badge {
   display: flex; align-items: center; gap: 6px;
   background: var(--gold-dim);
-  border: 1px solid rgba(201,168,76,0.2);
+  border: 1px solid rgba(var(--gold-rgb),0.24);
   border-radius: 99px;
   padding: 5px 12px;
   font-size: 0.78rem; font-weight: 500; color: var(--gold2);
@@ -108,7 +117,7 @@ body {
 .nav {
   position: fixed; bottom: 0; left: 0; right: 0; z-index: 100;
   display: flex; align-items: center; justify-content: space-around;
-  background: rgba(10,11,14,0.96);
+  background: rgba(var(--bg-rgb),0.94);
   backdrop-filter: blur(20px);
   border-top: 1px solid var(--border);
   padding: 8px 0 max(8px, env(safe-area-inset-bottom));
@@ -211,7 +220,7 @@ body {
 
 .btn-gold {
   background: var(--gold);
-  color: #0a0b0e;
+  color: var(--accent-contrast);
 }
 .btn-gold:hover { background: var(--gold2); }
 
@@ -231,9 +240,9 @@ body {
 
 .btn-full { width: 100%; }
 
-.btn-green { background: var(--green-dim); border: 1px solid rgba(61,206,138,0.3); color: var(--green); }
-.btn-red { background: var(--red-dim); border: 1px solid rgba(224,84,84,0.3); color: var(--red); }
-.btn-yellow { background: var(--gold-dim); border: 1px solid rgba(201,168,76,0.3); color: var(--gold2); }
+.btn-green { background: var(--green-dim); border: 1px solid rgba(var(--green-rgb),0.3); color: var(--green); }
+.btn-red { background: var(--red-dim); border: 1px solid rgba(var(--red-rgb),0.3); color: var(--red); }
+.btn-yellow { background: var(--gold-dim); border: 1px solid rgba(var(--gold-rgb),0.3); color: var(--gold2); }
 
 .btn-sm { padding: 7px 14px; font-size: 0.8rem; }
 .btn-lg { padding: 14px 24px; font-size: 1rem; }
@@ -244,9 +253,9 @@ body {
   padding: 3px 8px; border-radius: 5px;
   font-size: 0.68rem; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase;
 }
-.badge-easy { background: rgba(61,206,138,0.15); color: var(--easy); }
-.badge-medium { background: rgba(240,200,106,0.15); color: var(--medium); }
-.badge-hard { background: rgba(224,84,84,0.15); color: var(--hard); }
+.badge-easy { background: rgba(var(--green-rgb),0.15); color: var(--easy); }
+.badge-medium { background: rgba(var(--gold-rgb),0.15); color: var(--medium); }
+.badge-hard { background: rgba(var(--red-rgb),0.15); color: var(--hard); }
 .badge-cat { background: var(--surface3); color: var(--text2); }
 
 /* WORD CARD */
@@ -378,7 +387,7 @@ body {
 
 .flashcard-back {
   background: var(--surface2);
-  border: 1px solid rgba(201,168,76,0.25);
+  border: 1px solid rgba(var(--gold-rgb),0.25);
   transform: rotateY(180deg);
   align-items: flex-start; text-align: left; justify-content: flex-start;
   padding: 24px;
@@ -492,8 +501,8 @@ body {
   margin-top: 12px;
   line-height: 1.5;
 }
-.quiz-feedback.correct { background: var(--green-dim); color: var(--green); border: 1px solid rgba(61,206,138,0.25); }
-.quiz-feedback.wrong { background: var(--red-dim); color: var(--red); border: 1px solid rgba(224,84,84,0.25); }
+.quiz-feedback.correct { background: var(--green-dim); color: var(--green); border: 1px solid rgba(var(--green-rgb),0.25); }
+.quiz-feedback.wrong { background: var(--red-dim); color: var(--red); border: 1px solid rgba(var(--red-rgb),0.25); }
 
 .quiz-score-bar {
   display: flex; align-items: center; gap: 12px;
@@ -796,8 +805,8 @@ input:checked + .toggle-slider::before { transform: translateX(20px); background
 }
 .about-link:hover { border-color: var(--gold); color: var(--gold); background: var(--gold-dim); }
 .about-link svg { width: 18px; height: 18px; flex-shrink: 0; }
-.about-link-fb:hover { border-color: #5b8ff9; color: #5b8ff9; background: var(--blue-dim); }
-.about-link-li:hover { border-color: #5b8ff9; color: #5b8ff9; background: var(--blue-dim); }
+.about-link-fb:hover { border-color: var(--blue); color: var(--blue); background: var(--blue-dim); }
+.about-link-li:hover { border-color: var(--blue); color: var(--blue); background: var(--blue-dim); }
 .about-link-mail:hover { border-color: var(--green); color: var(--green); background: var(--green-dim); }
 .about-divider {
   height: 1px; background: var(--border); margin: 20px 0;
@@ -850,14 +859,14 @@ input:checked + .toggle-slider::before { transform: translateX(20px); background
   position: relative;
 }
 .alpha-btn:hover { border-color: var(--gold); color: var(--gold); background: var(--gold-dim); }
-.alpha-btn.active { background: var(--gold); color: #0a0b0e; border-color: var(--gold); }
+.alpha-btn.active { background: var(--gold); color: var(--accent-contrast); border-color: var(--gold); }
 .alpha-btn.has-words::after {
   content: '';
   position: absolute; bottom: 3px; right: 3px;
   width: 5px; height: 5px; border-radius: 50%;
   background: var(--gold);
 }
-.alpha-btn.active::after { background: #0a0b0e; }
+.alpha-btn.active::after { background: var(--accent-contrast); }
 .alpha-btn.no-words { opacity: 0.3; cursor: default; }
 .alpha-btn.no-words:hover { border-color: var(--border); color: var(--text2); background: var(--surface); }
 
@@ -1335,7 +1344,7 @@ input:checked + .toggle-slider::before { transform: translateX(20px); background
             <div id="categoryBreakdown" style="font-size:0.82rem;color:var(--text3);">Loading...</div>
           </div>
 
-          <button class="btn btn-outline btn-full" onclick="resetProgress()" style="color:var(--red);border-color:rgba(224,84,84,0.3);">
+          <button class="btn btn-outline btn-full" onclick="resetProgress()" style="color:var(--red);border-color:rgba(var(--red-rgb),0.3);">
             Reset All Progress
           </button>
         </div>
@@ -1777,7 +1786,7 @@ function renderWordCard(w) {
   const showSyns = state.settings.showSyns;
   const showEx = state.settings.showEx;
 
-  return `<div class="word-card" onclick="openModal(${w.id})" style="${isLearned?'border-color:rgba(61,206,138,0.2);':''}" id="wc${w.id}">
+  return `<div class="word-card" onclick="openModal(${w.id})" style="${isLearned?'border-color:rgba(var(--green-rgb),0.2);':''}" id="wc${w.id}">
     <div class="word-card-meta">
       <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;">
         <span class="badge badge-${w.difficulty.toLowerCase()}">${w.difficulty}</span>
@@ -1874,7 +1883,7 @@ function openModal(id) {
     </div>` : ''}
     ${w.antonyms.length ? `<div class="modal-section">
       <div class="modal-section-label">Antonyms</div>
-      <div class="word-synonyms" style="margin:0;">${w.antonyms.map(s=>`<span class="syn-tag" style="border-color:rgba(224,84,84,0.2);color:var(--red);">${s}</span>`).join('')}</div>
+      <div class="word-synonyms" style="margin:0;">${w.antonyms.map(s=>`<span class="syn-tag" style="border-color:rgba(var(--red-rgb),0.2);color:var(--red);">${s}</span>`).join('')}</div>
     </div>` : ''}
     <div class="modal-divider"></div>
     <div style="padding-bottom:10px;display:flex;gap:10px;">
