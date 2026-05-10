@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>VocabsArt — Word Smart Vocabulary Platform</title>
-<meta name="theme-color" content="#010103">
+<meta name="theme-color" content="#000000">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -17,13 +17,13 @@
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 :root {
-  --bg: #010103;
-  --bg-rgb: 1, 1, 3;
-  --surface: rgba(7, 12, 22, 0.72);
-  --surface2: rgba(10, 16, 30, 0.8);
-  --surface3: rgba(15, 24, 43, 0.84);
-  --border: rgba(153,189,255,0.2);
-  --border2: rgba(163,203,255,0.34);
+  --bg: #000000;
+  --bg-rgb: 0, 0, 0;
+  --surface: #0a0a0a;
+  --surface2: #101010;
+  --surface3: #161616;
+  --border: rgba(255,255,255,0.1);
+  --border2: rgba(255,255,255,0.2);
   --gold: #ffb84d;
   --gold-rgb: 255, 184, 77;
   --gold2: #ffd38a;
@@ -58,11 +58,7 @@ html { font-size: 16px; scroll-behavior: smooth; }
 
 body {
   font-family: 'DM Sans', sans-serif;
-  background:
-    radial-gradient(circle at 12% -10%, rgba(var(--blue-rgb),0.08), transparent 34%),
-    radial-gradient(circle at 86% 8%, rgba(118, 160, 239, 0.06), transparent 28%),
-    radial-gradient(circle at 100% 100%, rgba(82, 124, 212, 0.05), transparent 38%),
-    var(--bg);
+  background: var(--bg);
   color: var(--text);
   min-height: 100vh;
   overflow-x: hidden;
@@ -172,29 +168,15 @@ body {
 .card:hover { border-color: var(--border2); }
 
 :is(.card, .stat-card, .word-card, .quiz-question, .exam-header, .tabs, .idiom-card) {
-  position: relative;
-  overflow: hidden;
-  transition: transform var(--transition), border-color var(--transition), box-shadow var(--transition);
+  transition: border-color var(--transition), background-color var(--transition);
 }
 
 :is(.card, .stat-card, .word-card, .quiz-question, .exam-header, .tabs, .idiom-card)::after {
-  content: '';
-  position: absolute;
-  left: 8%;
-  right: 8%;
-  top: 0;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(197, 224, 255, 0.6), transparent);
-  opacity: 0.8;
-  pointer-events: none;
+  display: none;
 }
 
 :is(.card, .stat-card, .word-card, .quiz-question, .exam-header, .tabs, .idiom-card):hover {
-  transform: translateY(-3px);
-  box-shadow:
-    0 24px 42px rgba(0, 0, 0, 0.62),
-    0 1px 0 rgba(199, 226, 255, 0.12) inset,
-    0 0 0 1px rgba(130, 172, 255, 0.08) inset;
+  border-color: var(--border2);
 }
 
 /* STATS GRID */
@@ -231,7 +213,7 @@ body {
   height: 5px; background: var(--surface3); border-radius: 99px; overflow: hidden;
   margin: 8px 0;
 }
-.progress-fill { height: 100%; background: linear-gradient(90deg, var(--gold), var(--gold2)); border-radius: 99px; transition: width 0.5s ease; }
+.progress-fill { height: 100%; background: var(--gold); border-radius: 99px; transition: width 0.5s ease; }
 
 /* BUTTONS */
 .btn {
@@ -299,15 +281,10 @@ body {
 }
 
 .word-card::before {
-  content: '';
-  position: absolute; top: 0; left: 0; right: 0; height: 2px;
-  background: linear-gradient(90deg, var(--gold), transparent);
-  opacity: 0;
-  transition: opacity var(--transition);
+  display: none;
 }
 
 .word-card:hover { border-color: var(--border2); }
-.word-card:hover::before { opacity: 1; }
 
 .word-name {
   font-family: 'Playfair Display', serif;
@@ -900,7 +877,7 @@ input:checked + .toggle-slider::before { transform: translateX(20px); background
 
 /* IDIOMS */
 .idiom-card {
-  background: var(--surface);
+  background: var(--surface2);
   border: 1px solid var(--border);
   border-radius: var(--radius);
   padding: 14px;
@@ -928,33 +905,46 @@ input:checked + .toggle-slider::before { transform: translateX(20px); background
   opacity: 0.85;
 }
 
-/* LEARN PAGE DARK TWEAK */
-#page-learn {
-  position: relative;
-  isolation: isolate;
+.idiom-alpha-wrap {
+  margin-bottom: 14px;
 }
 
-#page-learn::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  z-index: -1;
-  border-radius: 22px;
-  background:
-    radial-gradient(circle at 8% -12%, rgba(var(--blue-rgb), 0.12), transparent 36%),
-    linear-gradient(180deg, rgba(var(--bg-rgb), 0.82), rgba(var(--bg-rgb), 0.96));
+.idiom-alpha-grid {
+  display: grid;
+  grid-template-columns: repeat(9, 1fr);
+  gap: 5px;
+  margin-top: 8px;
 }
 
-#page-learn :is(.word-card, .chip, .alpha-btn) {
-  background: linear-gradient(150deg, rgba(var(--blue-rgb), 0.08), rgba(var(--bg-rgb), 0.95));
-  border-color: rgba(var(--blue-rgb), 0.24);
-  box-shadow:
-    0 16px 28px rgba(0, 0, 0, 0.58),
-    0 1px 0 rgba(var(--blue-rgb), 0.1) inset,
-    0 0 0 1px rgba(var(--blue-rgb), 0.08) inset;
+.idiom-alpha-btn {
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  line-height: 1;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--surface2);
+  color: var(--text2);
+  font-family: 'Playfair Display', serif;
+  font-size: 0.85rem;
+  font-weight: 700;
+  cursor: pointer;
 }
 
-/* GLASS OVERRIDES */
+.idiom-alpha-btn.active {
+  background: var(--surface3);
+  border-color: var(--border2);
+  color: var(--text);
+}
+
+#idiomAlphaAll.active {
+  border-color: var(--border2);
+  background: var(--surface3);
+}
+
+/* SURFACE OVERRIDES */
 :is(
   .card,
   .stat-card,
@@ -973,16 +963,12 @@ input:checked + .toggle-slider::before { transform: translateX(20px); background
   .admin-form input,
   .admin-form textarea,
   .admin-form select,
-  .alpha-btn,
-  .idiom-card
+  .alpha-btn
 ) {
-  background: linear-gradient(145deg, rgba(129, 171, 255, 0.1), rgba(6, 12, 24, 0.84));
-  backdrop-filter: blur(14px) saturate(130%);
-  -webkit-backdrop-filter: blur(14px) saturate(130%);
-  box-shadow:
-    0 20px 36px rgba(0, 0, 0, 0.56),
-    0 1px 0 rgba(192, 219, 255, 0.1) inset,
-    0 0 0 1px rgba(130, 172, 255, 0.06) inset;
+  background: var(--surface);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  box-shadow: none;
 }
 
 /* RESPONSIVE */
@@ -1157,6 +1143,11 @@ input:checked + .toggle-slider::before { transform: translateX(20px); background
             <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
           </div>
           <input class="search-input" id="idiomSearchInput" type="search" placeholder="Search idiom or meaning…" oninput="doIdiomSearch(this.value)">
+        </div>
+
+        <div class="idiom-alpha-wrap">
+          <button class="btn btn-surface btn-sm" id="idiomAlphaAll" onclick="setIdiomLetter('all')">All Idioms</button>
+          <div id="idiomAlphaPicker" class="idiom-alpha-grid"></div>
         </div>
 
         <div id="idiomSections" class="word-list"></div>
@@ -1566,6 +1557,7 @@ const RAW_WORDS = [{"w":"Abash","p":"uh BASH","pos":"verb","d":"to make ashamed;
 const RAW_IDIOMS = [{"i": "A breeze", "m": "Something very simple and easy to do", "e": "The math test was a breeze for her because she had studied all week."}, {"i": "A far cry from", "m": "Not similar to. Not as good as", "e": "The movie was a far cry from the original book."}, {"i": "A fish out of water", "m": "Someone not in his or her normal surroundings", "e": "At the formal dinner, he felt like a fish out of water."}, {"i": "A pretty penny", "m": "A lot of money", "e": "That designer handbag must have cost her a pretty penny."}, {"i": "About to", "m": "Almost ready to", "e": "I was about to leave when the phone rang."}, {"i": "Above all", "m": "Most importantly", "e": "Above all, be honest in everything you do."}, {"i": "Add up", "m": "Make sense; be logical", "e": "His excuse doesn't add up - something isn't right."}, {"i": "All at once", "m": "Suddenly; without warning", "e": "All at once, the lights went out and everyone screamed."}, {"i": "All of a sudden", "m": "All at once; suddenly", "e": "All of a sudden, it started pouring with rain."}, {"i": "As a matter of fact", "m": "In reality; actually", "e": "As a matter of fact, I've been to Paris three times."}, {"i": "As a rule", "m": "Generally; customarily", "e": "As a rule, she goes for a walk every morning."}, {"i": "At ease", "m": "Not nervous; calm", "e": "After the interview was over, she finally felt at ease."}, {"i": "At the drop of a hat", "m": "Quickly; without any preparation time", "e": "He's always ready to help at the drop of a hat."}, {"i": "Back out (of)", "m": "Withdraw an offer", "e": "He agreed to help but then backed out of the deal at the last minute."}, {"i": "Bank on", "m": "Depend on; count on", "e": "You can bank on her - she never misses a deadline."}, {"i": "Be my guest", "m": "Do what you want; feel free; help yourself", "e": "Can I use your pen? Be my guest!"}, {"i": "Be rusty", "m": "Need practice or review", "e": "My French is a bit rusty; I haven't spoken it in years."}, {"i": "Beats me", "m": "I don’t know; I have no idea (often used in response to a question)", "e": "Why is the office closed today? Beats me!"}, {"i": "Better off", "m": "In an improved condition", "e": "You'd be better off taking the train during rush hour."}, {"i": "Bite off more than one can chew", "m": "Take on more responsibility than one can handle", "e": "He bit off more than he could chew by signing up for five courses at once."}, {"i": "Bound to", "m": "Certain to; sure to", "e": "With so little sleep, you're bound to feel tired tomorrow."}, {"i": "Break down", "m": "Stop functioning (a machine, for example)", "e": "Our car broke down on the highway and we had to call for help."}, {"i": "Break in (on)", "m": "Interrupt", "e": "Sorry to break in on your conversation, but this is urgent."}, {"i": "Break the ice", "m": "Break through social barriers (as at a party)", "e": "He told a funny joke to break the ice at the party."}, {"i": "Break the news (to)", "m": "Inform; give bad news", "e": "She had to break the news to her family that she was moving abroad."}, {"i": "Break up", "m": "End (a meeting, for example)", "e": "The party broke up just before midnight."}, {"i": "Break up (with)", "m": "Stop being a couple (a boyfriend and girlfriend, for example)", "e": "She broke up with her boyfriend after two years together."}, {"i": "Brush up on", "m": "Review; study; practice", "e": "I need to brush up on my grammar before the exam."}, {"i": "Bump into", "m": "Meet unexpectedly; run into", "e": "I bumped into an old friend at the supermarket yesterday."}, {"i": "By and large", "m": "Mostly; generally; on the whole", "e": "By and large, the students were happy with the new schedule."}, {"i": "By heart", "m": "By memory; learned word for word", "e": "She learned the poem by heart in just one day."}, {"i": "By no means", "m": "In no way; not at all", "e": "This is by no means an easy problem to solve."}, {"i": "Call off", "m": "Cancel", "e": "They had to call off the outdoor concert because of the storm."}, {"i": "Call on", "m": "Visit", "e": "The teacher called on him to answer the question."}, {"i": "Calm down", "m": "Relax", "e": "Calm down - everything is going to be fine."}, {"i": "Care for", "m": "(1) take care of; (2) like; feel affection for", "e": "She cares for her elderly grandmother every weekend."}, {"i": "Catch on", "m": "Become popular", "e": "The new dance move quickly caught on all over the world."}, {"i": "Catch on (to)", "m": "Understand. Learn", "e": "It took him a while to catch on to the idea, but he understood eventually."}, {"i": "Catch up (with)", "m": "Go as fast as; catch", "e": "Run faster or we'll never catch up with the others!"}, {"i": "Check in (or into)", "m": "Register (at a hotel)", "e": "We checked into the hotel at 3 o'clock in the afternoon."}, {"i": "Check out (of)", "m": "(1) clarify; make understandable; (2) become nice and sunny (used to talk about the weather)", "e": "We need to check out of the hotel by noon."}, {"i": "Come across", "m": "Find; meet; encounter", "e": "I came across an old photo album while cleaning the attic."}, {"i": "Come around (to)", "m": "Begin to change one’s opinion; begin to agree with", "e": "At first he disagreed, but he slowly came around to our point of view."}, {"i": "Come down with", "m": "Become sick with (an illness)", "e": "She came down with a cold just before her holiday."}, {"i": "Come up with", "m": "Think of (an idea)", "e": "Can you come up with a better solution to this problem?"}, {"i": "Cost an arm and a leg", "m": "Be very expensive", "e": "That new smartphone costs an arm and a leg!"}, {"i": "Count on", "m": "Depend on; rely on; bank on", "e": "You can always count on Tom when things get difficult."}, {"i": "Count out", "m": "Eliminate; no longer consider as a factor", "e": "Count me out - I have other plans for Saturday."}, {"i": "Cut off", "m": "Stop; discontinue (a service, for example)", "e": "The electricity was cut off because they hadn't paid the bill."}, {"i": "Cut out for", "m": "Have an aptitude for; be qualified for", "e": "He's not really cut out for a career in sales."}, {"i": "Day in and day out", "m": "Constantly; for a long time", "e": "Day in and day out, she practices the piano for two hours."}, {"i": "Die down", "m": "Become less severe; quiet down", "e": "The noise from the crowd gradually died down after the match."}, {"i": "Do over", "m": "Do again; repeat", "e": "The teacher asked him to do over his essay because it was too short."}, {"i": "Do without", "m": "Not have", "e": "We'll have to do without air conditioning until the repairman arrives."}, {"i": "Down the drain", "m": "Wasted; done for no reason (work, for example)", "e": "All that hard work went down the drain when the project was cancelled."}, {"i": "Dream up", "m": "Invent; think of; come up with", "e": "She dreamed up a brilliant plan to raise money for charity."}, {"i": "Drop (someone) a line", "m": "Send someone a letter", "e": "Drop me a line when you arrive in London!"}, {"i": "Drop in (on)", "m": "Visit informally", "e": "Feel free to drop in on us any time you're in the neighbourhood."}, {"i": "Drop off", "m": "(1) leave something (a package, for example); (2) take someone home; let someone out", "e": "He dropped off the parcel at the post office on his way to work."}, {"i": "Drop out (of)", "m": "Stop attending (classes, for example)", "e": "She dropped out of university after just one semester."}, {"i": "Easy as pie", "m": "Very simple; a piece of cake", "e": "Once you know the trick, solving the puzzle is easy as pie."}, {"i": "Eyes bigger than one’s stomach", "m": "Said of someone who takes more food than he or she can eat", "e": "I ordered three courses but couldn't finish - my eyes were bigger than my stomach."}, {"i": "Fall behind", "m": "Not move as quickly as; lag behind", "e": "Don't fall behind on your homework or it will pile up."}, {"i": "Fall through", "m": "Fail to happen", "e": "Our holiday plans fell through when the airline went on strike."}, {"i": "Fed up (with)", "m": "Not able to tolerate; disgusted with; annoyed by", "e": "I'm fed up with being stuck in traffic every morning."}, {"i": "Feel free", "m": "Do something if one wants", "e": "Feel free to ask me any questions you have."}, {"i": "Feel like", "m": "Be inclined to; want to", "e": "I feel like going for a walk - want to join me?"}, {"i": "Feel like a million dollars", "m": "Feel very good", "e": "After a long shower and a good meal, I felt like a million dollars."}, {"i": "Feel up to", "m": "Feel able to do something; ready to", "e": "I don't feel up to running today - I'm too tired."}, {"i": "Few and far between", "m": "Uncommon and infrequent", "e": "Good job opportunities in this town are few and far between."}, {"i": "Figure out", "m": "Understand. Solve", "e": "She couldn't figure out why the computer kept crashing."}, {"i": "Fill in", "m": "Write in a blank (on an application form, for example)", "e": "Please fill in your name and address at the top of the form."}, {"i": "Fill in (for)", "m": "Substitute for", "e": "Can you fill in for me while I'm on holiday?"}, {"i": "Fill one in", "m": "Provide missing information", "e": "Can you fill me in on what I missed at the meeting?"}, {"i": "Fill out", "m": "Complete (an application form, for example)", "e": "You'll need to fill out this form before seeing the doctor."}, {"i": "Find out", "m": "Learn; discover", "e": "I was shocked when I found out what had happened."}, {"i": "Fix up", "m": "Repair. Renovate", "e": "They plan to fix up the old cottage and rent it out."}, {"i": "Follow in one’s footsteps", "m": "Do what someone else did (especially an older relative)", "e": "She followed in her mother's footsteps and became a doctor."}, {"i": "For good", "m": "Permanently; forever", "e": "He left his hometown for good and never looked back."}, {"i": "For the time being", "m": "Temporarily; for now", "e": "For the time being, we'll work from home until the office is ready."}, {"i": "Get a kick out of (doing something)", "m": "Enjoy; have fun doing something", "e": "He gets a real kick out of teaching children to read."}, {"i": "Get along with", "m": "Have good relations with", "e": "She gets along with all of her colleagues really well."}, {"i": "Get carried away", "m": "Go too far; do too much; buy too much", "e": "Don't get carried away with the decorations - keep it simple."}, {"i": "Get in one's blood", "m": "Become a habit; become customary", "e": "Travelling has really gotten into his blood; he can't stay in one place."}, {"i": "Get in over one's head", "m": "Take on too much responsibility", "e": "She got in over her head trying to manage three projects at once."}, {"i": "Get in the way", "m": "Block; obstruct", "e": "Don't let personal problems get in the way of your work."}, {"i": "Get in touch with", "m": "Contact", "e": "I'll get in touch with you as soon as I have more information."}, {"i": "Get off", "m": "Leave (a vehicle)", "e": "We get off the bus at the next stop."}, {"i": "Get off the ground", "m": "Start to be successful", "e": "The new startup finally got off the ground after months of planning."}, {"i": "Get on", "m": "Board (a vehicle)", "e": "We need to get on the train before it leaves."}, {"i": "Get over", "m": "Recover from (a disease)", "e": "It took him months to get over the loss of his job."}, {"i": "Get rid of", "m": "Discard; no longer have", "e": "It's time to get rid of all these old clothes you never wear."}, {"i": "Get the hang of something", "m": "Learn how to do something", "e": "It took me a few tries, but I finally got the hang of riding a bike."}, {"i": "Get under way", "m": "Begin; start", "e": "The construction work got under way last Monday."}, {"i": "Give (someone) a cold shoulder", "m": "Act unfriendly toward someone; ignore", "e": "He gave her the cold shoulder after their argument."}, {"i": "Give a hand", "m": "Applaud; clap", "e": "The audience gave the performers a big hand at the end."}, {"i": "Give a hand (with)", "m": "Assist", "e": "Could you give me a hand with moving this sofa?"}, {"i": "Give away", "m": "Distribute (for free)", "e": "The charity gave away free meals to those in need."}, {"i": "Go easy on", "m": "Not punish severely", "e": "Go easy on him - it was his first day on the job."}, {"i": "Go on (with)", "m": "Continue", "e": "Please go on with your story; I'm listening."}, {"i": "Go with", "m": "(1) accompany; (2) look good together; complement (for example, two articles of clothing)", "e": "That blue tie goes perfectly with your grey suit."}, {"i": "Go without saying", "m": "Be clear; be obvious", "e": "It goes without saying that you should always wear a seatbelt."}, {"i": "Grow up", "m": "To mature; to become an adult", "e": "She grew up in a small village and moved to the city at eighteen."}, {"i": "Hand in", "m": "Give back to; return", "e": "Remember to hand in your assignment before the deadline."}, {"i": "Hand out", "m": "Distribute", "e": "The teacher handed out the test papers at the start of the lesson."}, {"i": "Hang on", "m": "Wait", "e": "Hang on a moment - I'll be right back."}, {"i": "Hard to come by", "m": "Difficult to find", "e": "Fresh vegetables are hard to come by in this remote area."}, {"i": "Have a heart", "m": "Be compassionate; show mercy", "e": "Have a heart and give him another chance - he's truly sorry."}, {"i": "Have a hunch", "m": "Have an intuitive feeling", "e": "I have a hunch that she already knows about the surprise party."}, {"i": "Have a word with (someone)", "m": "Talk to someone briefly", "e": "I need to have a word with you about your recent behaviour."}, {"i": "Have on", "m": "Wear", "e": "She had on a beautiful red dress at the ceremony."}, {"i": "Have one's hands full", "m": "Be very busy; have a challenging job", "e": "With three children under five, she really has her hands full."}, {"i": "Have the time of one's life", "m": "Have fun; have a great time", "e": "They had the time of their lives on their trip to Japan."}, {"i": "Hear firsthand (from)", "m": "Get information directly from someone", "e": "I heard firsthand from the manager what really happened."}, {"i": "Hear from", "m": "Be contacted by; be in touch with", "e": "Have you heard from Sarah lately? I haven't spoken to her in weeks."}, {"i": "Hear of", "m": "Know about; be familiar with", "e": "I've never heard of that band - are they new?"}, {"i": "Hit it off", "m": "Become friendly (especially at a first meeting)", "e": "The two new colleagues hit it off straight away."}, {"i": "Hit the road", "m": "Leave, go away", "e": "We need to hit the road early to avoid the traffic."}, {"i": "Hold on (to)", "m": "Grasp", "e": "Hold on to the railing - the path is very slippery."}, {"i": "Hold still", "m": "Not move", "e": "Hold still while I take your photograph!"}, {"i": "Hold up", "m": "Delay", "e": "An accident on the motorway held us up for over an hour."}, {"i": "In a nutshell", "m": "In summary; in brief", "e": "In a nutshell, the project was over budget and behind schedule."}, {"i": "In hot water", "m": "In trouble", "e": "He got into hot water for arriving late to every meeting."}, {"i": "In no time", "m": "Very soon; very quickly", "e": "With her help, we finished the work in no time."}, {"i": "In person", "m": "Face to face (not by telephone, letter, etc.)", "e": "I'd rather discuss this in person than over the phone."}, {"i": "In store", "m": "In the future; coming up", "e": "Nobody knew what surprises were in store for the evening."}, {"i": "In the dark", "m": "Not knowing; confused", "e": "We were kept in the dark about the company's plans for months."}, {"i": "In the long run", "m": "Over a long period of time", "e": "Eating healthily now will benefit you in the long run."}, {"i": "In the same boat", "m": "In the same situation; having the same problem", "e": "We're all in the same boat - none of us has any experience with this."}, {"i": "Iron out", "m": "Solve (a problem)", "e": "Let's meet to iron out the remaining problems with the contract."}, {"i": "Join the club", "m": "Have the same problem", "e": "I never win at chess. Join the club - neither do I!"}, {"i": "Jump to conclusions", "m": "Form opinions without sufficient evidence", "e": "Don't jump to conclusions before you have all the facts."}, {"i": "Keep an eye on", "m": "Watch; take care of; look after", "e": "Could you keep an eye on my bag while I go to the bathroom?"}, {"i": "Keep an eye out (for)", "m": "Look for", "e": "Keep an eye out for any good deals at the market."}, {"i": "Keep on (with)", "m": "Continue", "e": "Keep on with your studies and you will succeed."}, {"i": "Keep track of", "m": "Know where something or someone is", "e": "It's hard to keep track of all the changes in the new policy."}, {"i": "Keep up (with)", "m": "Maintain the same speed as", "e": "She struggled to keep up with the rest of the class."}, {"i": "Kill time", "m": "Spend time doing unimportant things (before an appointment)", "e": "We killed time reading magazines while waiting for the flight."}, {"i": "Know like the back of one's hand", "m": "Be very familiar with", "e": "He knows this city like the back of his hand - he never gets lost."}, {"i": "Lay off", "m": "Put out of work", "e": "The factory had to lay off fifty workers due to falling demand."}, {"i": "Learn the ropes", "m": "Become familiar with; get used to; get the hang of", "e": "It took her a few weeks to learn the ropes of her new job."}, {"i": "Leave out", "m": "Not include; omit", "e": "Don't leave out any important details when writing your report."}, {"i": "Leave someone/something alone", "m": "Not disturb", "e": "Just leave me alone - I need some time to think."}, {"i": "Let someone down", "m": "Disappoint", "e": "I promised I would be there, and I don't want to let you down."}, {"i": "Let up", "m": "Decline in intensity (rain, for example)", "e": "The rain let up just in time for the outdoor festival."}, {"i": "Look after", "m": "Take care of; mind", "e": "She looks after her younger brother while their parents are at work."}, {"i": "Look for", "m": "Try to locate", "e": "I've been looking for my keys for half an hour."}, {"i": "Look forward to", "m": "Anticipate (with pleasure)", "e": "I'm really looking forward to the summer holidays."}, {"i": "Look into", "m": "Investigate", "e": "The police are looking into the cause of the fire."}, {"i": "Look like", "m": "Resemble", "e": "She looks like her mother - they could be twins."}, {"i": "Look out (for)", "m": "Examine; read", "e": "Look out for ice on the roads this morning."}, {"i": "Look over", "m": "Examine; read", "e": "Please look over the contract carefully before you sign."}, {"i": "Look up", "m": "(1) find information (especially in a reference book); (2) try to locate someone", "e": "If you don't know a word, look it up in a dictionary."}, {"i": "Look up to", "m": "Respect; admire", "e": "Many young athletes look up to her as a role model."}, {"i": "Make a fool of oneself", "m": "Act embarrassingly", "e": "He made a fool of himself at the party by dancing on the table."}, {"i": "Make a point of", "m": "Make a special effort", "e": "She makes a point of thanking everyone who helps her."}, {"i": "Make ends meet", "m": "Balance a budget", "e": "With two jobs, he still struggles to make ends meet."}, {"i": "Make sense (of)", "m": "Be logical and clear; understand", "e": "I can't make sense of these instructions - can you help?"}, {"i": "Make up one’s mind", "m": "Decide", "e": "Have you made up your mind about which university to attend?"}, {"i": "Music to one’s ears", "m": "Something that sounds pleasant", "e": "Hearing that the project was approved was music to our ears."}, {"i": "No harm done", "m": "There was no damage done", "e": "I accidentally broke a pencil. No harm done - we have plenty more."}, {"i": "Not at all", "m": "Not in any way; not to any degree", "e": "Thank you so much! Not at all - it was my pleasure."}, {"i": "Odds and ends", "m": "Small, miscellaneous items", "e": "She has a drawer full of odds and ends that she never throws away."}, {"i": "On edge", "m": "Nervous", "e": "Waiting for the exam results had everyone on edge."}, {"i": "On end", "m": "Consecutively, without a break", "e": "He worked for hours on end without taking a break."}, {"i": "On hand", "m": "Easily available", "e": "Make sure there are enough supplies on hand for the event."}, {"i": "On needles and pins", "m": "Nervous; anxious", "e": "She was on needles and pins waiting to hear if she'd got the job."}, {"i": "On one’s own", "m": "Independent", "e": "He moved abroad and lived on his own for the first time."}, {"i": "On second thought", "m": "After reconsidering", "e": "On second thought, maybe we should wait before making a decision."}, {"i": "On the go", "m": "Always busy; always moving", "e": "She's always on the go, managing work and family at the same time."}, {"i": "On the tip of one’s tongue", "m": "Almost able to remember", "e": "His name is on the tip of my tongue - I just can't remember it!"}, {"i": "On the whole", "m": "In general", "e": "On the whole, the conference was a great success."}, {"i": "Out of (something)", "m": "Not having something", "e": "We've run out of milk - can you pick some up on your way home?"}, {"i": "Out of one’s mind", "m": "Insane; illogical; irrational", "e": "You'd have to be out of your mind to go swimming in this weather."}, {"i": "Out of the blue", "m": "Unexpectedly; without warning", "e": "Out of the blue, she received a job offer from a company she had forgotten she'd applied to."}, {"i": "Play it safe", "m": "Choose a cautious plan", "e": "When hiking alone, always play it safe and let someone know your route."}, {"i": "Point out", "m": "Indicate", "e": "She pointed out that we had forgotten to invite two people."}, {"i": "Pull one's leg", "m": "Joke with someone; make up a story", "e": "I won a million pounds! Are you pulling my leg?"}, {"i": "Push one's luck", "m": "To continue doing something; to keep taking chances", "e": "You've already asked for two extensions - don't push your luck."}, {"i": "Put aside", "m": "Save for later; set aside", "e": "She put aside some money each month to save for a new car."}, {"i": "Put away", "m": "Return something to its proper place", "e": "Please put away your toys when you've finished playing."}, {"i": "Put off", "m": "Delay; postpone", "e": "Don't put off until tomorrow what you can do today."}, {"i": "Put on", "m": "Begin to wear", "e": "He put on his coat before stepping out into the cold."}, {"i": "Put together", "m": "Assemble", "e": "We put together a care package for the new students."}, {"i": "Put up with", "m": "Tolerate", "e": "I don't know how she puts up with all that noise from the neighbours."}, {"i": "Right away", "m": "Immediately", "e": "I'll send you the file right away."}, {"i": "Ring a bell (with)", "m": "Sound familiar to", "e": "That name rings a bell - I think we met at the conference last year."}, {"i": "Rough it", "m": "Experience somewhat difficult or primitive conditions", "e": "During the camping trip, we roughed it without running water."}, {"i": "Rule out", "m": "Say something is impossible; eliminate", "e": "The doctor ruled out a serious illness and said it was just stress."}, {"i": "Run a temperature", "m": "Have a fever", "e": "The child was running a temperature, so they kept her home from school."}, {"i": "Run for office", "m": "Try to get elected", "e": "He decided to run for office after years of working in local government."}, {"i": "Run into", "m": "(1) meet unexpectedly; bump into; (2) collide with", "e": "I ran into my old teacher at the post office."}, {"i": "Run late", "m": "Be late; be in a hurry", "e": "Sorry, I'm running late - please start without me."}, {"i": "Run out of", "m": "Exhaust the supply of", "e": "We ran out of paper just before finishing the report."}, {"i": "Save one’s breath", "m": "Don’t bother asking someone", "e": "Save your breath - she's already made up her mind."}, {"i": "Search me", "m": "I don't know; I have no idea; beats me", "e": "Where did I put my glasses? Search me - I have no idea!"}, {"i": "See (someone) off", "m": "Accompany (to an airport or train station, for example)", "e": "We went to the airport to see her off before her flight."}, {"i": "See to", "m": "Take care of; check on; fix", "e": "Can you see to the guests while I finish preparing dinner?"}, {"i": "Serve one right", "m": "Receive the proper punishment; get the penalty one deserves", "e": "It serves him right for not studying - he failed the test."}, {"i": "Short for", "m": "A nickname for", "e": "Mike is short for Michael."}, {"i": "Show around", "m": "Orient; give a tour", "e": "She showed the new employee around the office on his first day."}, {"i": "Show off", "m": "Try to attract attention by unusual behavior", "e": "He was showing off by doing tricks on his skateboard."}, {"i": "Show up", "m": "Arrive", "e": "Only ten people showed up to the meeting."}, {"i": "Shut down", "m": "Close", "e": "The factory was shut down after safety inspections revealed serious problems."}, {"i": "Sign up (for)", "m": "Enroll (for a class, for example)", "e": "I signed up for an online photography course last week."}, {"i": "Sing another tune", "m": "Change one's opinion; feel differently", "e": "After seeing the damage himself, he sang a completely different tune."}, {"i": "Size up", "m": "Measure; estimate", "e": "She quickly sized up the situation and knew what to do."}, {"i": "Sleep on it", "m": "Postpone a decision until the next day", "e": "That's a big decision - sleep on it and let me know tomorrow."}, {"i": "Slowly but surely", "m": "Gradually; steadily but not quickly", "e": "Slowly but surely, she improved her language skills."}, {"i": "Snowed under", "m": "Very busy", "e": "I'm completely snowed under at work this week - can we meet next week instead?"}, {"i": "So far, so good", "m": "Up until now, there are no problems", "e": "How is the new project going? So far, so good - no major problems yet."}, {"i": "Sooner or later", "m": "At some indefinite future time", "e": "Sooner or later, you'll have to face the consequences of your actions."}, {"i": "Tell apart", "m": "Distinguish", "e": "The twins look so alike that it's almost impossible to tell them apart."}, {"i": "Things are looking up", "m": "The situation is improving", "e": "Since she got a new job, things are really looking up for her."}, {"i": "Think over", "m": "Consider", "e": "Take your time and think it over before you decide."}, {"i": "Throw away", "m": "Discard; get rid of", "e": "Don't throw away those boxes - we might need them for moving."}, {"i": "Throw cold water on", "m": "Discourage; force to cancel (a plan, for example)", "e": "He threw cold water on our plans by pointing out all the risks."}, {"i": "Throw the book at someone", "m": "Give someone the maximum punishment", "e": "The judge threw the book at him for his repeated offences."}, {"i": "Try on", "m": "Test clothing before buying (for size, style)", "e": "She tried on three pairs of shoes before finding the right ones."}, {"i": "Try out", "m": "Test a product before buying", "e": "Let me try out the new software before we decide to buy it."}, {"i": "Try out (for)", "m": "Audition for (a role in a play, for example) Attempt to join (a team, for example)", "e": "She's trying out for the school play this year."}, {"i": "Turn around", "m": "Face in a different direction", "e": "Turn around slowly so I can see the whole costume."}, {"i": "Turn down", "m": "(1) reject an offer; (2) decrease in intensity", "e": "He turned down the job offer because the salary was too low."}, {"i": "Turn in", "m": "(1) return; give back; hand in; (2) go to bed", "e": "I turned in my essay just five minutes before the deadline."}, {"i": "Turn into", "m": "Change to; transform into", "e": "The warm weather turned into a storm by the afternoon."}, {"i": "Turn off", "m": "Stop the operation (of an appliance)", "e": "Don't forget to turn off the lights when you leave."}, {"i": "Turn on", "m": "Start the operation (of an appliance)", "e": "Turn on the oven and let it preheat for ten minutes."}, {"i": "Turn out", "m": "(1) result; end up; be the final product; (2) produce; (3) arrive; gather (for a meeting, for example)", "e": "The event turned out to be a great success despite the bad weather."}, {"i": "Turn up", "m": "(1) increase in intensity; (2) arrive", "e": "He turned up late to the party, as usual."}, {"i": "Under the weather", "m": "Slightly ill", "e": "I'm feeling a bit under the weather today, so I'll work from home."}, {"i": "Use up", "m": "Use completely", "e": "We've used up all the flour - I need to buy more."}, {"i": "Wait on", "m": "Serve", "e": "The waiter waited on our table throughout the meal."}, {"i": "Walk on air", "m": "Be very happy", "e": "After getting the promotion, she was walking on air all day."}, {"i": "Warm up", "m": "(1) heat; (2) practice; prepare for", "e": "Let's warm up with a few stretches before we start running."}, {"i": "Warm up (to)", "m": "Become friendly with; start to enjoy", "e": "It took a while, but she finally warmed up to the idea of moving abroad."}, {"i": "Watch out (for)", "m": "Be alert; look out for", "e": "Watch out for pickpockets in busy tourist areas."}, {"i": "Wear out", "m": "Become no longer useful because of wear", "e": "My old trainers have completely worn out - I need a new pair."}];
 let IDIOMS = [];
 let idiomSearchTerm = '';
+let idiomSelectedLetter = 'all';
 
 // ============================================================
 // STATE
@@ -2307,14 +2299,54 @@ function doIdiomSearch(query) {
   renderIdioms();
 }
 
+function setIdiomLetter(letter) {
+  idiomSelectedLetter = letter;
+  renderIdioms();
+}
+
+function getIdiomLetter(item) {
+  if (item && /^[A-Z]$/.test(item.letter)) return item.letter;
+  const first = (item?.idiom || '')[0] || '#';
+  return /^[A-Z]$/.test(first.toUpperCase()) ? first.toUpperCase() : '#';
+}
+
+function renderIdiomAlphabet(sourceItems) {
+  const picker = document.getElementById('idiomAlphaPicker');
+  const allBtn = document.getElementById('idiomAlphaAll');
+  if (!picker || !allBtn) return;
+
+  const letters = [...new Set(sourceItems.map(item => getIdiomLetter(item)))].sort((a, b) => a.localeCompare(b));
+  if (idiomSelectedLetter !== 'all' && !letters.includes(idiomSelectedLetter)) {
+    idiomSelectedLetter = 'all';
+  }
+
+  allBtn.classList.toggle('active', idiomSelectedLetter === 'all');
+  picker.textContent = '';
+
+  letters.forEach(letter => {
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = `idiom-alpha-btn ${idiomSelectedLetter === letter ? 'active' : ''}`;
+    btn.textContent = letter;
+    btn.onclick = () => setIdiomLetter(letter);
+    picker.appendChild(btn);
+  });
+}
+
 function renderIdioms() {
   const listEl = document.getElementById('idiomSections');
   const countEl = document.getElementById('idiomCount');
   if (!listEl || !countEl) return;
 
-  const filtered = IDIOMS.filter(item => {
+  const searchFiltered = IDIOMS.filter(item => {
     if (!idiomSearchTerm) return true;
     return item.idiom.toLowerCase().includes(idiomSearchTerm) || item.meaning.toLowerCase().includes(idiomSearchTerm) || item.example.toLowerCase().includes(idiomSearchTerm);
+  });
+  renderIdiomAlphabet(searchFiltered);
+
+  const filtered = searchFiltered.filter(item => {
+    if (idiomSelectedLetter === 'all') return true;
+    return getIdiomLetter(item) === idiomSelectedLetter;
   });
 
   countEl.textContent = `${filtered.length} of ${IDIOMS.length} idioms`;
@@ -2335,7 +2367,7 @@ function renderIdioms() {
 
   const grouped = {};
   filtered.forEach(item => {
-    const letter = /^[A-Z]$/.test(item.letter) ? item.letter : '#';
+    const letter = getIdiomLetter(item);
     if (!grouped[letter]) grouped[letter] = [];
     grouped[letter].push(item);
   });
