@@ -38,9 +38,9 @@
   --red: #ff7a90;
   --red-rgb: 255, 122, 144;
   --red-dim: rgba(255,122,144,0.14);
-  --blue: #7cb8ff;
-  --blue-rgb: 124, 184, 255;
-  --blue-dim: rgba(124,184,255,0.16);
+  --blue: #74adf3;
+  --blue-rgb: 116, 173, 243;
+  --blue-dim: rgba(116,173,243,0.16);
   --purple: #b79cff;
   --purple-dim: rgba(183,156,255,0.16);
   --easy: #63e6be;
@@ -59,9 +59,9 @@ html { font-size: 16px; scroll-behavior: smooth; }
 body {
   font-family: 'DM Sans', sans-serif;
   background:
-    radial-gradient(circle at 12% -10%, rgba(var(--blue-rgb),0.2), transparent 34%),
-    radial-gradient(circle at 86% 8%, rgba(129, 171, 255, 0.15), transparent 28%),
-    radial-gradient(circle at 100% 100%, rgba(89, 131, 222, 0.12), transparent 38%),
+    radial-gradient(circle at 12% -10%, rgba(var(--blue-rgb),0.16), transparent 34%),
+    radial-gradient(circle at 86% 8%, rgba(118, 160, 239, 0.12), transparent 28%),
+    radial-gradient(circle at 100% 100%, rgba(82, 124, 212, 0.09), transparent 38%),
     var(--bg);
   color: var(--text);
   min-height: 100vh;
@@ -926,6 +926,32 @@ input:checked + .toggle-slider::before { transform: translateX(20px); background
   padding-top: 6px;
   border-top: 1px solid var(--border);
   opacity: 0.85;
+}
+
+/* LEARN PAGE DARK TWEAK */
+#page-learn {
+  position: relative;
+  isolation: isolate;
+}
+
+#page-learn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: 22px;
+  background:
+    radial-gradient(circle at 8% -12%, rgba(var(--blue-rgb), 0.12), transparent 36%),
+    linear-gradient(180deg, rgba(var(--bg-rgb), 0.82), rgba(var(--bg-rgb), 0.96));
+}
+
+#page-learn :is(.word-card, .chip, .alpha-btn) {
+  background: linear-gradient(150deg, rgba(var(--blue-rgb), 0.12), rgba(var(--bg-rgb), 0.9));
+  border-color: rgba(var(--blue-rgb), 0.24);
+  box-shadow:
+    0 16px 28px rgba(0, 0, 0, 0.48),
+    0 1px 0 rgba(var(--blue-rgb), 0.16) inset,
+    0 0 0 1px rgba(var(--blue-rgb), 0.1) inset;
 }
 
 /* GLASS OVERRIDES */
