@@ -2811,7 +2811,7 @@ function renderExamQuestion() {
   if (!q) { endExam(); return; }
   document.getElementById('examQNum').textContent = `${state.examIndex+1}/${total}`;
   document.getElementById('examNextBtn').style.display = 'none';
-  const examProgress = Math.round(((state.examIndex) / total) * 100);
+  const examProgress = Math.round((state.examIndex / total) * 100);
   document.getElementById('examProgressFill').style.width = `${examProgress}%`;
   document.getElementById('examProgressText').textContent = `Question ${state.examIndex + 1} of ${total}`;
   const box = document.getElementById('examQuestionBox');
@@ -3024,7 +3024,13 @@ function backupAndSync() {
     return;
   }
 
-  alert('Backup payload: ' + payload);
+  const blob = new Blob([payload], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'vocabsart-backup.json';
+  a.click();
+  URL.revokeObjectURL(url);
 }
 
 // ============================================================
