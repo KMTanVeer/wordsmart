@@ -180,11 +180,11 @@ jobs:
           resize_icon() {
             local src=$1 size=$2 out=$3
             if [ ! -f "$src" ]; then
-              echo "Icon source not found: $src (requested size: ${size}x${size})"
+              echo "Icon source not found: $src (expected app-icon.png in repository root; requested size: ${size}x${size})"
               exit 1
             fi
             if command -v convert &>/dev/null; then
-              convert -background none "$src" -resize "${size}x${size}" "png32:$out"
+              convert "$src" -resize "${size}x${size}" "png32:$out"
             else
               python3 -c "
           import struct, zlib
