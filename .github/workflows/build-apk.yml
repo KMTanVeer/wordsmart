@@ -11,6 +11,7 @@ on:
       - 'capacitor.config.json'
       - 'package.json'
       - 'icons/**'
+      - 'app-icon.png'
       - 'vocabsart-icon.svg'
       - 'vocabsart-icon-light.svg'
       - '.github/workflows/build-apk.yml'
@@ -176,12 +177,10 @@ jobs:
             ["mipmap-xxxhdpi"]=432
           )
 
-          render_svg() {
-            local svg=$1 size=$2 out=$3
-            if command -v rsvg-convert &>/dev/null; then
-              rsvg-convert -w "$size" -h "$size" "$svg" -o "$out"
-            elif command -v convert &>/dev/null; then
-              convert -background none "$svg" -resize "${size}x${size}" "$out" 2>/dev/null
+          render_icon() {
+            local src=$1 size=$2 out=$3
+            if command -v convert &>/dev/null; then
+              convert "$src" -resize "${size}x${size}" "$out" 2>/dev/null
             else
               python3 -c "
           import struct, zlib
@@ -218,9 +217,9 @@ jobs:
             fg_size=${fg_sizes[$dir]}
             res_dir="android/app/src/main/res/$dir"
             mkdir -p "$res_dir"
-            render_svg icons/icon.svg "$size" "$res_dir/ic_launcher.png"
+            render_icon app-icon.png "$size" "$res_dir/ic_launcher.png"
             apply_circle_mask "$res_dir/ic_launcher.png" "$res_dir/ic_launcher_round.png" "$size"
-            render_svg icons/icon.svg "$fg_size" "$res_dir/ic_launcher_foreground.png"
+            render_icon app-icon.png "$fg_size" "$res_dir/ic_launcher_foreground.png"
           done
           echo "Android launcher icons set:" && ls android/app/src/main/res/mipmap-mdpi/
 
