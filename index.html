@@ -1152,9 +1152,10 @@ input:checked + .toggle-slider::before { transform: translateX(20px); background
 /* =========================
    HOME REDESIGN OVERRIDES
    ========================= */
-body {
+#page-home {
   background:
     radial-gradient(120% 90% at 50% -10%, #132550 0%, #081429 42%, #030811 74%, #010205 100%);
+  min-height: calc(100vh - 188px);
 }
 
 .topbar {
@@ -1384,8 +1385,18 @@ body {
   margin-top: 4px;
 }
 
+.review-title {
+  font-size: 0.78rem;
+  color: var(--text2);
+  font-weight: 600;
+}
+
 .review-card .stat-val {
   font-size: 2rem;
+}
+
+.stat-val.blue {
+  color: var(--blue);
 }
 
 .home-cta {
@@ -1554,7 +1565,7 @@ body {
         <svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M17.657 18.657A8 8 0 016.343 7.343S7 9 9 10c0-2 .5-5 2.986-7C14 5 16.09 5.777 17.656 7.343A7.975 7.975 0 0120 13a7.975 7.975 0 01-2.343 5.657z"/><path d="M9.879 16.121A3 3 0 1012.015 11L11 14H9c0 .768.293 1.536.879 2.121z"/></svg>
         <span id="streakCount">0</span> Day Streak
       </div>
-      <button class="notif-btn" aria-label="Notifications" onclick="navigate('about')">
+      <button class="notif-btn" aria-label="Open more section" onclick="navigate('about')">
         <svg aria-hidden="true" width="17" height="17" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 17h5l-1.4-1.4A2 2 0 0118 14.2V11a6 6 0 10-12 0v3.2a2 2 0 01-.6 1.4L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/></svg>
         <span class="notif-dot" aria-hidden="true"></span>
       </button>
@@ -1608,14 +1619,14 @@ body {
         <div class="review-grid">
           <button class="review-card" type="button" onclick="navigateToWeak()">
             <div class="stat-icon red"><svg aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M21 12a9 9 0 11-2.64-6.36"/><path d="M21 3v6h-6"/></svg></div>
-            <div style="font-size:0.78rem;color:var(--text2);font-weight:600;">Need Revision</div>
+            <div class="review-title">Need Revision</div>
             <div class="stat-val red" id="statWeak">0</div>
             <p>Words to review</p>
           </button>
           <button class="review-card" type="button" onclick="navigateToSaved()">
             <div class="stat-icon blue"><svg aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg></div>
-            <div style="font-size:0.78rem;color:var(--text2);font-weight:600;">Saved Words</div>
-            <div class="stat-val" style="color:var(--blue);" id="statBookmarks">0</div>
+            <div class="review-title">Saved Words</div>
+            <div class="stat-val blue" id="statBookmarks">0</div>
             <p>Your bookmarked words</p>
           </button>
         </div>
@@ -2383,7 +2394,8 @@ function renderRecentWords() {
   const safeDiff = escapeHTML(w.difficulty);
   const safeDef = escapeHTML(w.definition);
   const normalizedDifficulty = String(w.difficulty || '').toLowerCase();
-  const safeDiffClass = ['easy', 'medium', 'hard'].includes(normalizedDifficulty) ? normalizedDifficulty : 'medium';
+  const DEFAULT_DIFFICULTY_CLASS = 'medium';
+  const safeDiffClass = ['easy', 'medium', 'hard'].includes(normalizedDifficulty) ? normalizedDifficulty : DEFAULT_DIFFICULTY_CLASS;
   el.innerHTML = `
     <button class="recent-single" type="button" onclick="openModal(${latestId})">
       <div class="recent-title-row">
