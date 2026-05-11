@@ -1555,7 +1555,7 @@ body {
         <span id="streakCount">0</span> Day Streak
       </div>
       <button class="notif-btn" aria-label="Notifications" onclick="navigate('about')">
-        <svg width="17" height="17" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 17h5l-1.4-1.4A2 2 0 0118 14.2V11a6 6 0 10-12 0v3.2a2 2 0 01-.6 1.4L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/></svg>
+        <svg aria-hidden="true" width="17" height="17" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 17h5l-1.4-1.4A2 2 0 0118 14.2V11a6 6 0 10-12 0v3.2a2 2 0 01-.6 1.4L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/></svg>
         <span class="notif-dot" aria-hidden="true"></span>
       </button>
     </div>
@@ -1574,19 +1574,19 @@ body {
 
         <div class="stats-grid home-grid-3">
           <div class="stat-card">
-            <div class="stat-icon purple"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M12 3l9 5-9 5-9-5 9-5z"/><path d="M3 12l9 5 9-5"/></svg></div>
+            <div class="stat-icon purple"><svg aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M12 3l9 5-9 5-9-5 9-5z"/><path d="M3 12l9 5 9-5"/></svg></div>
             <div class="stat-val gold" id="statLearned">0</div>
             <div class="stat-label">Learned Today</div>
             <div class="stat-trend" id="statLearnedMessage">Start a new streak today</div>
           </div>
           <div class="stat-card">
-            <div class="stat-icon blue"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M4 6a3 3 0 013-3h10a3 3 0 013 3v12a3 3 0 01-3 3H7a3 3 0 01-3-3V6z"/><path d="M8 8h8M8 12h8M8 16h5"/></svg></div>
+            <div class="stat-icon blue"><svg aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M4 6a3 3 0 013-3h10a3 3 0 013 3v12a3 3 0 01-3 3H7a3 3 0 01-3-3V6z"/><path d="M8 8h8M8 12h8M8 16h5"/></svg></div>
             <div class="stat-val" id="statTotal">832</div>
             <div class="stat-label">Total Words</div>
             <div class="stat-sub">Total in your library</div>
           </div>
           <div class="stat-card">
-            <div class="stat-icon green"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="7"/><path d="M12 8v4l2.5 2.5"/></svg></div>
+            <div class="stat-icon green"><svg aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="7"/><path d="M12 8v4l2.5 2.5"/></svg></div>
             <div class="stat-val green" id="statAccuracy">—</div>
             <div class="stat-label">Quiz Accuracy</div>
             <div class="stat-trend" id="statAccuracyMessage">Take a quick quiz to track your trend</div>
@@ -1607,13 +1607,13 @@ body {
 
         <div class="review-grid">
           <button class="review-card" type="button" onclick="navigateToWeak()">
-            <div class="stat-icon red"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M21 12a9 9 0 11-2.64-6.36"/><path d="M21 3v6h-6"/></svg></div>
+            <div class="stat-icon red"><svg aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M21 12a9 9 0 11-2.64-6.36"/><path d="M21 3v6h-6"/></svg></div>
             <div style="font-size:0.78rem;color:var(--text2);font-weight:600;">Need Revision</div>
             <div class="stat-val red" id="statWeak">0</div>
             <p>Words to review</p>
           </button>
           <button class="review-card" type="button" onclick="navigateToSaved()">
-            <div class="stat-icon blue"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg></div>
+            <div class="stat-icon blue"><svg aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg></div>
             <div style="font-size:0.78rem;color:var(--text2);font-weight:600;">Saved Words</div>
             <div class="stat-val" style="color:var(--blue);" id="statBookmarks">0</div>
             <p>Your bookmarked words</p>
@@ -1625,24 +1625,24 @@ body {
             <strong>Continue Learning</strong>
             <p>Pick up where you left off</p>
           </span>
-          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14"/><path d="m13 5 7 7-7 7"/></svg>
+          <svg aria-hidden="true" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14"/><path d="m13 5 7 7-7 7"/></svg>
         </button>
 
         <div class="feature-grid">
           <button class="feature-btn" onclick="navigate('flashcards')">
-            <svg fill="none" viewBox="0 0 24 24" stroke="#b281ff" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/></svg>
+            <svg aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="#b281ff" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/></svg>
             Flashcards
           </button>
           <button class="feature-btn" onclick="navigate('quiz')">
-            <svg fill="none" viewBox="0 0 24 24" stroke="#52e8a5" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M9.5 9a2.5 2.5 0 015 0c0 1.7-2.5 2.2-2.5 3.8"/><circle cx="12" cy="17" r="1"/></svg>
+            <svg aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="#52e8a5" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M9.5 9a2.5 2.5 0 015 0c0 1.7-2.5 2.2-2.5 3.8"/><circle cx="12" cy="17" r="1"/></svg>
             Quick Quiz
           </button>
           <button class="feature-btn" onclick="navigate('idioms')">
-            <svg fill="none" viewBox="0 0 24 24" stroke="#63a7ff" stroke-width="2"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M7 8h10M7 12h10M7 16h6"/></svg>
+            <svg aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="#63a7ff" stroke-width="2"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M7 8h10M7 12h10M7 16h6"/></svg>
             Browse Idioms
           </button>
           <button class="feature-btn" onclick="navigate('exam')">
-            <svg fill="none" viewBox="0 0 24 24" stroke="#ffbf4d" stroke-width="2"><path d="M7 4h10l3 4-8 12L4 8l3-4z"/><path d="M9 11h6"/></svg>
+            <svg aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="#ffbf4d" stroke-width="2"><path d="M7 4h10l3 4-8 12L4 8l3-4z"/><path d="M9 11h6"/></svg>
             Mock Exam
           </button>
         </div>
@@ -2382,7 +2382,8 @@ function renderRecentWords() {
   const safePos = escapeHTML(w.pos);
   const safeDiff = escapeHTML(w.difficulty);
   const safeDef = escapeHTML(w.definition);
-  const safeDiffClass = String(w.difficulty || '').toLowerCase().replace(/[^a-z]/g, '');
+  const normalizedDifficulty = String(w.difficulty || '').toLowerCase();
+  const safeDiffClass = ['easy', 'medium', 'hard'].includes(normalizedDifficulty) ? normalizedDifficulty : 'medium';
   el.innerHTML = `
     <button class="recent-single" type="button" onclick="openModal(${latestId})">
       <div class="recent-title-row">
@@ -2393,10 +2394,10 @@ function renderRecentWords() {
       <div class="word-def">${safeDef}</div>
       <div class="recent-meta-row">
         <span class="meta-left">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 11h18"/></svg>
+          <svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 11h18"/></svg>
           Recently learned
         </span>
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg>
+        <svg aria-hidden="true" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg>
       </div>
     </button>
   `;
