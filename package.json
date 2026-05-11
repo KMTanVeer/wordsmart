@@ -1,7 +1,7 @@
 {
-  "name": "vocabsart-wordsmart",
+  "name": "vocabsart",
   "version": "1.0.0",
-  "description": "VocabsArt Word Smart Vocabulary Platform — Android App",
+  "description": "VocabsArt Vocabulary Platform — Android App",
   "private": true,
   "scripts": {
     "cap:add-android": "npx cap add android",

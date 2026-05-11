@@ -1,4 +1,4 @@
-# VocabsArt — Word Smart Vocabulary Platform
+# VocabsArt Vocabulary Platform
 
 <p align="center">
   <img src="vocabsart-icon.svg" alt="VocabsArt Icon" width="120" height="120"/>
@@ -6,14 +6,14 @@
 
 <p align="center">
   <strong>Build your vocabulary the smart way.</strong><br>
-  A feature-rich offline-ready vocabulary app with 832 words from Word Smart.
+  A feature-rich offline-ready vocabulary app with 832 curated words.
 </p>
 
 ---
 
 ## Features
 
-- 📚 **832 vocabulary words** from the Word Smart series with definitions, pronunciations, Bengali meanings, synonyms, antonyms, and example sentences
+- 📚 **832 vocabulary words** with definitions, pronunciations, Bengali meanings, synonyms, antonyms, and example sentences
 - 🗂️ **Idiom Library** — organized idiom sections sourced from the included idiom PDF
 - 🃏 **Flashcards** — flip through cards with difficulty ratings (Know / Hard / Save)
 - 🧠 **Quiz mode** — multiple choice questions: word meaning, synonym, antonym, and sentence completion

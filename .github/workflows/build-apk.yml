@@ -231,8 +231,8 @@ jobs:
       - name: Accept Android SDK licenses
         run: yes | sdkmanager --licenses 2>/dev/null || true
 
-      # ── 11. Build debug APK ───────────────────────────────────────────────
-      - name: Build debug APK
+      # ── 11. Build installable debug APK ───────────────────────────────────
+      - name: Build installable debug APK
         working-directory: android
         run: |
           chmod +x gradlew
@@ -241,15 +241,27 @@ jobs:
           ANDROID_HOME: ${{ env.ANDROID_HOME }}
           JAVA_HOME: ${{ env.JAVA_HOME }}
 
-      # ── 12. Upload APK as artifact ────────────────────────────────────────
+      # ── 12. Locate the generated debug APK ────────────────────────────────
+      - name: Locate debug APK
+        id: locate_apk
+        run: |
+          apk_path="android/app/build/outputs/apk/debug/app-debug.apk"
+          if [ ! -f "$apk_path" ]; then
+            echo "No debug APK found at $apk_path"
+            exit 1
+          fi
+          echo "apk_path=$apk_path" >> "$GITHUB_OUTPUT"
+          echo "Using APK: $apk_path"
+
+      # ── 13. Upload APK as artifact ────────────────────────────────────────
       - name: Upload APK artifact
         uses: actions/upload-artifact@v4
         with:
-          name: VocabsArt-WordSmart-debug-apk
-          path: android/app/build/outputs/apk/debug/app-debug.apk
+          name: VocabsArt-debug-apk
+          path: ${{ steps.locate_apk.outputs.apk_path }}
           retention-days: 30
 
-      # ── 13. Create release (on push to main/master) ───────────────────────
+      # ── 14. Create release (on push to main/master) ───────────────────────
       - name: Create GitHub Release
         if: github.event_name == 'push'
         uses: softprops/action-gh-release@v2
@@ -269,6 +281,6 @@ jobs:
             - ✅ Full offline support — no internet required
             - ✅ All vocabulary, quizzes, and progress saved locally
             - ✅ Same experience as the website
-          files: android/app/build/outputs/apk/debug/app-debug.apk
+          files: ${{ steps.locate_apk.outputs.apk_path }}
           token: ${{ secrets.GITHUB_TOKEN }}
           fail_on_unmatched_files: false
