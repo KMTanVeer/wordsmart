@@ -12,6 +12,7 @@ on:
       - 'package.json'
       - 'icons/**'
       - 'app-icon.png'
+      - 'file.svg'
       - 'vocabsart-icon.svg'
       - 'vocabsart-icon-light.svg'
       - '.github/workflows/build-apk.yml'
@@ -122,10 +123,10 @@ jobs:
 
           for size in 72 96 128 144 152 192 384 512; do
             if command -v rsvg-convert &>/dev/null; then
-              rsvg-convert -w $size -h $size icons/icon.svg -o icons/icon-${size}.png
+              rsvg-convert -w $size -h $size file.svg -o icons/icon-${size}.png
             else
               # Fallback: use ImageMagick
-              convert -background none icons/icon.svg -resize ${size}x${size} icons/icon-${size}.png 2>/dev/null || \
+              convert -background none file.svg -resize ${size}x${size} icons/icon-${size}.png 2>/dev/null || \
               # Last fallback: create a minimal solid PNG with Python
               python3 -c "
           import struct, zlib, base64
@@ -146,7 +147,7 @@ jobs:
       - name: Prepare www directory
         run: |
           mkdir -p www
-          cp index.html manifest.json service-worker.js avatar.jpg www/
+          cp index.html manifest.json service-worker.js avatar.jpg file.svg www/
           cp -r fonts www/
           cp -r icons www/
 
@@ -177,13 +178,17 @@ jobs:
             ["mipmap-xxxhdpi"]=432
           )
 
+          ICON_SOURCE="file.svg"
+
           resize_icon() {
             local src=$1 size=$2 out=$3
             if [ ! -f "$src" ]; then
-              echo "Icon source not found: $src (expected app-icon.png in repository root; requested size: ${size}x${size})"
+              echo "Icon source not found: $src (requested size: ${size}x${size})"
               exit 1
             fi
-            if command -v convert &>/dev/null; then
+            if command -v rsvg-convert &>/dev/null && [ "${src##*.}" = "svg" ]; then
+              rsvg-convert -w "$size" -h "$size" "$src" -o "$out"
+            elif command -v convert &>/dev/null; then
               convert "$src" -resize "${size}x${size}" "png32:$out"
             else
               python3 -c "
@@ -221,9 +226,9 @@ jobs:
             fg_size=${fg_sizes[$dir]}
             res_dir="android/app/src/main/res/$dir"
             mkdir -p "$res_dir"
-            resize_icon app-icon.png "$size" "$res_dir/ic_launcher.png"
+            resize_icon "$ICON_SOURCE" "$size" "$res_dir/ic_launcher.png"
             apply_circle_mask "$res_dir/ic_launcher.png" "$res_dir/ic_launcher_round.png" "$size"
-            resize_icon app-icon.png "$fg_size" "$res_dir/ic_launcher_foreground.png"
+            resize_icon "$ICON_SOURCE" "$fg_size" "$res_dir/ic_launcher_foreground.png"
           done
           echo "Android launcher icons set:" && ls android/app/src/main/res/mipmap-mdpi/
 
