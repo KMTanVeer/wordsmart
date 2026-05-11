@@ -231,23 +231,23 @@ jobs:
       - name: Accept Android SDK licenses
         run: yes | sdkmanager --licenses 2>/dev/null || true
 
-      # ── 11. Build final release APK ───────────────────────────────────────
-      - name: Build final release APK
+      # ── 11. Build installable debug APK ───────────────────────────────────
+      - name: Build installable debug APK
         working-directory: android
         run: |
           chmod +x gradlew
-          ./gradlew assembleRelease --no-daemon
+          ./gradlew assembleDebug --no-daemon
         env:
           ANDROID_HOME: ${{ env.ANDROID_HOME }}
           JAVA_HOME: ${{ env.JAVA_HOME }}
 
-      # ── 12. Locate the generated release APK ──────────────────────────────
-      - name: Locate release APK
+      # ── 12. Locate the generated debug APK ────────────────────────────────
+      - name: Locate debug APK
         id: locate_apk
         run: |
-          apk_path="$(ls -1 android/app/build/outputs/apk/release/*.apk | head -n 1)"
-          if [ -z "$apk_path" ]; then
-            echo "No release APK found under android/app/build/outputs/apk/release/"
+          apk_path="android/app/build/outputs/apk/debug/app-debug.apk"
+          if [ ! -f "$apk_path" ]; then
+            echo "No debug APK found at $apk_path"
             exit 1
           fi
           echo "apk_path=$apk_path" >> "$GITHUB_OUTPUT"
@@ -257,7 +257,7 @@ jobs:
       - name: Upload APK artifact
         uses: actions/upload-artifact@v4
         with:
-          name: VocabsArt-release-apk
+          name: VocabsArt-debug-apk
           path: ${{ steps.locate_apk.outputs.apk_path }}
           retention-days: 30
 
@@ -272,7 +272,7 @@ jobs:
             ## VocabsArt Android APK
 
             ### Install instructions
-            1. Download the release APK from the **Assets** section below
+            1. Download `app-debug.apk` from the **Assets** section below
             2. On your Android phone, go to **Settings → Security** and enable **Install from unknown sources**
             3. Open the downloaded APK file and tap **Install**
             4. Open **VocabsArt** from your app drawer
