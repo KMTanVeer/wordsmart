@@ -1785,8 +1785,9 @@ document.addEventListener('selectstart', e => {
 });
 
 document.addEventListener('keydown', e => {
-  const isClipboardOrSelectCombo = (e.ctrlKey || e.metaKey) && ['a', 'c', 'x'].includes(e.key.toLowerCase());
-  if (isClipboardOrSelectCombo && !isInInputContext(e.target)) e.preventDefault();
+  const key = e.key ? e.key.toLowerCase() : '';
+  const isClipboardCombo = (e.ctrlKey || e.metaKey) && ['c', 'x'].includes(key);
+  if (isClipboardCombo && !isInInputContext(e.target)) e.preventDefault();
 });
 </script>
 
