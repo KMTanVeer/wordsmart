@@ -1583,7 +1583,7 @@ input:checked + .toggle-slider::before { transform: translateX(20px); background
           <div class="stat-card">
             <div class="stat-icon purple"><svg aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M12 3l9 5-9 5-9-5 9-5z"/><path d="M3 12l9 5 9-5"/></svg></div>
             <div class="stat-val gold" id="statLearned">0</div>
-            <div class="stat-label">Learned Words</div>
+            <div class="stat-label">Total Learned</div>
             <div class="stat-trend" id="statLearnedMessage">Start a new streak today</div>
           </div>
           <div class="stat-card">
@@ -2383,7 +2383,7 @@ function renderRecentWords() {
   const recent = (state.progress.recent || []).slice(0,8);
   if (!recent.length) { el.innerHTML = '<div class="empty" style="padding:16px 0;"><p>Start learning to track progress</p></div>'; return; }
   const latestId = Number.parseInt(recent[0], 10);
-  if (!Number.isFinite(latestId) || !Number.isInteger(latestId)) {
+  if (!Number.isFinite(latestId)) {
     el.innerHTML = '<div class="empty" style="padding:16px 0;"><p>Start learning to track progress</p></div>';
     return;
   }
