@@ -11,7 +11,7 @@
   "categories": ["education"],
   "icons": [
     {
-      "src": "icons/icon.svg",
+      "src": "file.svg",
       "sizes": "any",
       "type": "image/svg+xml",
       "purpose": "any maskable"
