@@ -1766,11 +1766,27 @@ input:checked + .toggle-slider::before { transform: translateX(20px); background
 </div>
 
 <script>
-document.addEventListener('copy', e => e.preventDefault());
-document.addEventListener('cut', e => e.preventDefault());
-document.addEventListener('contextmenu', e => e.preventDefault());
+const isInputField = target => !!target.closest('input, textarea');
+
+document.addEventListener('copy', e => {
+  if (!isInputField(e.target)) e.preventDefault();
+});
+
+document.addEventListener('cut', e => {
+  if (!isInputField(e.target)) e.preventDefault();
+});
+
+document.addEventListener('contextmenu', e => {
+  if (!isInputField(e.target)) e.preventDefault();
+});
+
 document.addEventListener('selectstart', e => {
-  if (!e.target.closest('input, textarea')) e.preventDefault();
+  if (!isInputField(e.target)) e.preventDefault();
+});
+
+document.addEventListener('keydown', e => {
+  const isCopyCombo = (e.ctrlKey || e.metaKey) && ['a', 'c', 'x'].includes(e.key.toLowerCase());
+  if (isCopyCombo && !isInputField(e.target)) e.preventDefault();
 });
 </script>
 
