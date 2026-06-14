@@ -21,7 +21,6 @@
 - 🔖 **Bookmarks** — save words for later review
 - 📊 **Progress tracking** — track learned words, weak words, streaks, and quiz accuracy
 - 🔍 **Search** — instantly find any word by name, definition, or synonym
-- ➕ **Add Word** — add your own custom words to the vocabulary list
 - 🌙 **Dark theme** — elegant dark UI with gold accent colors
 - 📱 **PWA / Offline** — installable as a Progressive Web App; works without internet
 - 🇧🇩 **Bengali meanings** — optional Bengali translations for every word
@@ -37,9 +36,8 @@
 | **Quiz** | 20-question quiz with instant feedback |
 | **Exam** | 30-question timed exam (15 minutes) |
 | **More → Stats** | Detailed performance stats and category breakdown |
-| **More → Admin** | Developer profile and contact info |
-| **More → Add Word** | Form to add custom words to your vocabulary list |
 | **More → Settings** | Toggle Bengali meanings, synonyms, examples, and weak-word focus |
+| **More → About** | Developer profile, contact info, and app version |
 
 ## Tech Stack
 

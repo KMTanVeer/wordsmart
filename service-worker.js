@@ -1,11 +1,16 @@
-const CACHE_NAME = 'vocabsart-v25';
+const CACHE_NAME = 'vocabsart-v27';
 
-// Core files to pre-cache on install
+// Core files to pre-cache on install (using relative paths for subpath support)
 const PRECACHE_URLS = [
-  '/',
-  '/index.html',
-  '/manifest.json',
-  '/avatar.jpg',
+  './',
+  'index.html',
+  'manifest.json',
+  'avatar.jpg',
+  'file.svg',
+  'vocabsart-icon.svg',
+  'app-icon.png',
+  'icons/favicon.png',
+  'icons/app-logo.png'
 ];
 
 // Google Fonts CDN origins we want to cache at runtime
@@ -36,7 +41,7 @@ self.addEventListener('activate', event => {
   );
 });
 
-// ---- Fetch: serve from cache, fall back to network ----
+// ---- Fetch: serve based on strategy ----
 self.addEventListener('fetch', event => {
   const { request } = event;
   const url = new URL(request.url);
@@ -51,7 +56,6 @@ self.addEventListener('fetch', event => {
             if (response.ok) cache.put(request, response.clone());
             return response;
           }).catch(err => {
-            // Offline and no cached version available — let the browser handle it
             if (cached) return cached;
             return Promise.reject(err);
           });
@@ -61,7 +65,30 @@ self.addEventListener('fetch', event => {
     return;
   }
 
-  // Same-origin requests: cache-first with network fallback
+  // Same-origin document requests (index.html or root): Stale-While-Revalidate
+  const isDoc = url.origin === self.location.origin && 
+                (url.pathname === '/' || url.pathname.endsWith('/') || url.pathname.endsWith('index.html'));
+  
+  if (isDoc) {
+    event.respondWith(
+      caches.open(CACHE_NAME).then(cache =>
+        cache.match(request).then(cached => {
+          const fetched = fetch(request).then(response => {
+            if (response.ok) {
+              cache.put(request, response.clone());
+            }
+            return response;
+          }).catch(() => {
+            // Offline: fallback silently to cached response
+          });
+          return cached || fetched;
+        })
+      )
+    );
+    return;
+  }
+
+  // Same-origin assets (CSS, JS, images, icons): Cache-First with Network fallback
   if (url.origin === self.location.origin) {
     event.respondWith(
       caches.match(request).then(cached => {
@@ -78,6 +105,6 @@ self.addEventListener('fetch', event => {
     return;
   }
 
-  // All other requests: network only
+  // All other requests (e.g. external links): Network only
   event.respondWith(fetch(request));
 });

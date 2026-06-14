@@ -1,11 +1,12 @@
 {
   "name": "vocabsart",
-  "version": "1.0.0",
+  "version": "1.1.2",
   "description": "VocabsArt Vocabulary Platform — Android App",
   "private": true,
   "scripts": {
-    "cap:add-android": "npx cap add android",
-    "cap:sync": "npx cap sync",
+    "build": "node scripts/build.js",
+    "cap:add-android": "npm run build && npx cap add android",
+    "cap:sync": "npm run build && npx cap sync",
     "cap:open": "npx cap open android"
   },
   "dependencies": {
