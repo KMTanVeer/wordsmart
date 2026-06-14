@@ -55,7 +55,7 @@
   --glass-blur: blur(20px) saturate(140%);
   --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4);}
 
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
 
 html { font-size: 16px; scroll-behavior: smooth; }
 
@@ -2296,7 +2296,8 @@ function renderWordCard(w) {
 function toggleRevise(e, id) {
   e.stopPropagation();
   const isWeak = (state.progress.weak[id]||0) > 1;
-  state.progress.weak[id] = isWeak ? 0 : 2;
+  const newWeak = isWeak ? 0 : 2;
+  state.progress.weak[id] = newWeak;
   saveProgress();
   const btn = document.getElementById('modalReviseBtn');
   if (btn) {
@@ -2304,6 +2305,20 @@ function toggleRevise(e, id) {
     btn.innerHTML = `<svg width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" d="M6 18L18 6M6 6l12 12"/></svg> ${isWeak?'Revise':'Marked for Revision'}`;
   }
   updateHomeStats();
+  
+  const card = document.getElementById('wc' + id);
+  if (card) {
+    const meta = card.querySelector('.word-card-meta div');
+    if (meta) {
+      const existingBadge = Array.from(meta.querySelectorAll('.badge')).find(b => b.textContent.includes('Weak'));
+      if (existingBadge) {
+        existingBadge.remove();
+      }
+      if (!isWeak) {
+        meta.insertAdjacentHTML('beforeend', '<span class="badge" style="background:var(--red-dim);color:var(--red);">Weak</span>');
+      }
+    }
+  }
 }
 
 function toggleSave(e, id) {
@@ -2323,6 +2338,15 @@ function markLearned(id) {
   state.progress.recent = [id, ...state.progress.recent.filter(x=>x!==id)].slice(0,20);
   saveProgress();
   updateHomeStats();
+  
+  const card = document.getElementById('wc' + id);
+  if (card) {
+    card.style.borderColor = 'rgba(var(--green-rgb),0.2)';
+    const meta = card.querySelector('.word-card-meta div');
+    if (meta && !meta.innerHTML.includes('Learned')) {
+      meta.insertAdjacentHTML('beforeend', '<span class="badge" style="background:var(--green-dim);color:var(--green);">✓ Learned</span>');
+    }
+  }
 }
 
 // ============================================================
@@ -2417,11 +2441,6 @@ function closeModal(e) { if (e.target === document.getElementById('wordModal')) 
 function closeModal2() {
   document.getElementById('wordModal').classList.remove('open');
   updateHomeStats();
-  if (state.currentPage === 'learn') {
-    const savedLetter = state.selectedLetter;
-    renderLearnList();
-    if (savedLetter) selectLetter(savedLetter);
-  }
 }
 
 function navigateToWeak() {
